@@ -10,8 +10,8 @@ Authors: Binhuan Sun (binsun@biosustain.dtu.dk), Pashkova Liubov (liupa@dtu.dk)
 
 The changes were made to the following files: 
 - `.env` file (added a MongoDB connecting string as a new environment variable);
-- `make_vectordb_cosmosdb.py`;
-- `streamlit_app_cosmosdb.py`;
+- `make_vectordb.py`;
+- `streamlit_app.py`;
 - the streamlit app is dockerized.
 
 Changelog:
@@ -32,7 +32,7 @@ Please note the following limitations and considerations:
 ## Scripts execution
 The DB population script does not have to be executed in a docker container:
 ```
-python make_vectordb_cosmosdb.py ./Paper_all pankb_vector_store
+python make_vectordb.py ./Paper_all pankb_vector_store
 ```
 (now we don't need the third argument, as we do not persist anything to the RAM; we insert to the MongoDB instance)
 
