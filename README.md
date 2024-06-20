@@ -6,11 +6,11 @@ A GenAI Assistant based on Langchain + Streamlit + Azure Cosmos DB for MongoDB (
 
 Authors:
 - Binhuan Sun (binsun@biosustain.dtu.dk): data preprocessing, LLM, DEV vector DB creation (Chroma), retriever, Streamlit web app. 
-- Pashkova Liubov (liupa@dtu.dk): Changing the DEV vector DB (Chroma) to the PROD vector DB instance (Azure Cosmos DB for MongoDB (vCore)) and adjusting the choice of embeddings to the Cosmos DB limitations, the PROD DB index creation, dockerization, integration of the streamlit app with the Django framework templates.
+- Pashkova Liubov (liupa@dtu.dk): Changing the DEV vector DB (Chroma) to the PROD vector DB instance (Azure Cosmos DB for MongoDB (vCore)) and adjusting the choice of embeddings to the Cosmos DB limitations, the PROD DB index creation, dockerization, integration of the streamlit app with the Django framework templates, the Github repo set up.
 
 ## Important considerations & limitations
 
-The DB population process took 93 minutes (<i>goddamn long!!!introduce multithreading to speed up!!!</i>). The MongoDB storage size the populated collection took is ~ 1.0 GiB, incl. the indexes.
+The DB population process took 93 minutes (<i>toedit: goddamn long!!!introduce multithreading to speed up!!!</i>). The MongoDB storage size the populated collection took is ~ 1.0 GiB, incl. the indexes.
 
 Please note the following limitations and considerations:
 - If we use an Azure Cosmos DB for MongoDB instance as the vector DB, we can try only embeddings with dimensionalities <= 2000 because for Azure Cosmos DB for MongoDB the maximum number of supported dimensions is 2000. Maybe it is even for the better, large embeddings are more expensive and not always provide a significant increase in performance. Examples: https://platform.openai.com/docs/guides/embeddings 
@@ -65,5 +65,5 @@ CONTAINER ID   IMAGE                COMMAND                  CREATED          ST
 
 Currently, the Streamlit app is available as a django application:
 ```
-http://<pankb server-ip or domain name>/ai_assistant/
+http://<toedit: pankb server-ip or domain name>/ai_assistant/
 ```
