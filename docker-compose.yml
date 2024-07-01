@@ -6,7 +6,7 @@ services:
         image: pankb_llm:latest
         restart: always
         command:
-            streamlit run streamlit_app_cosmosdb.py --server.port 8501
+            streamlit run streamlit_app.py --server.port 8501
         volumes:
             - ./:/usr/src/app
         ports:
