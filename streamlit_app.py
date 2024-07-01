@@ -2,22 +2,16 @@
 # The Streamlit app
 # Authors: Binhuan Sun (binsun@biosustain.dtu.dk), Pashkova Liubov (liupa@dtu.dk)
 #
-#
-# Usage:
-# streamlit run streamlit_app_cosmosdb.py --server.address 0.0.0.0 --server.port 8088
-#
 
 import os
 import dotenv
 from langchain_openai import ChatOpenAI
 from langchain.schema.runnable import RunnablePassthrough
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_openai import OpenAIEmbeddings
 from operator import itemgetter
 from langchain.schema.runnable import RunnableMap
 from langchain.retrievers.contextual_compression import ContextualCompressionRetriever
 from langchain_cohere import CohereRerank
-from langchain_community.llms import Cohere
 from langchain_community.vectorstores.azure_cosmos_db import AzureCosmosDBVectorSearch, CosmosDBSimilarityType, CosmosDBVectorSearchType
 from langchain_voyageai import VoyageAIEmbeddings
 import streamlit as st
@@ -40,10 +34,10 @@ collection = client[db_name][collection_name]
 
 
 def format_docs(docs):
-    return "\n\n".join(doc.page_content for doc in docs)
+    return "\n\n".join('Title: ' + doc.metadata['title'] + '.' + ' Content: ' + doc.page_content for doc in docs)
 
 def filter_and_extract_documents(documents):
-    filtered_documents = [doc for doc in documents if doc.metadata['relevance_score'] >= 0.7]
+    filtered_documents = [doc for doc in documents if doc.metadata['relevance_score'] >= 0.5]
     return filtered_documents
 
 def get_retriever(db_name, collection_name):
@@ -56,7 +50,6 @@ def get_retriever(db_name, collection_name):
 
     retriever = vectordb.as_retriever(search_type="similarity", search_kwargs={"k": 30})
 
-    llm = Cohere(temperature=0)
     compressor = CohereRerank(top_n=20)
     compression_retriever = ContextualCompressionRetriever(
         base_compressor=compressor, base_retriever=retriever
@@ -74,7 +67,7 @@ def question_answer(retriever, question):
 
     prompt = ChatPromptTemplate.from_template(template)
 
-    llm = ChatOpenAI(model_name="gpt-4o", temperature=0)
+    llm = ChatOpenAI(model_name="gpt-4-turbo", temperature=0, model_kwargs={"top_p": 0.0})
 
     rag_chain_from_docs = (
             {
@@ -111,7 +104,7 @@ def question_answer(retriever, question):
 
 
 if __name__ == "__main__":
-    st.title("PangenomeLLM: Your Microbial Pangenomics Assistant")
+    st.title("PanKB LLM: Your Microbial Pangenomics Assistant")
 
     # Initialize your retriever just once
     retriever = get_retriever(db_name, collection_name)
