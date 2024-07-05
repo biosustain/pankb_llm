@@ -26,7 +26,7 @@ PANKB_PREPROD_MONGODB_CONN_STRING - MongoDB PRE-PROD (Azure CosmosDB for MongoDB
 ```
 These secrets are encrypted and safely stored on Github in the "Settings - Secrets and Variables - Actions - Repository secrets" section. In this section, you can also add new Github Actions secrets and edit the existing ones. However, in order to change a secret name, you have to remove the existing secret and add the new one instead of the old one.
 
-After the Github Actions deployment job has successfully run, the web-application must be available at <a href="pankb.org/ai_assistant" target="_blank">pankb.org/ai_assistant</a>. 
+After the Github Actions deployment job has successfully run, the web-application must be available at <your-pre-prod-server-ip-address>. 
 
 The status of the docker container can be checked with the following command:
 ```
