@@ -3,14 +3,6 @@
 # based on an Azure Cosmos DB for MongoDb instance within a sharded cluster.
 # Authors: Binhuan Sun (binsun@biosustain.dtu.dk), Pashkova Liubov (liupa@dtu.dk)
 #
-#
-# Usage:
-# python make_vectordb_cosmosdb.py ./Paper_all <collection_name>
-# In our particular case: ----
-# python make_vectordb_cosmosdb.py ./Paper_all pankb_vector_store
-# where pankb_vector_store is the name of the MongoDB collection.
-#
-
 
 import os
 import dotenv
@@ -97,7 +89,7 @@ if __name__ == "__main__":
     # The MongoDB database instance name: ----
     db_name = "pankb_llm"
     # Set the name of the db index to be created: ----
-    index_name = "pankb_vector_store_ivf_index"
+    index_name = "pankb_vector_store_hnsw_index"
 
     # Connect to the MongoDB instance: ----
     client = MongoClient(connection_string)
@@ -107,32 +99,38 @@ if __name__ == "__main__":
     # Drop the MongoDB collection if it exists: ----
     collection.drop()
 
-    # Populate the MongoDB chunk by chunk: ----
+    #
+    # We have to use a hacky method to create the HNSW index BEFORE inserting all the documents into the vector db (despite it increases the data insertion time).
+    # It is done in order to avoid timeout error that for some reasons occurs if we try to create the index after inserting all the data.
+    # The reasons can be in the database cluster configuration parameters that we can not change.
+    # Just insert one test document, create the index, then clear the collection and proceed with inserting all the documents.
+    for split_docs_chunk in split_list(all_splits_no_dup[1:2], 41000):
+        vectordb = AzureCosmosDBVectorSearch.from_documents(
+            split_docs_chunk,
+            embeddings,
+            collection=collection,
+            index_name=index_name)
+
+    print("Creating the vector index...")
+    # Below we set the variables used to construct the DB index: ----
+    similarity = CosmosDBSimilarityType.L2
+    kind = CosmosDBVectorSearchType.VECTOR_HNSW
+    m = 16
+    ef_construction = 100
+    dimensions = 1024
+    vectordb.create_index(similarity=similarity, kind=kind, m=m, ef_construction=ef_construction, dimensions=dimensions)
+    print("The index has been successfully created.")
+
+    # Clean after creating the index and before inserting all the documents: ----
+    collection.delete_many({})
+
+    # Now populate the database updating the index in the meantime: ----
+    print("Populating the Vector DB (can take a while)...")
     for split_docs_chunk in split_docs_chunked:
         vectordb = AzureCosmosDBVectorSearch.from_documents(
             split_docs_chunk,
             embeddings,
             collection=collection,
-            index_name=index_name)   #here we add the creation of the similarity index
+            index_name=index_name) 
 
-    # Below we set the variables used to construct the DB index: ----
-    # Read more about these variables in detail here:
-    # https://learn.microsoft.com/en-us/azure/cosmos-db/mongodb/vcore/vector-search
-    # num_lists - "This integer is the number of clusters that the inverted file (IVF) index uses to group the vector data.
-    # We recommend that numLists is set to documentCount/1000 for up to 1 million documents and to sqrt(documentCount) for more than 1 million documents.
-    # Using a numLists value of 1 is akin to performing brute-force search, which has limited performance."
-    num_lists = round(len(all_splits_no_dup)/1000)
-    # The dimension of the embeddings (must coincide with the dimension of the model chosen, in our case it is "voyage-large-2-instruct" with the dim = 1024)
-    dim = 1024
-    # Use cosine similarity as the similarity algorithm: ----
-    similarity_algorithm = CosmosDBSimilarityType.COS
-    # kind - the type of index to be created.
-    # The CPU (M30) on a server, where we have our Azure Cosmos DB for MongoDB instance, supports only the vector-ivf index type.
-    # To create the vector-hnsw index, we need to upgrade to M40 tier
-    # (it will cost us 780.42 USD per month instead of 211.36 that we pay for M30 now).
-    kind = CosmosDBVectorSearchType.VECTOR_IVF
-
-    print("Creating the vector index...")
-    vectordb.create_index(num_lists, dim, similarity_algorithm, kind)
-    print("The index has been successfully created.")
     print("Total execution time: %.2f minutes" % ((time.time() - script_start_time) / 60))
