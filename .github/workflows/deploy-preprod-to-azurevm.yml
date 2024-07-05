@@ -41,7 +41,7 @@ jobs:
             echo REPLICATE_API_TOKEN="${{secrets.REPLICATE_API_TOKEN}}" >> .env
             echo VOYAGE_API_KEY="${{secrets.VOYAGE_API_KEY}}" >> .env
             echo "" >> .env
-            echo "## MongoDB-PROD (Azure CosmosDB for MongoDB) Connection String" >> .env
+            echo "## MongoDB-PREPROD (Azure CosmosDB for MongoDB) Connection String" >> .env
             echo "# Had to multiply maxIdleTimeMS by 10 to handle" >> .env
             echo "# urllib3.exceptions.ProtocolError: (\"Connection broken: ConnectionResetError(104, 'Connection reset by peer')\", ConnectionResetError(104, 'Connection reset by peer'))" >> .env
             echo MONGODB_CONN_STRING="${{secrets.PANKB_PREPROD_MONGODB_CONN_STRING}}" >> .env
