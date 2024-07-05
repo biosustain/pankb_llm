@@ -2,6 +2,7 @@
 # The Streamlit app
 # Authors: Binhuan Sun (binsun@biosustain.dtu.dk), Pashkova Liubov (liupa@dtu.dk)
 #
+#
 
 import os
 import dotenv
@@ -32,7 +33,6 @@ client = MongoClient(connection_string)
 # Obtain the db collection object: ----
 collection = client[db_name][collection_name]
 
-
 def format_docs(docs):
     return "\n\n".join('Title: ' + doc.metadata['title'] + '.' + ' Content: ' + doc.page_content for doc in docs)
 
@@ -55,7 +55,6 @@ def get_retriever(db_name, collection_name):
         base_compressor=compressor, base_retriever=retriever
     )
     return compression_retriever
-
 
 def question_answer(retriever, question):
     template = """You are PangenomeLLM. You are a cautious assistant proficient in microbial pangenomics. Use the following pieces of context to answer user's questions. 
