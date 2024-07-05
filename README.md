@@ -27,7 +27,8 @@ The DB population process took 93 minutes (<i>toedit: goddamn long!!!introduce m
 Please note the following limitations and considerations:
 - If we use an Azure Cosmos DB for MongoDB instance as the vector DB, we can try only embeddings with dimensionalities <= 2000 because for Azure Cosmos DB for MongoDB the maximum number of supported dimensions is 2000. Maybe it is even for the better, large embeddings are more expensive and not always provide a significant increase in performance. Examples: https://platform.openai.com/docs/guides/embeddings 
 - We have to create the similarity index. The dimensionality of this index must be the same as the dimensionality of the embeddings.
-- The CPU (M30) on a server, where we have our Azure Cosmos DB for MongoDB instance, supports only the <i>vector-ivf</i> index type. To create the <i>vector-hnsw</i> index, we need to upgrade to the M40 tier (it costs twice more than M30).
+- The Azure M30 tier (Azure Cosmos DB for MongoDB) supports only the <i>vector-ivf</i> index type. To create the <i>vector-hnsw</i> index, we have to upgrade to the M40 tier (it costs twice more than M30 if we do not select the "High Availability" option on Azure Portal).
+- We have to create the HNSW index before data insertion (although it significantly increases data insertion time). If we do it afterwards, we can not avoid the timeout-type error. The reasons can be the cluster configuration options that we can not change on our side if we use IaaS.
 
 ## Scripts execution
 
