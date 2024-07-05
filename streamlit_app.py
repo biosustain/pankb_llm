@@ -33,6 +33,7 @@ client = MongoClient(connection_string)
 # Obtain the db collection object: ----
 collection = client[db_name][collection_name]
 
+
 def format_docs(docs):
     return "\n\n".join('Title: ' + doc.metadata['title'] + '.' + ' Content: ' + doc.page_content for doc in docs)
 
