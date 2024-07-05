@@ -12,9 +12,9 @@ Authors:
 
 Every time when one pushes to the `pre-prod` repo (usually from the DEV server), the changes in the AI Assistant Web Application will be AUTOMATICALLY deployed to the PRE-PROD server. The automation (CI/CD) is achieved with the help of Github Actions enabled for the repository. The respective config file is `.github/workflows/deploy-preprod-to-azurevm.yml`. In order for the automated deployment to work, you should set up the values of the following secret Github Actions secrets:
 ```
-PANKB_PREPROD_HOST - the PROD server IP address
-PANKB_PREPROD_SSH_USERNAME - the ssh user name to connect to the PROD server
-PANKB_PREPROD_PRIVATE_SSH_KEY - the ssh key that is used to connect to the PROD server
+PANKB_PREPROD_HOST - the PRE-PROD server IP address
+PANKB_PREPROD_SSH_USERNAME - the ssh user name to connect to the PRE-PROD server
+PANKB_PREPROD_PRIVATE_SSH_KEY - the ssh key that is used to connect to the PRE-PROD server
 OPENAI_API_KEY
 COHERE_API_KEY
 TOGETHER_API_KEY
