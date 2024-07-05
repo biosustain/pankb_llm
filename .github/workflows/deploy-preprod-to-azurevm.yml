@@ -47,4 +47,3 @@ jobs:
             echo MONGODB_CONN_STRING="${{secrets.PANKB_PREPROD_MONGODB_CONN_STRING}}" >> .env
             cat .env
             docker compose up -d --build --force-recreate
-            rm .env
