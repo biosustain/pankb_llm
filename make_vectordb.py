@@ -1,6 +1,6 @@
 #
 # The script builds a vector database out of txt documents
-# based on an Azure Cosmos DB for MongoDb instance within a sharded cluster.
+# based on an Azure Cosmos DB for MongoDB instance within a sharded cluster.
 # Authors: Binhuan Sun (binsun@biosustain.dtu.dk), Pashkova Liubov (liupa@dtu.dk)
 #
 
@@ -99,30 +99,35 @@ if __name__ == "__main__":
     # Drop the MongoDB collection if it exists: ----
     collection.drop()
 
-    #
-    # We have to use a hacky method to create the HNSW index BEFORE inserting all the documents into the vector db (despite it increases the data insertion time).
-    # It is done in order to avoid timeout error that for some reasons occurs if we try to create the index after inserting all the data.
-    # The reasons can be in the database cluster configuration parameters that we can not change.
-    # Just insert one test document, create the index, then clear the collection and proceed with inserting all the documents.
-    for split_docs_chunk in split_list(all_splits_no_dup[1:2], 41000):
-        vectordb = AzureCosmosDBVectorSearch.from_documents(
-            split_docs_chunk,
-            embeddings,
-            collection=collection,
-            index_name=index_name)
-
     print("Creating the vector index...")
-    # Below we set the variables used to construct the DB index: ----
-    similarity = CosmosDBSimilarityType.L2
-    kind = CosmosDBVectorSearchType.VECTOR_HNSW
-    m = 16
-    ef_construction = 100
-    dimensions = 1024
-    vectordb.create_index(similarity=similarity, kind=kind, m=m, ef_construction=ef_construction, dimensions=dimensions)
-    print("The index has been successfully created.")
-
-    # Clean after creating the index and before inserting all the documents: ----
-    collection.delete_many({})
+    # Note: The index is created before we insert the data
+    # (despite it increases the total data insertion time, as the index has to be updated after each insertion).
+    # We create it beforehand to avoid timeout errors,
+    # which we get if we try to create the index after populating the Vector DB and which
+    # we can not get rid of (presumably due to the cluster hardware configuration can not be changed).
+    #
+    # Example of the same problem enciuntered while creating the index on the M40 tier is described here:
+    # https://stochasticcoder.com/2024/03/08/azure-cosmos-db-for-mongodb-hnsw-vector-search/
+    #
+    client[db_name].command({
+        "createIndexes": collection_name,
+        "indexes": [
+            {
+                "name": collection_name + "_hnsw_index",
+                "key": {
+                    "vectorContent": "cosmosSearch"
+                },
+                "cosmosSearchOptions": {
+                    "kind": "vector-hnsw",
+                    "m": 16,
+                    "efConstruction": 100,
+                    "similarity": "L2",
+                    "dimensions": 1024
+                }
+            }
+        ]
+    })
+    print("The vector index has been successfully created.")
 
     # Now populate the database updating the index in the meantime: ----
     print("Populating the Vector DB (can take a while)...")
@@ -131,6 +136,6 @@ if __name__ == "__main__":
             split_docs_chunk,
             embeddings,
             collection=collection,
-            index_name=index_name) 
+            index_name=index_name)
 
     print("Total execution time: %.2f minutes" % ((time.time() - script_start_time) / 60))
