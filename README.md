@@ -22,13 +22,14 @@ System requirements:
 
 ## Important considerations & limitations
 
-The DB population process can take up to 90-150 minutes (depends on the DEV server configuration). The MongoDB storage size the populated collection is ~ 1.0 GiB, incl. the indexes.
+The DB population process can take up to 90-150 minutes. It depends on the DEV server and Cosmos DB sharded cluster configurations. The MongoDB storage size the populated collection is ~ 1.0 GiB, incl. the indexes.
 
 Please note the following limitations and considerations:
 - If we use an Azure Cosmos DB for MongoDB instance as the vector DB, we can try only embeddings with dimensionalities <= 2000 because for Azure Cosmos DB for MongoDB the maximum number of supported dimensions is 2000. Maybe it is even for the better, large embeddings are more expensive and not always provide a significant increase in performance. Examples: https://platform.openai.com/docs/guides/embeddings 
 - We have to create the similarity index. The dimensionality of this index must be the same as the dimensionality of the embeddings.
 - The Azure M30 tier (Azure Cosmos DB for MongoDB) supports only the <i>vector-ivf</i> index type. To create the <i>vector-hnsw</i> index, we have to upgrade to the M40 tier (it costs twice more than M30 if we do not select the "High Availability" option on Azure Portal).
-- We have to create the HNSW index before data insertion (although it significantly increases data insertion time). If we do it after, we can not avoid the timeout-type error. The reasons can be the cluster configuration options that we can not change on our side if we use IaaS.
+- We have to create the HNSW index before data insertion (although it significantly increases the total data insertion time). If we do it after, we can not avoid timeout-type errors. The reasons can be the cluster configuration options that we can not change on our side if we use IaaS.
+- The most comprehensive explanation of the HNSW indexing algorithm and its parameters (such as efConstruction and M) is given here: https://www.pinecone.io/learn/series/faiss/hnsw/. Our current parameters may not be optimal, because they were chosen in accordance to the <a href="https://cookbook.chromadb.dev/core/configuration/#hnsw-configuration" target="_blank">default settings of ChromaDB</a>, which initially served as the development vector db. 
 
 ## Scripts execution
 
