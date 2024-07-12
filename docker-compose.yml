@@ -6,8 +6,10 @@ services:
         image: pankb_llm:latest
         restart: always
         command:
-            streamlit run streamlit_app.py --server.port 8501
+            streamlit run streamlit_app.py --server.port 8501 --server.enableCORS=false --server.sslKeyFile /tmp/privkey.pem --server.sslCertFile /tmp/fullchain.pem
         volumes:
             - ./:/usr/src/app
+            - ../django_project/certbot/conf/live/pankb.org/fullchain.pem:/tmp/fullchain.pem    # the SSL certificate
+            - ../django_project/certbot/conf/live/pankb.org/privkey.pem:/tmp/privkey.pem        # the SSL private key
         ports:
             - 8501:8501
