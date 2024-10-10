@@ -24,7 +24,8 @@ dotenv.load_dotenv()
 # Obtain the MongoDB connection string: ----
 connection_string = os.getenv("MONGODB_CONN_STRING")
 # The MongoDB database instance name: ----
-db_name = "pankb_llm"
+# db_name = "pankb_llm"
+db_name = os.getenv("PANKB_LLM_DATABASE")
 # The MongoDB collection name (must be populated with vector embeddings): ----
 collection_name = "pankb_vector_store"
 

@@ -56,6 +56,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Get collection name and vector database path')
     parser.add_argument('plain_text_dir', type=str, help='The path to your plain text files')
     parser.add_argument('collection', type=str, help='The name of the collection of your vector database')
+    parser.add_argument('drop', action=argparse.BooleanOptionalAction, help='Drop the existing collection')
     args = parser.parse_args()
 
     plain_text_dir = str(args.plain_text_dir)
@@ -87,7 +88,8 @@ if __name__ == "__main__":
     # Obtain the MongoDB connection string: ----
     connection_string = os.getenv("MONGODB_CONN_STRING")
     # The MongoDB database instance name: ----
-    db_name = "pankb_llm"
+    # db_name = "pankb_llm"
+    db_name = os.getenv("PANKB_LLM_DATABASE")
     # Set the name of the db index to be created: ----
     index_name = "pankb_vector_store_hnsw_index"
 
@@ -97,7 +99,8 @@ if __name__ == "__main__":
     collection = client[db_name][collection_name]
 
     # Drop the MongoDB collection if it exists: ----
-    collection.drop()
+    if args.drop:
+    	collection.drop()
 
     print("Creating the vector index...")
     # Note: The index is created before we insert the data
