@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM python:3.10
 
 WORKDIR /usr/src/app
 
@@ -8,6 +8,9 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 COPY ./requirements.txt /usr/src/app/requirements.txt
+
+RUN curl https://sh.rustup.rs -sSf | bash -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
 
 # Install the requirements with all depencies:
 RUN pip install --upgrade pip setuptools wheel \
