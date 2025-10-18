@@ -67,7 +67,7 @@ def question_answer(retriever, question):
 
     prompt = ChatPromptTemplate.from_template(template)
 
-    llm = ChatOpenAI(model_name="gpt-4-turbo", temperature=0, model_kwargs={"top_p": 0.0})
+    llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0, model_kwargs={"top_p": 0.0})
 
     rag_chain_from_docs = (
             {
@@ -85,16 +85,30 @@ def question_answer(retriever, question):
          "question": lambda input: input["question"]}
     ) | {
                                 "answer": rag_chain_from_docs,
-                                "Source": lambda input: list(set(doc.metadata['source'] for doc in input["documents"])),
+                                "Source": lambda input: [
+                                    {
+                                        'url': doc.metadata['source'],
+                                        'title': doc.metadata.get('title', 'Unknown Title')
+                                    }
+                                    for doc in input["documents"]
+                                ],
                             }
     response = rag_chain_with_source.invoke(question)
 
     answer = response['answer'].content + '<br>' + '<br>' + '<b>Reference:</b>' + '<br>'
 
-    # Generate links with numbers, assuming the list items are URLs
-    links = [f'<a href="{url}">paper {i + 1}</a>' for i, url in enumerate(response['Source'])]
+    # Generate links with paper titles instead of numbers
+    seen_urls = set()
+    unique_sources = []
+    for source in response['Source']:
+        if source['url'] not in seen_urls:
+            seen_urls.add(source['url'])
+            unique_sources.append(source)
 
-    # Join the links into a single string separated by commas
+    links = [f'<a href="{source["url"]}">{source["title"]}</a>'
+             for source in unique_sources]
+
+    # Join the links into a single string separated by line breaks
     formatted_links = '<br>'.join(links)
 
     # Append the formatted links to the answer
