@@ -1,3 +1,8 @@
+networks:
+  pankb-net:
+    name: pankb-net
+    external: false
+
 services:
     pankb_llm:
         container_name: pankb-llm
@@ -15,3 +20,5 @@ services:
             - ../django_project/certbot/conf/live/pankb.org/privkey.pem:/tmp/privkey.pem        # the SSL private key
         ports:
             - 8501:8501
+        networks:
+            - pankb-net
