@@ -1,0 +1,448 @@
+{
+ "k_values": [
+  1,
+  3,
+  5,
+  10,
+  20,
+  30,
+  50,
+  100
+ ],
+ "n_questions": 47,
+ "ground_truth": "eval/results/ground_truth.json",
+ "runs": {
+  "voyage_large_2_instruct": {
+   "collection": "voyage_large_2_instruct",
+   "model": "voyage-large-2-instruct",
+   "provider": "voyage",
+   "dimensions": 1024,
+   "n_questions": 47,
+   "n_documents": 18156,
+   "seconds": 12.7,
+   "mrr": 0.3989,
+   "recall@1": 0.1656,
+   "ndcg@1": 0.2553,
+   "hit@1": 0.2553,
+   "recall@3": 0.2965,
+   "ndcg@3": 0.2814,
+   "hit@3": 0.4681,
+   "recall@5": 0.361,
+   "ndcg@5": 0.3047,
+   "hit@5": 0.5532,
+   "recall@10": 0.5401,
+   "ndcg@10": 0.3693,
+   "hit@10": 0.7021,
+   "recall@20": 0.6943,
+   "ndcg@20": 0.4135,
+   "hit@20": 0.8723,
+   "recall@30": 0.7376,
+   "ndcg@30": 0.4243,
+   "hit@30": 0.8936,
+   "recall@50": 0.7447,
+   "ndcg@50": 0.4263,
+   "hit@50": 0.8936,
+   "recall@100": 0.7447,
+   "ndcg@100": 0.4263,
+   "hit@100": 0.8936,
+   "per_paper": {
+    "https://doi.org/10.1007/978-3-030-38281-0_10": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1007/978-3-030-38281-0_4": {
+     "n_questions": 1,
+     "recall@30": 0.0
+    },
+    "https://doi.org/10.1016/j.fm.2023.104334": {
+     "n_questions": 10,
+     "recall@30": 0.74
+    },
+    "https://doi.org/10.1038/s41598-017-11385-9": {
+     "n_questions": 1,
+     "recall@30": 0.6667
+    },
+    "https://doi.org/10.1038/s41598-020-77723-6": {
+     "n_questions": 3,
+     "recall@30": 0.3333
+    },
+    "https://doi.org/10.1038/s41598-022-21731-1": {
+     "n_questions": 7,
+     "recall@30": 0.9286
+    },
+    "https://doi.org/10.1073/pnas.1523199113": {
+     "n_questions": 2,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1093/bib/bbaa013": {
+     "n_questions": 1,
+     "recall@30": 0.5
+    },
+    "https://doi.org/10.1093/gbe/evx270": {
+     "n_questions": 2,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1128/msystems.00248-24": {
+     "n_questions": 3,
+     "recall@30": 0.6111
+    },
+    "https://doi.org/10.1128/spectrum.01029-22": {
+     "n_questions": 5,
+     "recall@30": 0.9333
+    },
+    "https://doi.org/10.1128/spectrum.01264-21": {
+     "n_questions": 4,
+     "recall@30": 0.7917
+    },
+    "https://doi.org/10.1128/spectrum.03117-22": {
+     "n_questions": 1,
+     "recall@30": 0.6667
+    },
+    "https://doi.org/10.1128/spectrum.05184-22": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1186/s12864-016-2951-4": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1186/s13068-018-1201-1": {
+     "n_questions": 1,
+     "recall@30": 0.0
+    },
+    "https://doi.org/10.1371/journal.pone.0299588": {
+     "n_questions": 2,
+     "recall@30": 0.3
+    },
+    "https://doi.org/10.3390/ijms23105612": {
+     "n_questions": 1,
+     "recall@30": 0.6667
+    }
+   }
+  },
+  "voyage_4_large": {
+   "collection": "voyage_4_large",
+   "model": "voyage-4-large",
+   "provider": "voyage",
+   "dimensions": 1024,
+   "n_questions": 47,
+   "n_documents": 18156,
+   "seconds": 11.4,
+   "mrr": 0.6171,
+   "recall@1": 0.2855,
+   "ndcg@1": 0.4468,
+   "hit@1": 0.4468,
+   "recall@3": 0.4996,
+   "ndcg@3": 0.4709,
+   "hit@3": 0.7021,
+   "recall@5": 0.6074,
+   "ndcg@5": 0.5201,
+   "hit@5": 0.8085,
+   "recall@10": 0.7564,
+   "ndcg@10": 0.5793,
+   "hit@10": 0.8936,
+   "recall@20": 0.8546,
+   "ndcg@20": 0.609,
+   "hit@20": 1.0,
+   "recall@30": 0.8926,
+   "ndcg@30": 0.6197,
+   "hit@30": 1.0,
+   "recall@50": 0.9138,
+   "ndcg@50": 0.6256,
+   "hit@50": 1.0,
+   "recall@100": 0.9138,
+   "ndcg@100": 0.6256,
+   "hit@100": 1.0,
+   "per_paper": {
+    "https://doi.org/10.1007/978-3-030-38281-0_10": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1007/978-3-030-38281-0_4": {
+     "n_questions": 1,
+     "recall@30": 0.3333
+    },
+    "https://doi.org/10.1016/j.fm.2023.104334": {
+     "n_questions": 10,
+     "recall@30": 0.89
+    },
+    "https://doi.org/10.1038/s41598-017-11385-9": {
+     "n_questions": 1,
+     "recall@30": 0.6667
+    },
+    "https://doi.org/10.1038/s41598-020-77723-6": {
+     "n_questions": 3,
+     "recall@30": 0.8333
+    },
+    "https://doi.org/10.1038/s41598-022-21731-1": {
+     "n_questions": 7,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1073/pnas.1523199113": {
+     "n_questions": 2,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1093/bib/bbaa013": {
+     "n_questions": 1,
+     "recall@30": 0.75
+    },
+    "https://doi.org/10.1093/gbe/evx270": {
+     "n_questions": 2,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1128/msystems.00248-24": {
+     "n_questions": 3,
+     "recall@30": 0.8889
+    },
+    "https://doi.org/10.1128/spectrum.01029-22": {
+     "n_questions": 5,
+     "recall@30": 0.9333
+    },
+    "https://doi.org/10.1128/spectrum.01264-21": {
+     "n_questions": 4,
+     "recall@30": 0.9167
+    },
+    "https://doi.org/10.1128/spectrum.03117-22": {
+     "n_questions": 1,
+     "recall@30": 0.6667
+    },
+    "https://doi.org/10.1128/spectrum.05184-22": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1186/s12864-016-2951-4": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1186/s13068-018-1201-1": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1371/journal.pone.0299588": {
+     "n_questions": 2,
+     "recall@30": 0.5667
+    },
+    "https://doi.org/10.3390/ijms23105612": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    }
+   }
+  },
+  "openai_3_large_1024": {
+   "collection": "openai_3_large_1024",
+   "model": "text-embedding-3-large",
+   "provider": "openai",
+   "dimensions": 1024,
+   "n_questions": 47,
+   "n_documents": 18156,
+   "seconds": 10.4,
+   "mrr": 0.5457,
+   "recall@1": 0.2826,
+   "ndcg@1": 0.4468,
+   "hit@1": 0.4468,
+   "recall@3": 0.4004,
+   "ndcg@3": 0.3997,
+   "hit@3": 0.5532,
+   "recall@5": 0.4543,
+   "ndcg@5": 0.4222,
+   "hit@5": 0.617,
+   "recall@10": 0.6351,
+   "ndcg@10": 0.4898,
+   "hit@10": 0.7872,
+   "recall@20": 0.7837,
+   "ndcg@20": 0.536,
+   "hit@20": 0.9149,
+   "recall@30": 0.8067,
+   "ndcg@30": 0.5426,
+   "hit@30": 0.9149,
+   "recall@50": 0.8191,
+   "ndcg@50": 0.546,
+   "hit@50": 0.9362,
+   "recall@100": 0.8191,
+   "ndcg@100": 0.546,
+   "hit@100": 0.9362,
+   "per_paper": {
+    "https://doi.org/10.1007/978-3-030-38281-0_10": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1007/978-3-030-38281-0_4": {
+     "n_questions": 1,
+     "recall@30": 0.3333
+    },
+    "https://doi.org/10.1016/j.fm.2023.104334": {
+     "n_questions": 10,
+     "recall@30": 0.74
+    },
+    "https://doi.org/10.1038/s41598-017-11385-9": {
+     "n_questions": 1,
+     "recall@30": 0.6667
+    },
+    "https://doi.org/10.1038/s41598-020-77723-6": {
+     "n_questions": 3,
+     "recall@30": 0.5
+    },
+    "https://doi.org/10.1038/s41598-022-21731-1": {
+     "n_questions": 7,
+     "recall@30": 0.8571
+    },
+    "https://doi.org/10.1073/pnas.1523199113": {
+     "n_questions": 2,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1093/bib/bbaa013": {
+     "n_questions": 1,
+     "recall@30": 0.75
+    },
+    "https://doi.org/10.1093/gbe/evx270": {
+     "n_questions": 2,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1128/msystems.00248-24": {
+     "n_questions": 3,
+     "recall@30": 0.8889
+    },
+    "https://doi.org/10.1128/spectrum.01029-22": {
+     "n_questions": 5,
+     "recall@30": 0.9333
+    },
+    "https://doi.org/10.1128/spectrum.01264-21": {
+     "n_questions": 4,
+     "recall@30": 0.9167
+    },
+    "https://doi.org/10.1128/spectrum.03117-22": {
+     "n_questions": 1,
+     "recall@30": 0.6667
+    },
+    "https://doi.org/10.1128/spectrum.05184-22": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1186/s12864-016-2951-4": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1186/s13068-018-1201-1": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1371/journal.pone.0299588": {
+     "n_questions": 2,
+     "recall@30": 0.3
+    },
+    "https://doi.org/10.3390/ijms23105612": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    }
+   }
+  },
+  "cohere_embed_v4": {
+   "collection": "cohere_embed_v4",
+   "model": "embed-v4.0",
+   "provider": "cohere",
+   "dimensions": 1536,
+   "n_questions": 47,
+   "n_documents": 18156,
+   "seconds": 11.5,
+   "mrr": 0.5921,
+   "recall@1": 0.3092,
+   "ndcg@1": 0.4468,
+   "hit@1": 0.4468,
+   "recall@3": 0.5411,
+   "ndcg@3": 0.4873,
+   "hit@3": 0.7234,
+   "recall@5": 0.683,
+   "ndcg@5": 0.5432,
+   "hit@5": 0.8723,
+   "recall@10": 0.7493,
+   "ndcg@10": 0.5706,
+   "hit@10": 0.9149,
+   "recall@20": 0.8344,
+   "ndcg@20": 0.5964,
+   "hit@20": 0.9574,
+   "recall@30": 0.8628,
+   "ndcg@30": 0.6049,
+   "hit@30": 0.9787,
+   "recall@50": 0.8628,
+   "ndcg@50": 0.6049,
+   "hit@50": 0.9787,
+   "recall@100": 0.8628,
+   "ndcg@100": 0.6049,
+   "hit@100": 0.9787,
+   "per_paper": {
+    "https://doi.org/10.1007/978-3-030-38281-0_10": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1007/978-3-030-38281-0_4": {
+     "n_questions": 1,
+     "recall@30": 0.6667
+    },
+    "https://doi.org/10.1016/j.fm.2023.104334": {
+     "n_questions": 10,
+     "recall@30": 0.82
+    },
+    "https://doi.org/10.1038/s41598-017-11385-9": {
+     "n_questions": 1,
+     "recall@30": 0.6667
+    },
+    "https://doi.org/10.1038/s41598-020-77723-6": {
+     "n_questions": 3,
+     "recall@30": 0.6111
+    },
+    "https://doi.org/10.1038/s41598-022-21731-1": {
+     "n_questions": 7,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1073/pnas.1523199113": {
+     "n_questions": 2,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1093/bib/bbaa013": {
+     "n_questions": 1,
+     "recall@30": 0.75
+    },
+    "https://doi.org/10.1093/gbe/evx270": {
+     "n_questions": 2,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1128/msystems.00248-24": {
+     "n_questions": 3,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1128/spectrum.01029-22": {
+     "n_questions": 5,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1128/spectrum.01264-21": {
+     "n_questions": 4,
+     "recall@30": 0.7917
+    },
+    "https://doi.org/10.1128/spectrum.03117-22": {
+     "n_questions": 1,
+     "recall@30": 0.6667
+    },
+    "https://doi.org/10.1128/spectrum.05184-22": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1186/s12864-016-2951-4": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1186/s13068-018-1201-1": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    },
+    "https://doi.org/10.1371/journal.pone.0299588": {
+     "n_questions": 2,
+     "recall@30": 0.3
+    },
+    "https://doi.org/10.3390/ijms23105612": {
+     "n_questions": 1,
+     "recall@30": 1.0
+    }
+   }
+  }
+ }
+}
