@@ -1,0 +1,74 @@
+{
+ "max_dims": 2000,
+ "probe_texts": [
+  "Pangenome analysis reveals the genetic basis for taxonomic classification.",
+  "Lactate dehydrogenase is a crucial enzyme in the bacterial lactic acid synthesis pathway.",
+  "The core genome comprises genes present in more than 99% of strains."
+ ],
+ "results": [
+  {
+   "key": "voyage_large_2_instruct",
+   "provider": "voyage",
+   "model": "voyage-large-2-instruct",
+   "collection": "voyage_large_2_instruct",
+   "note": "production baseline (now legacy upstream)",
+   "ok": true,
+   "error": null,
+   "dimensions": 1024,
+   "query_dimensions": 1024,
+   "norm_min": 1.0,
+   "norm_max": 1.0,
+   "normalized": true,
+   "within_cosmos_limit": true,
+   "dim_matches_query": true
+  },
+  {
+   "key": "voyage_4_large",
+   "provider": "voyage",
+   "model": "voyage-4-large",
+   "collection": "voyage_4_large",
+   "note": "vendor-recommended successor to the baseline",
+   "ok": true,
+   "error": null,
+   "dimensions": 1024,
+   "query_dimensions": 1024,
+   "norm_min": 1.0,
+   "norm_max": 1.0,
+   "normalized": true,
+   "within_cosmos_limit": true,
+   "dim_matches_query": true
+  },
+  {
+   "key": "openai_3_large_1024",
+   "provider": "openai",
+   "model": "text-embedding-3-large",
+   "collection": "openai_3_large_1024",
+   "note": "cross-vendor comparison; truncated from 3072",
+   "ok": true,
+   "error": null,
+   "dimensions": 1024,
+   "query_dimensions": 1024,
+   "norm_min": 0.999676,
+   "norm_max": 1.000237,
+   "normalized": true,
+   "within_cosmos_limit": true,
+   "dim_matches_query": true
+  },
+  {
+   "key": "cohere_embed_v4",
+   "provider": "cohere",
+   "model": "embed-v4.0",
+   "collection": "cohere_embed_v4",
+   "note": "cross-vendor comparison; 1536 native",
+   "ok": true,
+   "error": null,
+   "dimensions": 1536,
+   "query_dimensions": 1536,
+   "norm_min": 1.0,
+   "norm_max": 1.0,
+   "normalized": true,
+   "within_cosmos_limit": true,
+   "dim_matches_query": true
+  }
+ ]
+}

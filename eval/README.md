@@ -92,6 +92,44 @@ the located span. Ground truth is one-to-many by construction.
 Current result: **47/50 usable** — 19 exact, 28 fuzzy, 2 unmatched, 1 without a
 reference answer. Median 2 relevant chunks per question (range 1–5).
 
+#### Why one-to-many matters for the metric
+
+The multi-chunk structure is not an inconvenience to be engineered away — it
+is what makes recall a useful measurement here. With exactly one relevant
+chunk per question, recall can only be 0 or 1: it collapses into accuracy, and
+two models that both "found 30 questions" are indistinguishable even if one
+surfaced the central passage and the other barely clipped its edge. With
+several relevant chunks, recall becomes continuous (a question with 3 relevant
+chunks scores 0.33 / 0.67 / 1.00), which is where the discriminative power
+comes from. nDCG needs this too: with a single relevant document it degenerates
+towards MRR.
+
+We report **strict recall** — `relevant retrieved / relevant that exist` — not
+a hit-rate that scores 1 whenever any relevant chunk is found. Hit-rate answers
+a different, operational question ("could this question be answered at all?")
+and is worth revisiting later, but it is binary and therefore blunt for
+comparing embedding models.
+
+#### On chunk size and overlap
+
+No chunk size makes answers stop spanning boundaries. The longest reference
+answer is 1704 chars; a chunk large enough to contain it whole would dilute the
+embedding of every short passage, mixing several topics into one vector and
+degrading retrieval precision. Small chunks localise well but sever semantics;
+large chunks preserve semantics but retrieve poorly and waste context. Spanning
+is the normal case, and one-to-many ground truth models it honestly rather than
+trying to eliminate it.
+
+Raising `chunk_overlap` reduces severance but is not free either: it inflates
+the store and manufactures near-duplicate chunks, so a top-k can fill up with
+several slicings of the same passage — recall looks higher while the context
+actually carries less independent information.
+
+These are tunable parameters and this harness could measure them, but every
+change requires re-embedding the entire corpus. Deferred: the current
+experiment holds chunking fixed at the production setting (500 / 100) so that
+the embedding model is the only variable.
+
 ### Verification (`03`)
 
 Unverified ground truth is the most dangerous failure mode here: every
