@@ -1,0 +1,1192 @@
+[
+ {
+  "pmid": "27286824",
+  "doi": "https://doi.org/10.1073/pnas.1523199113",
+  "title": "Comparative genome-scale modelling of Staphylococcus aureus strains identifies strain-specific metabolic capabilities linked to pathogenicity",
+  "role": "positive",
+  "chars": 68928
+ },
+ {
+  "pmid": "27634541",
+  "doi": "https://doi.org/10.1186/s12864-016-2951-4",
+  "title": "Title: Pangenome and immuno-proteomics analysis of Acinetobacter baumannii strains revealed the core peptide vaccine targets",
+  "role": "positive",
+  "chars": 106776
+ },
+ {
+  "pmid": "28887527",
+  "doi": "https://doi.org/10.1038/s41598-017-11385-9",
+  "title": "Title: Pan-genome analysis of Bacillus for microbiome profiling",
+  "role": "positive",
+  "chars": 51116
+ },
+ {
+  "pmid": "29272410",
+  "doi": "https://doi.org/10.1093/gbe/evx270",
+  "title": "Genetic Competence Drives Genome Diversity in Bacillus subtilis",
+  "role": "positive",
+  "chars": 53406
+ },
+ {
+  "pmid": "30026808",
+  "doi": "https://doi.org/10.1186/s13068-018-1201-1",
+  "title": "Title: Pan-genome analyses of 24 Shewanella strains re-emphasize the diversification of their functions yet evolutionary dynamics of metal-reducing pathway",
+  "role": "positive",
+  "chars": 62840
+ },
+ {
+  "pmid": "32065216",
+  "doi": "https://doi.org/10.1093/bib/bbaa013",
+  "title": "Toward a high-quality pan-genome landscape of Bacillus subtilis by removal of confounding strains",
+  "role": "positive",
+  "chars": 73866
+ },
+ {
+  "pmid": "32633917",
+  "doi": "https://doi.org/10.1007/978-3-030-38281-0_4",
+  "title": "Title: A Review of Pangenome Tools and Recent Studies",
+  "role": "positive",
+  "chars": 30649
+ },
+ {
+  "pmid": "32633918",
+  "doi": "https://doi.org/10.1007/978-3-030-38281-0_10",
+  "title": "Title: Pangenome Flux Balance Analysis Toward Panphenomes",
+  "role": "positive",
+  "chars": 34566
+ },
+ {
+  "pmid": "33273480",
+  "doi": "https://doi.org/10.1038/s41598-020-77723-6",
+  "title": "Title: Pan-genome analysis and ancestral state reconstruction of class halobacteria: probability of a new super-order",
+  "role": "positive",
+  "chars": 59870
+ },
+ {
+  "pmid": "34352473",
+  "doi": "https://doi.org/10.1016/j.micres.2021.126833",
+  "title": "Title: In silico comparative genomics analysis of Lactiplantibacillus plantarum DW12, a potential gamma-aminobutyric acid (GABA)-producing strain",
+  "role": "positive",
+  "chars": 28383
+ },
+ {
+  "pmid": "35446150",
+  "doi": "https://doi.org/10.1128/spectrum.01264-21",
+  "title": "Comparative Genomics Reveals Genetic Diversity and Metabolic Potentials of the Genus Qipengyuania and Suggests Fifteen Novel Species",
+  "role": "positive",
+  "chars": 63663
+ },
+ {
+  "pmid": "35628419",
+  "doi": "https://doi.org/10.3390/ijms23105612",
+  "title": "Microbial Consortia and Mixed Plastic Waste: Pangenomic Analysis Reveals Potential for Degradation of Multiple Plastic Types via Previously Identified PET Degrading Bacteria",
+  "role": "positive",
+  "chars": 52658
+ },
+ {
+  "pmid": "36069574",
+  "doi": "https://doi.org/10.1128/spectrum.01029-22",
+  "title": "Pan-Genome Analysis of Campylobacter: Insights on the Genomic Diversity and Virulence Profile",
+  "role": "positive",
+  "chars": 29989
+ },
+ {
+  "pmid": "36318042",
+  "doi": "https://doi.org/10.1128/spectrum.03117-22",
+  "title": "Pan-Genome Analysis of Staphylococcus aureus Reveals Key Factors Influencing Genomic Plasticity",
+  "role": "positive",
+  "chars": 26336
+ },
+ {
+  "pmid": "36344558",
+  "doi": "https://doi.org/10.1038/s41598-022-21731-1",
+  "title": "Title: Comparative and pangenomic analysis of the genus Streptomyces",
+  "role": "positive",
+  "chars": 101887
+ },
+ {
+  "pmid": "37042769",
+  "doi": "https://doi.org/10.1128/spectrum.05184-22",
+  "title": "Pangenomic Study of Fusobacterium nucleatum Reveals the Distribution of Pathogenic Genes and Functional Clusters at the Subspecies and Strain Levels",
+  "role": "positive",
+  "chars": 35667
+ },
+ {
+  "pmid": "37567624",
+  "doi": "https://doi.org/10.1016/j.fm.2023.104334",
+  "title": "Title: Pangenome analysis reveals the genetic basis for taxonomic classification of the Lactobacillaceae family",
+  "role": "positive",
+  "chars": 58229
+ },
+ {
+  "pmid": "38686794",
+  "doi": "https://doi.org/10.1093/nar/gkae314",
+  "title": "BGCFlow: systematic pangenome workflow for the analysis of biosynthetic gene clusters across large genomic datasets",
+  "role": "positive",
+  "chars": 60354
+ },
+ {
+  "pmid": "38695578",
+  "doi": "https://doi.org/10.1128/msystems.00248-24",
+  "title": "From genome to evolution: investigating type II methylotrophs using a pangenomic analysis",
+  "role": "positive",
+  "chars": 66816
+ },
+ {
+  "pmid": "38718091",
+  "doi": "https://doi.org/10.1371/journal.pone.0299588",
+  "title": "Comprehensive analysis of genomic variation, pan-genome and biosynthetic potential of Corynebacterium glutamicum strains",
+  "role": "positive",
+  "chars": 44407
+ },
+ {
+  "pmid": "18854354",
+  "doi": "https://doi.org/10.1093/nar/gkn674",
+  "title": "Strepto-DB, a database for comparative genomics of group A (GAS) and B (GBS) streptococci, implemented with the novel database platform \u2018Open Genome Resource\u2019 (OGeR)",
+  "role": "noise",
+  "chars": 12900
+ },
+ {
+  "pmid": "19435847",
+  "doi": "https://doi.org/10.1073/pnas.0808945106",
+  "title": "Biogeography of the Sulfolobus islandicus pan-genome",
+  "role": "noise",
+  "chars": 28169
+ },
+ {
+  "pmid": "19493340",
+  "doi": "https://doi.org/10.1186/1745-6150-4-19",
+  "title": "Title: Comprehensive comparative-genomic analysis of type 2 toxin-antitoxin systems and related mobile stress response systems in prokaryotes",
+  "role": "noise",
+  "chars": 221007
+ },
+ {
+  "pmid": "19703284",
+  "doi": "https://doi.org/10.1186/1471-2164-10-394",
+  "title": "Title: Extending the models for iron and sulfur oxidation in the extreme acidophile Acidithiobacillus ferrooxidans",
+  "role": "noise",
+  "chars": 76477
+ },
+ {
+  "pmid": "20048063",
+  "doi": "https://doi.org/10.1128/AEM.02039-09",
+  "title": "Conserved Symbiotic Plasmid DNA Sequences in the Multireplicon Pangenomic Structure of Rhizobium etli",
+  "role": "noise",
+  "chars": 38008
+ },
+ {
+  "pmid": "20398277",
+  "doi": "https://doi.org/10.1186/1471-2164-11-239",
+  "title": "Title: Pyrosequencing-based comparative genome analysis of the nosocomial pathogen Enterococcus faecium and identification of a large transferable pathogenicity island",
+  "role": "noise",
+  "chars": 102216
+ },
+ {
+  "pmid": "20890839",
+  "doi": "https://doi.org/10.2436/20.1501.01.110",
+  "title": "The bacterial pan-genome: a new paradigm in microbiology",
+  "role": "noise",
+  "chars": 44009
+ },
+ {
+  "pmid": "20942950",
+  "doi": "https://doi.org/10.1186/1471-2180-10-258",
+  "title": "Title: Analysis and comparison of the pan-genomic properties of sixteen well-characterized bacterial genera",
+  "role": "noise",
+  "chars": 151872
+ },
+ {
+  "pmid": "21643699",
+  "doi": "https://doi.org/10.1007/s00248-011-9880-1",
+  "title": "Title: The Salmonella enterica pan-genome",
+  "role": "noise",
+  "chars": 58605
+ },
+ {
+  "pmid": "22128332",
+  "doi": "https://doi.org/10.1073/pnas.1109451108",
+  "title": "Similarity of genes horizontally acquired by Escherichia coli and Salmonella enterica is evidence of a supraspecies pangenome",
+  "role": "noise",
+  "chars": 25392
+ },
+ {
+  "pmid": "22536428",
+  "doi": "https://doi.org/10.1371/journal.pone.0035698",
+  "title": "Comparative Genomics of Mycoplasma: Analysis of Conserved Essential Genes and Diversity of the Pan-Genome",
+  "role": "noise",
+  "chars": 26451
+ },
+ {
+  "pmid": "22701679",
+  "doi": "https://doi.org/10.1371/journal.pone.0038596",
+  "title": "Diversification of the Salmonella Fimbriae: A Model of Macro- and Microevolution",
+  "role": "noise",
+  "chars": 63751
+ },
+ {
+  "pmid": "23028950",
+  "doi": "https://doi.org/10.1371/journal.pone.0045346",
+  "title": "Pan-Genomic Analysis Provides Insights into the Genomic Variation and Evolution of Salmonella Paratyphi A",
+  "role": "noise",
+  "chars": 36317
+ },
+ {
+  "pmid": "23189144",
+  "doi": "https://doi.org/10.1371/journal.pone.0049403",
+  "title": "Rapid Evolution of the Sequences and Gene Repertoires of Secreted Proteins in Bacteria",
+  "role": "noise",
+  "chars": 38525
+ },
+ {
+  "pmid": "23386843",
+  "doi": "https://doi.org/10.3389/fmicb.2013.00004",
+  "title": "Evolutionary consequences of antibiotic use for the resistome, mobilome and microbial pangenome",
+  "role": "noise",
+  "chars": 34860
+ },
+ {
+  "pmid": "23409014",
+  "doi": "https://doi.org/10.1371/journal.pone.0055644",
+  "title": "Comparative Genomics of 12 Strains of Erwinia amylovora Identifies a Pan-Genome with a Large Conserved Core",
+  "role": "noise",
+  "chars": 32110
+ },
+ {
+  "pmid": "23431003",
+  "doi": "https://doi.org/10.1093/gbe/evt027",
+  "title": "Replicon-Dependent Bacterial Genome Evolution: The Case of Sinorhizobium meliloti",
+  "role": "noise",
+  "chars": 47349
+ },
+ {
+  "pmid": "23626695",
+  "doi": "https://doi.org/10.1371/journal.pone.0061528",
+  "title": "Comparative Genomic Analysis of the Genus Nocardiopsis Provides New Insights into Its Genetic Mechanisms of Environmental Adaptability",
+  "role": "noise",
+  "chars": 31350
+ },
+ {
+  "pmid": "23645200",
+  "doi": "https://doi.org/10.1128/AEM.00984-13",
+  "title": "Comparative Genomics of Bifidobacterium animalis subsp. lactis Reveals a Strict Monophyletic Bifidobacterial Taxon",
+  "role": "noise",
+  "chars": 33981
+ },
+ {
+  "pmid": "23723974",
+  "doi": "https://doi.org/10.1371/journal.pone.0063155",
+  "title": "Constraints on Genome Dynamics Revealed from Gene Distribution among the Ralstonia solanacearum Species",
+  "role": "noise",
+  "chars": 32357
+ },
+ {
+  "pmid": "23724777",
+  "doi": "https://doi.org/10.1186/1471-2164-14-366",
+  "title": "Title: Pan-genome analysis of the emerging foodborne pathogen Cronobacter spp. suggests a species-level bidirectional divergence driven by niche adaptation",
+  "role": "noise",
+  "chars": 54351
+ },
+ {
+  "pmid": "24581150",
+  "doi": "https://doi.org/10.1186/1471-2164-15-170",
+  "title": "Title: Comparative genomics of the Bifidobacterium breve taxon",
+  "role": "noise",
+  "chars": 79614
+ },
+ {
+  "pmid": "25608745",
+  "doi": "https://doi.org/10.1186/s12864-014-1206-5",
+  "title": "Title: Plasmids are vectors for redundant chromosomal genes in the Bacillus cereus group",
+  "role": "noise",
+  "chars": 37138
+ },
+ {
+  "pmid": "25766446",
+  "doi": "https://doi.org/10.1186/s12864-015-1314-x",
+  "title": "Title: High correlation between genotypes and phenotypes of environmental bacteria Comamonas testosteroni strains",
+  "role": "noise",
+  "chars": 59733
+ },
+ {
+  "pmid": "25880171",
+  "doi": "https://doi.org/10.1186/s12862-015-0302-8",
+  "title": "Title: Comparative functional pan-genome analyses to build connections between genomic dynamics and phenotypic evolution in polycyclic aromatic hydrocarbon metabolism in the genus Mycobacterium",
+  "role": "noise",
+  "chars": 116902
+ },
+ {
+  "pmid": "26476454",
+  "doi": "https://doi.org/10.1093/nar/gkv1070",
+  "title": "KEGG as a reference resource for gene and protein annotation",
+  "role": "noise",
+  "chars": 19671
+ },
+ {
+  "pmid": "26569403",
+  "doi": "https://doi.org/10.1371/journal.pone.0142962",
+  "title": "Comparative Genomic and Phylogenomic Analyses Reveal a Conserved Core Genome Shared by Estuarine and Oceanic Cyanopodoviruses",
+  "role": "noise",
+  "chars": 26506
+ },
+ {
+  "pmid": "26713670",
+  "doi": "https://doi.org/10.1111/mmi.13289",
+  "title": "Transcriptional control of quorum sensing and associated metabolic interactions in Pseudomonas syringae strain B728a",
+  "role": "noise",
+  "chars": 48118
+ },
+ {
+  "pmid": "27420027",
+  "doi": "https://doi.org/10.1038/ismej.2016.88",
+  "title": "Association mapping reveals novel serpentine adaptation gene clusters in a population of symbiotic Mesorhizobium",
+  "role": "noise",
+  "chars": 36235
+ },
+ {
+  "pmid": "27734920",
+  "doi": "https://doi.org/10.1038/srep35168",
+  "title": "Title: Bacterial intra-species gene loss occurs in a largely clocklike manner mostly within a pool of less conserved and constrained genes",
+  "role": "noise",
+  "chars": 50030
+ },
+ {
+  "pmid": "27765811",
+  "doi": "https://doi.org/10.1042/BSR20160282",
+  "title": "Genomic analyses of multidrug resistant Pseudomonas aeruginosa PA1 resequenced by single-molecule real-time sequencing",
+  "role": "noise",
+  "chars": 30241
+ },
+ {
+  "pmid": "27899624",
+  "doi": "https://doi.org/10.1093/nar/gkw1101",
+  "title": "MicroScope in 2017: an expanding and evolving integrated resource for community expertise of microbial genomes",
+  "role": "noise",
+  "chars": 35822
+ },
+ {
+  "pmid": "28056800",
+  "doi": "https://doi.org/10.1186/s12864-016-3461-0",
+  "title": "Title: Networking in microbes: conjugative elements and plasmids in the genus Alteromonas",
+  "role": "noise",
+  "chars": 68825
+ },
+ {
+  "pmid": "28123380",
+  "doi": "https://doi.org/10.3389/fmicb.2016.02138",
+  "title": "Genome Analysis of Clostridium difficile PCR Ribotype 014 Lineage in Australian Pigs and Humans Reveals a Diverse Genetic Repertoire and Signatures of Long-Range Interspecies Transmission",
+  "role": "noise",
+  "chars": 75590
+ },
+ {
+  "pmid": "28130242",
+  "doi": "https://doi.org/10.1093/bioinformatics/btx034",
+  "title": "Hierarchical sets: analyzing pangenome structure through scalable set visualizations",
+  "role": "noise",
+  "chars": 25130
+ },
+ {
+  "pmid": "28287462",
+  "doi": "https://doi.org/10.3390/biology6010021",
+  "title": "SNP Discovery Using a Pangenome: Has the Single Reference Approach Become Obsolete?",
+  "role": "noise",
+  "chars": 32431
+ },
+ {
+  "pmid": "28592797",
+  "doi": "https://doi.org/10.1038/s41598-017-02399-4",
+  "title": "Title: Distinct Biological Potential of Streptococcus gordonii and Streptococcus sanguinis Revealed by Comparative Genome Analysis",
+  "role": "noise",
+  "chars": 100949
+ },
+ {
+  "pmid": "28744269",
+  "doi": "https://doi.org/10.3389/fmicb.2017.01278",
+  "title": "Comparative Genomics of Methanopyrus sp. SNP6 and KOL6 Revealing Genomic Regions of Plasticity Implicated in Extremely Thermophilic Profiles",
+  "role": "noise",
+  "chars": 18310
+ },
+ {
+  "pmid": "28852435",
+  "doi": "https://doi.org/10.1186/s40793-017-0259-x",
+  "title": "Title: Complete Genome sequence of the nematicidal Bacillus thuringiensis MYBT18246",
+  "role": "noise",
+  "chars": 31267
+ },
+ {
+  "pmid": "28911112",
+  "doi": "https://doi.org/10.1093/nar/gkx607",
+  "title": "Integrative and conjugative elements and their hosts: composition, distribution and organization",
+  "role": "noise",
+  "chars": 44699
+ },
+ {
+  "pmid": "28912444",
+  "doi": "https://doi.org/10.1038/s41598-017-12016-z",
+  "title": "Title: Pan-genomic and transcriptomic analyses of Leuconostoc mesenteroides provide insights into its genomic and metabolic features and roles in kimchi fermentation",
+  "role": "noise",
+  "chars": 85194
+ },
+ {
+  "pmid": "29020009",
+  "doi": "https://doi.org/10.1371/journal.pone.0183859",
+  "title": "Genome sequences of lower Great Lakes Microcystis sp. reveal strain-specific genes that are present and expressed in western Lake Erie blooms",
+  "role": "noise",
+  "chars": 38833
+ },
+ {
+  "pmid": "29079617",
+  "doi": "https://doi.org/10.1128/AEM.01746-17",
+  "title": "Staphylococcus edaphicus sp. nov., Isolated in Antarctica, Harbors the mecC Gene and Genomic Islands with a Suspected Role in Adaptation to Extreme Environments",
+  "role": "noise",
+  "chars": 34229
+ },
+ {
+  "pmid": "29321635",
+  "doi": "https://doi.org/10.1038/s41598-017-18661-8",
+  "title": "Title: Pan-genome analysis of the genus Finegoldia identifies two distinct clades, strain-specific heterogeneity, and putative virulence factors",
+  "role": "noise",
+  "chars": 54924
+ },
+ {
+  "pmid": "29419787",
+  "doi": "https://doi.org/10.3390/microorganisms6010013",
+  "title": "Biomarkers\u2019 Responses to Reductive Dechlorination Rates and Oxygen Stress in Bioaugmentation Culture KB-1TM",
+  "role": "noise",
+  "chars": 31871
+ },
+ {
+  "pmid": "29475869",
+  "doi": "https://doi.org/10.1128/AEM.02694-17",
+  "title": "Genus-Wide Assessment of Lignocellulose Utilization in the Extremely Thermophilic Genus Caldicellulosiruptor by Genomic, Pangenomic, and Metagenomic Analyses",
+  "role": "noise",
+  "chars": 49830
+ },
+ {
+  "pmid": "29629856",
+  "doi": "https://doi.org/10.1099/mgen.0.000175",
+  "title": "Use of genomics to design a diagnostic assay to discriminate between Streptococcus pneumoniae and Streptococcus pseudopneumoniae Open Access",
+  "role": "noise",
+  "chars": 29372
+ },
+ {
+  "pmid": "29801938",
+  "doi": "https://doi.org/10.1016/j.syapm.2018.04.007",
+  "title": "Title: Towards a congruent reclassification and nomenclature of the thermophilic species of the genus Pseudothermotoga within the order Thermotogales",
+  "role": "noise",
+  "chars": 27269
+ },
+ {
+  "pmid": "29997890",
+  "doi": "https://doi.org/10.1016/j.nmni.2018.05.005",
+  "title": "Title: Genomic analyses reveal two distinct lineages of Corynebacterium ulcerans strains",
+  "role": "noise",
+  "chars": 20294
+ },
+ {
+  "pmid": "30013519",
+  "doi": "https://doi.org/10.3389/fmicb.2018.01298",
+  "title": "Reincarnation of Bacteriocins From the Lactobacillus Pangenomic Graveyard",
+  "role": "noise",
+  "chars": 34828
+ },
+ {
+  "pmid": "30050512",
+  "doi": "https://doi.org/10.3389/fmicb.2018.01520",
+  "title": "Complete Genome Sequence of Industrial Biocontrol Strain Paenibacillus polymyxa HY96-2 and Further Analysis of Its Biocontrol Mechanism",
+  "role": "noise",
+  "chars": 38087
+ },
+ {
+  "pmid": "30186253",
+  "doi": "https://doi.org/10.3389/fmicb.2018.01910",
+  "title": "PGAweb: A Web Server for Bacterial Pan-Genome Analysis",
+  "role": "noise",
+  "chars": 22385
+ },
+ {
+  "pmid": "30247672",
+  "doi": "https://doi.org/10.1093/gbe/evy209",
+  "title": "MultiTwin: A Software Suite to Analyze Evolution at Multiple Levels of Organization Using Multipartite Graphs",
+  "role": "noise",
+  "chars": 23427
+ },
+ {
+  "pmid": "30257645",
+  "doi": "https://doi.org/10.1186/s12864-018-5100-4",
+  "title": "Title: Comparative genome analysis provides deep insights into Aeromonas hydrophila taxonomy and virulence-related factors",
+  "role": "noise",
+  "chars": 46896
+ },
+ {
+  "pmid": "30372443",
+  "doi": "https://doi.org/10.1371/journal.pgen.1007763",
+  "title": "Metabolic adaptations underlying genome flexibility in prokaryotes",
+  "role": "noise",
+  "chars": 31398
+ },
+ {
+  "pmid": "30482178",
+  "doi": "https://doi.org/10.1186/s12866-018-1330-5",
+  "title": "Title: Genomic traits of Klebsiella oxytoca DSM 29614, an uncommon metal-nanoparticle producer strain isolated from acid mine drainages",
+  "role": "noise",
+  "chars": 44213
+ },
+ {
+  "pmid": "30497358",
+  "doi": "https://doi.org/10.1186/s12859-018-2417-6",
+  "title": "Title: PanDelos: a dictionary-based method for pan-genome content discovery",
+  "role": "noise",
+  "chars": 89379
+ },
+ {
+  "pmid": "30619175",
+  "doi": "https://doi.org/10.3389/fmicb.2018.03096",
+  "title": "The Core- and Pan-Genomic Analyses of the Genus Comamonas: From Environmental Adaptation to Potential Virulence",
+  "role": "noise",
+  "chars": 25780
+ },
+ {
+  "pmid": "30637341",
+  "doi": "https://doi.org/10.1128/mSystems.00281-18",
+  "title": "Pangenomic Approach To Understanding Microbial Adaptations within a Model Built Environment, the International Space Station, Relative to Human Hosts and Soil",
+  "role": "noise",
+  "chars": 41641
+ },
+ {
+  "pmid": "30858831",
+  "doi": "https://doi.org/10.3389/fmicb.2019.00263",
+  "title": "Antimicrobial Activity of Agastache Honey and Characterization of Its Bioactive Compounds in Comparison With Important Commercial Honeys",
+  "role": "noise",
+  "chars": 49207
+ },
+ {
+  "pmid": "30870618",
+  "doi": "https://doi.org/10.1016/j.chom.2019.02.006",
+  "title": "Title: Strain-Level Diversity in the Gut: The P.\u00a0copri Case",
+  "role": "noise",
+  "chars": 6897
+ },
+ {
+  "pmid": "31281302",
+  "doi": "https://doi.org/10.3389/fmicb.2019.01410",
+  "title": "On the Impact of the Pangenome and Annotation Discrepancies While Building Protein Sequence Databases for Bacteria Proteogenomics",
+  "role": "noise",
+  "chars": 44207
+ },
+ {
+  "pmid": "31284652",
+  "doi": "https://doi.org/10.3390/v11070624",
+  "title": "Bacillus Phage vB_BtS_B83 Previously Designated as a Plasmid May Represent a New Siphoviridae Genus",
+  "role": "noise",
+  "chars": 27605
+ },
+ {
+  "pmid": "31375706",
+  "doi": "https://doi.org/10.1038/s41598-019-47551-4",
+  "title": "Title: The population structure of Clostridium tetani deduced from its pan-genome",
+  "role": "noise",
+  "chars": 45034
+ },
+ {
+  "pmid": "31454987",
+  "doi": "https://doi.org/10.3390/md17090498",
+  "title": "Comparative Genomic Insights into Secondary Metabolism Biosynthetic Gene Cluster Distributions of Marine Streptomyces",
+  "role": "noise",
+  "chars": 19442
+ },
+ {
+  "pmid": "31510914",
+  "doi": "https://doi.org/10.1186/s12864-019-6059-5",
+  "title": "Title: Chlamydia pan-genomic analysis reveals balance between host adaptation and selective pressure to genome reduction",
+  "role": "noise",
+  "chars": 89598
+ },
+ {
+  "pmid": "31641046",
+  "doi": "https://doi.org/10.1128/mSystems.00252-19",
+  "title": "Comprehensive Analysis Reveals the Evolution and Pathogenicity of Aeromonas, Viewed from Both Single Isolated Species and Microbial Communities",
+  "role": "noise",
+  "chars": 55149
+ },
+ {
+  "pmid": "31646960",
+  "doi": "https://doi.org/10.1186/s12864-019-6123-1",
+  "title": "Title: Comparative genomic analysis of the Hafnia genus reveals an explicit evolutionary relationship between the species alvei and paralvei and provides insights into pathogenicity",
+  "role": "noise",
+  "chars": 70131
+ },
+ {
+  "pmid": "31798566",
+  "doi": "https://doi.org/10.3389/fmicb.2019.02650",
+  "title": "Genome-Wide Identification of Myxobacterial Predation Genes and Demonstration of Formaldehyde Secretion as a Potentially Predation-Resistant Trait of Pseudomonas aeruginosa",
+  "role": "noise",
+  "chars": 31089
+ },
+ {
+  "pmid": "31838800",
+  "doi": "https://doi.org/10.4014/jmb.1909.09008",
+  "title": "Comparative Genome Analysis of Psychrobacillus Strain PB01, Isolated from an Iceberg",
+  "role": "noise",
+  "chars": 16445
+ },
+ {
+  "pmid": "31941435",
+  "doi": "https://doi.org/10.1186/s12859-019-3335-y",
+  "title": "Title: PRAP: Pan Resistome analysis pipeline",
+  "role": "noise",
+  "chars": 23296
+ },
+ {
+  "pmid": "31980014",
+  "doi": "https://doi.org/10.1186/s12866-019-1683-4",
+  "title": "Title: Comparative genomics of multidrug-resistant Enterococcus spp. isolated from wastewater treatment plants",
+  "role": "noise",
+  "chars": 74919
+ },
+ {
+  "pmid": "32106516",
+  "doi": "https://doi.org/10.3390/microorganisms8030314",
+  "title": "Molecular Mechanisms Underpinning Aggregation in Acidiphilium sp. C61 Isolated from Iron-Rich Pelagic Aggregates",
+  "role": "noise",
+  "chars": 48712
+ },
+ {
+  "pmid": "32191703",
+  "doi": "https://doi.org/10.1371/journal.pcbi.1007732",
+  "title": "PPanGGOLiN: Depicting microbial diversity via a partitioned pangenome graph",
+  "role": "noise",
+  "chars": 54720
+ },
+ {
+  "pmid": "32375781",
+  "doi": "https://doi.org/10.1186/s12934-020-01359-4",
+  "title": "Title: Comprehensive dissection of dispensable genomic regions in Streptomyces based on comparative analysis approach",
+  "role": "noise",
+  "chars": 45043
+ },
+ {
+  "pmid": "32424209",
+  "doi": "https://doi.org/10.1038/s41598-020-65228-1",
+  "title": "Title: Genome Comparison Identifies Different Bacillus Species in a Bast Fibre-Retting Bacterial Consortium and Provides Insights into Pectin Degrading Genes",
+  "role": "noise",
+  "chars": 75413
+ },
+ {
+  "pmid": "32509595",
+  "doi": "https://doi.org/10.3389/fcimb.2020.00222",
+  "title": "A Pangenome Approach for Discerning Species-Unique Gene Markers for Identifications of Streptococcus pneumoniae and Streptococcus pseudopneumoniae",
+  "role": "noise",
+  "chars": 43263
+ },
+ {
+  "pmid": "32633920",
+  "doi": "https://doi.org/10.1007/978-3-030-38281-0_7",
+  "title": "Title: Pangenomes and Selection: The Public Goods Hypothesis",
+  "role": "noise",
+  "chars": 33049
+ },
+ {
+  "pmid": "32843837",
+  "doi": "https://doi.org/10.1177/1177932220938064",
+  "title": "First Steps in the Analysis of Prokaryotic Pan-Genomes",
+  "role": "noise",
+  "chars": 28787
+ },
+ {
+  "pmid": "32928108",
+  "doi": "https://doi.org/10.1186/s12864-020-07041-8",
+  "title": "Title: Benchmarking hybrid assembly approaches for genomic analyses of bacterial pathogens using Illumina and Oxford Nanopore sequencing",
+  "role": "noise",
+  "chars": 80552
+ },
+ {
+  "pmid": "33013780",
+  "doi": "https://doi.org/10.3389/fmicb.2020.546063",
+  "title": "Genomic Characteristics Distinguish Geographically Distributed Dehalococcoidia",
+  "role": "noise",
+  "chars": 38914
+ },
+ {
+  "pmid": "33023476",
+  "doi": "https://doi.org/10.1186/s12864-020-07117-5",
+  "title": "Title: Vibrionaceae core, shell and cloud genes are non-randomly distributed on Chr 1: An hypothesis that links the genomic location of genes with their intracellular placement",
+  "role": "noise",
+  "chars": 51159
+ },
+ {
+  "pmid": "33150080",
+  "doi": "https://doi.org/10.7717/peerj.10177",
+  "title": "Isolation and sequence-based characterization of a koala symbiont: Lonepinella koalarum",
+  "role": "noise",
+  "chars": 48313
+ },
+ {
+  "pmid": "33193173",
+  "doi": "https://doi.org/10.3389/fmicb.2020.572642",
+  "title": "Comparative Genomic Analysis Reveals Genetic Mechanisms of the Variety of Pathogenicity, Antibiotic Resistance, and Environmental Adaptation of Providencia Genus",
+  "role": "noise",
+  "chars": 36552
+ },
+ {
+  "pmid": "33204772",
+  "doi": "https://doi.org/10.1016/j.dib.2020.106336",
+  "title": "Title: Data on draft genome sequence of Caldanaerobacter sp. strain 1523vc, a thermophilic bacterium, isolated from a hot spring of Uzon Caldera, (Kamchatka, Russia)",
+  "role": "noise",
+  "chars": 8052
+ },
+ {
+  "pmid": "33271875",
+  "doi": "https://doi.org/10.3390/ijms21239161",
+  "title": "Benchmarking Long-Read Assemblers for Genomic Analyses of Bacterial Pathogens Using Oxford Nanopore Sequencing",
+  "role": "noise",
+  "chars": 47047
+ },
+ {
+  "pmid": "33291832",
+  "doi": "https://doi.org/10.3390/foods9121805",
+  "title": "Comparative Genomic and Functional Evaluations of Bacillus subtilis Newly Isolated from Korean Traditional Fermented Foods",
+  "role": "noise",
+  "chars": 36345
+ },
+ {
+  "pmid": "33347948",
+  "doi": "https://doi.org/10.1016/j.resmic.2020.103794",
+  "title": "Title: Bacteriophages that infect Gram-negative bacteria as source of signal-arrest-release motif lysins",
+  "role": "noise",
+  "chars": 28463
+ },
+ {
+  "pmid": "33375492",
+  "doi": "https://doi.org/10.3390/microorganisms9010050",
+  "title": "Genomic Insight into Pediococcus acidilactici HN9, a Potential Probiotic Strain Isolated from the Traditional Thai-Style Fermented Beef Nhang",
+  "role": "noise",
+  "chars": 39206
+ },
+ {
+  "pmid": "33488540",
+  "doi": "https://doi.org/10.3389/fmicb.2020.592735",
+  "title": "Peeling the Layers Away: The Genomic Characterization of Bacillus pumilus 64-1, an Isolate With Antimicrobial Activity From the Marine Sponge Plakina cyanorosea (Porifera, Homoscleromorpha)",
+  "role": "noise",
+  "chars": 48030
+ },
+ {
+  "pmid": "33590101",
+  "doi": "https://doi.org/10.1093/nar/gkab064",
+  "title": "Bacteria have numerous distinctive groups of phage\u2013plasmids with conserved phage and variable plasmid gene repertoires",
+  "role": "noise",
+  "chars": 60973
+ },
+ {
+  "pmid": "33668147",
+  "doi": "https://doi.org/10.3390/ijms22052244",
+  "title": "The Distribution of Several Genomic Virulence Determinants Does Not Corroborate the Established Serotyping Classification of Bacillus thuringiensis",
+  "role": "noise",
+  "chars": 57201
+ },
+ {
+  "pmid": "33749576",
+  "doi": "https://doi.org/10.1099/mgen.0.000525",
+  "title": "Subtelomeres are fast-evolving regions of the Streptomyces linear chromosome Open Access",
+  "role": "noise",
+  "chars": 46593
+ },
+ {
+  "pmid": "33815306",
+  "doi": "https://doi.org/10.3389/fmicb.2021.605984",
+  "title": "Identification of Novel Sensitive and Reliable Serovar-Specific Targets for PCR Detection of Salmonella Serovars Hadar and Albany by Pan-Genome Analysis",
+  "role": "noise",
+  "chars": 25531
+ },
+ {
+  "pmid": "33828821",
+  "doi": "https://doi.org/10.1080/20002297.2021.1905958",
+  "title": "Genomic characterization of four Escherichia coli strains isolated from oral lichen planus biopsies",
+  "role": "noise",
+  "chars": 26153
+ },
+ {
+  "pmid": "33912144",
+  "doi": "https://doi.org/10.3389/fmicb.2021.628055",
+  "title": "CAZymes in Maribacter dokdonensis 62\u20131 From the Patagonian Shelf: Genomics and Physiology Compared to Related Flavobacteria and a Co-occurring Alteromonas Strain",
+  "role": "noise",
+  "chars": 30293
+ },
+ {
+  "pmid": "33952861",
+  "doi": "https://doi.org/10.1264/jsme2.ME20138",
+  "title": "The Thermosynechococcus Genus: Wide Environmental Distribution, but a Highly Conserved Genomic Core",
+  "role": "noise",
+  "chars": 25776
+ },
+ {
+  "pmid": "33963386",
+  "doi": "https://doi.org/10.1093/molbev/msab139",
+  "title": "Evidence for Selection in the Abundant Accessory Gene Content of a Prokaryote Pangenome",
+  "role": "noise",
+  "chars": 39420
+ },
+ {
+  "pmid": "34056597",
+  "doi": "https://doi.org/10.1093/nargab/lqab047",
+  "title": "GeneMark-HM: improving gene prediction in DNA sequences of human microbiome",
+  "role": "noise",
+  "chars": 34494
+ },
+ {
+  "pmid": "34163443",
+  "doi": "https://doi.org/10.3389/fmicb.2021.663768",
+  "title": "Staphylococcus saprophyticus From Clinical and Environmental Origins Have Distinct Biofilm Composition",
+  "role": "noise",
+  "chars": 35675
+ },
+ {
+  "pmid": "34194415",
+  "doi": "https://doi.org/10.3389/fmicb.2021.683814",
+  "title": "Comparative Genomic Insights Into the Taxonomic Classification, Diversity, and Secondary Metabolic Potentials of Kitasatospora, a Genus Closely Related to Streptomyces",
+  "role": "noise",
+  "chars": 33944
+ },
+ {
+  "pmid": "34403199",
+  "doi": "https://doi.org/10.1111/1751-7915.13844",
+  "title": "Synthesis of aromatic amino acids from 2G lignocellulosic substrates",
+  "role": "noise",
+  "chars": 37010
+ },
+ {
+  "pmid": "34546072",
+  "doi": "https://doi.org/10.1128/mSystems.00425-21",
+  "title": "Genomic Stability and Genetic Defense Systems in Dolosigranulum pigrum, a Candidate Beneficial Bacterium from the Human Microbiome",
+  "role": "noise",
+  "chars": 54912
+ },
+ {
+  "pmid": "34559043",
+  "doi": "https://doi.org/10.1099/mgen.0.000670",
+  "title": "Different evolutionary trends form the twilight zone of the bacterial pan-genome Open Access",
+  "role": "noise",
+  "chars": 30709
+ },
+ {
+  "pmid": "34576801",
+  "doi": "https://doi.org/10.3390/microorganisms9091906",
+  "title": "Comparative Genomic Analysis of Novel Bifidobacterium longum subsp. longum Strains Reveals Functional Divergence in the Human Gut Microbiota",
+  "role": "noise",
+  "chars": 39478
+ },
+ {
+  "pmid": "34659160",
+  "doi": "https://doi.org/10.3389/fmicb.2021.732106",
+  "title": "Genome Sequence Analysis of Clostridium chauvoei Strains of European Origin and Evaluation of Typing Options for Outbreak Investigations",
+  "role": "noise",
+  "chars": 47915
+ },
+ {
+  "pmid": "34850891",
+  "doi": "https://doi.org/10.1093/gbe/evab264",
+  "title": "Complete Genome Sequencing of a Novel Gloeobacter Species from a Waterfall Cave in Mexico",
+  "role": "noise",
+  "chars": 21845
+ },
+ {
+  "pmid": "34887548",
+  "doi": "https://doi.org/10.1038/s41396-021-01149-9",
+  "title": "Toward quantifying the adaptive role of bacterial pangenomes during environmental perturbations",
+  "role": "noise",
+  "chars": 51676
+ },
+ {
+  "pmid": "35035886",
+  "doi": "https://doi.org/10.12688/f1000research.51874.1",
+  "title": "Horizontal transfer and evolution of wall teichoic acid gene cassettes in Bacillus subtilis",
+  "role": "noise",
+  "chars": 32060
+ },
+ {
+  "pmid": "35056644",
+  "doi": "https://doi.org/10.3390/microorganisms10010195",
+  "title": "Selective Isolation of Eggerthella lenta from Human Faeces and Characterisation of the Species Prophage Diversity",
+  "role": "noise",
+  "chars": 52092
+ },
+ {
+  "pmid": "35107332",
+  "doi": "https://doi.org/10.1128/spectrum.02591-21",
+  "title": "Genomic Features and Pervasive Negative Selection in Rhodanobacter Strains Isolated from Nitrate and Heavy Metal Contaminated Aquifer",
+  "role": "noise",
+  "chars": 36292
+ },
+ {
+  "pmid": "35297758",
+  "doi": "https://doi.org/10.1099/mgen.0.000791",
+  "title": "Meta-analysis of the Ralstonia solanacearum species complex (RSSC) based on comparative evolutionary genomics and reverse ecology Open Access",
+  "role": "noise",
+  "chars": 42964
+ },
+ {
+  "pmid": "35369469",
+  "doi": "https://doi.org/10.3389/fmicb.2022.830209",
+  "title": "Carbapenemase-Producing Extraintestinal Pathogenic Escherichia coli From Argentina: Clonal Diversity and Predominance of Hyperepidemic Clones CC10 and CC131",
+  "role": "noise",
+  "chars": 34831
+ },
+ {
+  "pmid": "35382730",
+  "doi": "https://doi.org/10.1186/s12864-022-08303-3",
+  "title": "Title: Panakeia - a universal tool for bacterial pangenome analysis",
+  "role": "noise",
+  "chars": 51597
+ },
+ {
+  "pmid": "35615513",
+  "doi": "https://doi.org/10.3389/fmicb.2022.848490",
+  "title": "Feed Insects as a Reservoir of Granadaene-Producing Lactococci",
+  "role": "noise",
+  "chars": 36300
+ },
+ {
+  "pmid": "35893567",
+  "doi": "https://doi.org/10.3390/microorganisms10081509",
+  "title": "Molecular Characterization of pBOq-IncQ and pBOq-95LK Plasmids of Escherichia coli BOq 01, a New Isolated Strain from Poultry Farming, Involved in Antibiotic Resistance",
+  "role": "noise",
+  "chars": 31849
+ },
+ {
+  "pmid": "36016080",
+  "doi": "https://doi.org/10.3390/vaccines10081192",
+  "title": "Design of Multi-Epitope Vaccine for Staphylococcus saprophyticus: Pan-Genome and Reverse Vaccinology Approach",
+  "role": "noise",
+  "chars": 39733
+ },
+ {
+  "pmid": "36053980",
+  "doi": "https://doi.org/10.1111/1462-2920.16173",
+  "title": "Ecophysiological and genomic analyses of a representative isolate of highly abundant Bacillus cereus strains in contaminated subsurface sediments",
+  "role": "noise",
+  "chars": 40584
+ },
+ {
+  "pmid": "36123438",
+  "doi": "https://doi.org/10.1038/s41564-022-01219-4",
+  "title": "Title: A functional selection reveals previously undetected anti-phage defence systems in the E. coli pangenome",
+  "role": "noise",
+  "chars": 91169
+ },
+ {
+  "pmid": "36156193",
+  "doi": "https://doi.org/10.1099/mic.0.001247",
+  "title": "Extended genomic analyses of the broad-host-range phages vB_KmiM-2Di and vB_KmiM-4Dii reveal slopekviruses have highly conserved genomes Open Access",
+  "role": "noise",
+  "chars": 43038
+ },
+ {
+  "pmid": "36209064",
+  "doi": "https://doi.org/10.1186/s12859-022-04898-2",
+  "title": "Title: A graph-based approach for the visualisation and analysis of bacterial pangenomes",
+  "role": "noise",
+  "chars": 48441
+ },
+ {
+  "pmid": "36404338",
+  "doi": "https://doi.org/10.1186/s13099-022-00516-x",
+  "title": "Title: Genomes of Vibrio metoecus co-isolated with Vibrio cholerae extend our understanding of differences between these closely related species",
+  "role": "noise",
+  "chars": 55805
+ },
+ {
+  "pmid": "36408900",
+  "doi": "https://doi.org/10.1093/nar/gkac1078",
+  "title": "proGenomes3: approaching one million accurately and consistently annotated high-quality prokaryotic genomes",
+  "role": "noise",
+  "chars": 17228
+ },
+ {
+  "pmid": "36466249",
+  "doi": "https://doi.org/10.3389/fpls.2022.1030720",
+  "title": "Genome-guided comparative in planta transcriptome analyses for identifying cross-species common virulence factors in bacterial phytopathogens",
+  "role": "noise",
+  "chars": 49759
+ },
+ {
+  "pmid": "36536862",
+  "doi": "https://doi.org/10.2147/IDR.S384673",
+  "title": "A Complete Genome of Nocardia terpenica NC_YFY_NT001 and Pan-Genomic Analysis Based on Different Sources of Nocardia spp. Isolates Reveal Possibly Host-Related Virulence Factors",
+  "role": "noise",
+  "chars": 37371
+ },
+ {
+  "pmid": "36608657",
+  "doi": "https://doi.org/10.1016/j.cell.2022.12.006",
+  "title": "Title: Novel integrative elements and genomic plasticity in ocean ecosystems",
+  "role": "noise",
+  "chars": 75411
+ },
+ {
+  "pmid": "36677403",
+  "doi": "https://doi.org/10.3390/microorganisms11010111",
+  "title": "Hybrid Genomic Analysis of Salmonella enterica Serovar Enteritidis SE3 Isolated from Polluted Soil in Brazil",
+  "role": "noise",
+  "chars": 33854
+ },
+ {
+  "pmid": "36828537",
+  "doi": "https://doi.org/10.3390/tropicalmed8020121",
+  "title": "Development and Optimization of an Unbiased, Metagenomics-Based Pathogen Detection Workflow for Infectious Disease and Biosurveillance Applications",
+  "role": "noise",
+  "chars": 42319
+ },
+ {
+  "pmid": "36838372",
+  "doi": "https://doi.org/10.3390/microorganisms11020407",
+  "title": "Biodegradation of Oil by a Newly Isolated Strain Acinetobacter junii WCO-9 and Its Comparative Pan-Genome Analysis",
+  "role": "noise",
+  "chars": 30969
+ },
+ {
+  "pmid": "36871069",
+  "doi": "https://doi.org/10.1038/s41396-023-01390-4",
+  "title": "Ecological divergence of syntopic marine bacterial species is shaped by gene content and expression",
+  "role": "noise",
+  "chars": 28671
+ },
+ {
+  "pmid": "36916949",
+  "doi": "https://doi.org/10.1128/spectrum.02791-22",
+  "title": "Pangenome Analysis of a Salmonella Enteritidis Population Links a Major Outbreak to a Gifsy-1-Like Prophage Containing Anti-Inflammatory Gene gogB",
+  "role": "noise",
+  "chars": 10852
+ },
+ {
+  "pmid": "36943133",
+  "doi": "https://doi.org/10.1128/msystems.00119-23",
+  "title": "Evidence for a Putative Isoprene Reductase in Acetobacterium wieringae",
+  "role": "noise",
+  "chars": 60640
+ },
+ {
+  "pmid": "37012375",
+  "doi": "https://doi.org/10.1038/s41559-023-02027-7",
+  "title": "Title: A social niche breadth score reveals niche range strategies of generalists and specialists",
+  "role": "noise",
+  "chars": 101932
+ },
+ {
+  "pmid": "37065164",
+  "doi": "https://doi.org/10.3389/fmicb.2023.1128028",
+  "title": "Comparative genomics of 40 Weissella paramesenteroides strains",
+  "role": "noise",
+  "chars": 29543
+ },
+ {
+  "pmid": "37089548",
+  "doi": "https://doi.org/10.3389/fmicb.2023.1169973",
+  "title": "Isolation and pan-genome analysis of Enterobacter hormaechei Z129, a ureolytic bacterium, from the rumen of dairy cow",
+  "role": "noise",
+  "chars": 23003
+ },
+ {
+  "pmid": "37180381",
+  "doi": "https://doi.org/10.3389/fpls.2023.1145041",
+  "title": "Wide-genome selection of lactic acid bacteria harboring genes that promote the elimination of antinutritional factors",
+  "role": "noise",
+  "chars": 45625
+ },
+ {
+  "pmid": "37256057",
+  "doi": "https://doi.org/10.3389/fmicb.2023.1179966",
+  "title": "Oxford nanopore long-read sequencing enables the generation of complete bacterial and plasmid genomes without short-read sequencing",
+  "role": "noise",
+  "chars": 19708
+ },
+ {
+  "pmid": "37275147",
+  "doi": "https://doi.org/10.3389/fmicb.2023.1159176",
+  "title": "Comparative genomics of Stutzerimonas balearica (Pseudomonas balearica): diversity, habitats, and biodegradation of aromatic compounds",
+  "role": "noise",
+  "chars": 65824
+ },
+ {
+  "pmid": "37278719",
+  "doi": "https://doi.org/10.1099/mgen.0.001034",
+  "title": "PanGraph: scalable bacterial pan-genome graph construction Open Access",
+  "role": "noise",
+  "chars": 33936
+ },
+ {
+  "pmid": "37377491",
+  "doi": "https://doi.org/10.1016/j.crfs.2023.100525",
+  "title": "Title: Machine learning to predict foodborne salmonellosis outbreaks based on genome characteristics and meteorological trends",
+  "role": "noise",
+  "chars": 45204
+ },
+ {
+  "pmid": "37576785",
+  "doi": "https://doi.org/10.1177/11769343231191481",
+  "title": "The Pan-Genomic Analysis of Corynebacterium striatum Revealed its Genetic Characteristics as an Emerging Multidrug-Resistant Pathogen",
+  "role": "noise",
+  "chars": 27208
+ },
+ {
+  "pmid": "37623951",
+  "doi": "https://doi.org/10.3390/pathogens12080991",
+  "title": "Genomic Analysis of Yersinia pestis Strains from Brazil: Search for Virulence Factors and Association with Epidemiological Data",
+  "role": "noise",
+  "chars": 28031
+ },
+ {
+  "pmid": "37630590",
+  "doi": "https://doi.org/10.3390/microorganisms11082030",
+  "title": "Whole Genome Sequencing and Pan-Genomic Analysis of Multidrug-Resistant Vibrio cholerae VC01 Isolated from a Clinical Sample",
+  "role": "noise",
+  "chars": 30088
+ },
+ {
+  "pmid": "37630674",
+  "doi": "https://doi.org/10.3390/microorganisms11082114",
+  "title": "Comparative Genomic Analyses of Virulence and Antimicrobial Resistance in Citrobacter werkmanii, an Emerging Opportunistic Pathogen",
+  "role": "noise",
+  "chars": 36284
+ },
+ {
+  "pmid": "37858045",
+  "doi": "https://doi.org/10.1186/s12864-023-09694-7",
+  "title": "Title: Exploring the biosynthetic gene clusters in Brevibacterium: a comparative genomic analysis of diversity and distribution",
+  "role": "noise",
+  "chars": 87612
+ },
+ {
+  "pmid": "37897345",
+  "doi": "https://doi.org/10.1093/nar/gkad814",
+  "title": "StORF-Reporter: finding genes between genes",
+  "role": "noise",
+  "chars": 59989
+ },
+ {
+  "pmid": "38029151",
+  "doi": "https://doi.org/10.3389/fmicb.2023.1293206",
+  "title": "Populational genomic insights of Paraclostridium bifermentans as an emerging human pathogen",
+  "role": "noise",
+  "chars": 35859
+ },
+ {
+  "pmid": "38107860",
+  "doi": "https://doi.org/10.3389/fmicb.2023.1267771",
+  "title": "Environmental distribution and genomic characteristics of Solirubrobacter, with proposal of two novel species",
+  "role": "noise",
+  "chars": 57964
+ },
+ {
+  "pmid": "38385549",
+  "doi": "https://doi.org/10.1093/gbe/evae032",
+  "title": "Impact of Homologous Recombination on Core Genome Evolution and Host Adaptation of Pectobacterium parmentieri",
+  "role": "noise",
+  "chars": 62981
+ },
+ {
+  "pmid": "38560215",
+  "doi": "https://doi.org/10.1016/j.heliyon.2024.e27820",
+  "title": "Title: A pan-genomic assessment: Delving into the genome of the marine epiphyte Bacillus altitudinis strain 19_A and other very close Bacillus strains from multiple environments",
+  "role": "noise",
+  "chars": 40908
+ }
+]
