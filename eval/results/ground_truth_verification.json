@@ -1,0 +1,28 @@
+{
+ "n_usable": 47,
+ "n_excluded": 3,
+ "token_overlap": {
+  "min": 0.735,
+  "median": 1.0,
+  "max": 1.0,
+  "n_below_warn": 0
+ },
+ "unresolvable_chunk_ids": 0,
+ "short_relevant_chunks": 1,
+ "fuzzy_near_threshold": 1,
+ "flagged_questions": [],
+ "review_sample": [
+  "Q39",
+  "Q42",
+  "Q18",
+  "Q09",
+  "Q30",
+  "Q28",
+  "Q23",
+  "Q16",
+  "Q44",
+  "Q48",
+  "Q02",
+  "Q45"
+ ]
+}

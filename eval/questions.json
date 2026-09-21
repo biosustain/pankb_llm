@@ -1,0 +1,302 @@
+[
+  {
+    "id": "Q01",
+    "question": "What is the main factor that drives the gene acquisition in Bacillus subtilis species?",
+    "source_doi": "https://doi.org/10.1093/gbe/evx270",
+    "reference_answer": "While not excluding the contributions of other mechanisms, our results strongly suggest a process of gene acquisition that is largely driven by competence, where the long-term maintenance of acquired genes depends on local and global fitness effects."
+  },
+  {
+    "id": "Q02",
+    "question": "What contributes to the long-term maintenance of acquired genes in Bacillus subtilis species?",
+    "source_doi": "https://doi.org/10.1093/gbe/evx270",
+    "reference_answer": "While not excluding the contributions of other mechanisms, our results strongly suggest a process of gene acquisition that is largely driven by competence, where the long-term maintenance of acquired genes depends on local and global fitness effects."
+  },
+  {
+    "id": "Q03",
+    "question": "What are the most abundant Carbohydrate active enzymes (CAZymes) in Streptomyces pangenome?",
+    "source_doi": "https://doi.org/10.1038/s41598-022-21731-1",
+    "reference_answer": "Of the 6 CAZyme classes, the glycoside hydrolases (GHs) were most abundant (21,943 proteins) followed by glycosyl transferases (GTs; 11,366 proteins) (Fig. 4A)."
+  },
+  {
+    "id": "Q04",
+    "question": "Which species in Streptomyces may be able to catabolize a wide range of plant biomass?",
+    "source_doi": "https://doi.org/10.1038/s41598-022-21731-1",
+    "reference_answer": "Therefore, we expect that S. bingchenggensis BCW-1 is capable of catabolising a wide range of plant biomass constituents, though this has not been previously reported or confirmed."
+  },
+  {
+    "id": "Q05",
+    "question": "What substances might streptomycetes use for interspecies communication?",
+    "source_doi": "https://doi.org/10.1038/s41598-022-21731-1",
+    "reference_answer": "Using an organism-specific chemical compound as a signalling molecule is one of the easiest ways to detect cells from the same organism and sense the population and our data suggest that the majority of streptomycetes potentially use GBLs for intraspecies communication."
+  },
+  {
+    "id": "Q06",
+    "question": "Is the geosmin cyclase(GeoA) conservative in streptomycetes?",
+    "source_doi": "https://doi.org/10.1038/s41598-022-21731-1",
+    "reference_answer": "Though geosmin cyclase was bioinformatically identified in a number of actinomycetes including streptomycetes, the homology of the overall sequences varies while the active site motifs are more highly conserved56. Indeed, 3 out of 4 active sites of GeoA in S. coelicolor A3(2) and its closest homologue in S. venezuelae NRRL B-65442 were identical and the other active site had a single residue substitution while their overall identity was below the threshold used in this study. For such enzymes, it may be more appropriate to consider conservation of active sites and residues involved in substrate selection rather than an overall sequence alignment."
+  },
+  {
+    "id": "Q07",
+    "question": "Which genes in streptomycetes may be involved in clavulanic acid production?",
+    "source_doi": "https://doi.org/10.1038/s41598-022-21731-1",
+    "reference_answer": "For example, of all the characterised sigma factors in streptomycetes, the least conserved was Orf21 in Streptomyces clavuligerus ATCC 27064 (NRRL 3585 in the original report), which is suggested to be involved in clavulanic acid production"
+  },
+  {
+    "id": "Q08",
+    "question": "Can streptomycetes utilize benzoate?",
+    "source_doi": "https://doi.org/10.1038/s41598-022-21731-1",
+    "reference_answer": "Indeed, many Actinobacteria including streptomycetes are known to catabolise many aromatic compounds including benzoate and cinnamate derivatives as carbon sources"
+  },
+  {
+    "id": "Q09",
+    "question": "Which streptomycetes strains might have both complete protocatechuate and catechol catabolic pathways?",
+    "source_doi": "https://doi.org/10.1038/s41598-022-21731-1",
+    "reference_answer": "Only S. bingchenggensis BCW-1 and Streptomyces viridosporus ATCC 39115 were predicted to encode both of the protocatechuate and catechol catabolic pathways completely."
+  },
+  {
+    "id": "Q10",
+    "question": "Through pangenome analysis, which species in the Lactobacillaceae family has the most open pangenome? Please only tell me the species' name without extra information.",
+    "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+    "reference_answer": "The openness of the 26 pangenomes displayed a notable range in their diversity. 11 of the 26 species had a moderately open pangenome with normalized λ values > 0.3. 13 of the 26 species had a less open pangenome with normalized λ values between 0.2 and 0.3 (Fig. 2A). Only two species had more closed pangenomes, Lentilactobacillus parabuchneri, with a normalized λ value of 0.171 ± 0.004 and Lactobacillus acidophilus, with a normalized λ value of 0.077 ± 0.021. Limosilactobacillus reuteri had the most open pangenome (Li et al., 2023), with a normalized λ value of 0.378 ± 0.015, followed by Lactobacillus crispatus, with a normalized λ value of 0.364 ± 0.017."
+  },
+  {
+    "id": "Q11",
+    "question": "Based on Mash-based analysis, how many phylogroups are there in Lactiplantibacillus plantarum pangenome? Please only tell me the number without extra information.",
+    "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+    "reference_answer": "Having 611 genomes available, we revealed nine potential phylogroups within Lactiplantibacillus plantarum. COG-based enrichment analysis was also performed to determine the functional annotation of the genes in the CAR genomes for all 26 species."
+  },
+  {
+    "id": "Q12",
+    "question": "Which phylogroup in Lactobacillus plantarum is the most unique? Why?",
+    "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+    "reference_answer": "Interestingly, one of these clusters, Cluster A, is quite distinct from all other Mash clusters (Fig. 6B). Looking further into the gene content of Cluster A strains, we find 1146 exclusive genes mapped to known orthologs using eggNOG (Huerta-Cepas et al., 2019). The COG category breakdown reveals that 329 (28.7%) of these genes are not functionally annotated in addition to not having any known orthologs, with an additional 193 (16.8%) mapping to established orthologous genes of unknown function. The largest known grouping for these exclusive genes belongs to ‘L’ (163 genes, 14.2%), followed by ‘G’ (77 genes, 6.72%), ‘K’ (74 genes, 6.46%), ‘M’ (72 genes, 6.28%), ‘E’ (57 genes, 4.97%), ‘V’ (36 genes, 3.14%), and ‘P’ (23 genes, 2.01%) (Fig. 6C). A Fisher's Exact Test was performed (Benjamini–Hochberg correction, false-discovery rate at 0.01), which found that these Cluster A exclusive genes were enriched for genes in the KEGG-defined histidine metabolic pathway, specifically for the histidine biosynthesis KEGG module responsible for converting PRPP into histidine (Fig. 6D). Upon closer examination, we found that genes encoding this module are also found in other phylogroup candidate strains. Still, those genes are not the same as the ones exclusive to Cluster A, most likely coding for isozymes. It should be noted that most of these exclusive genes have minimal-to-no functional annotation and warrant further investigation to understand this phylogenetically distinct subgroup within L. plantarum fully."
+  },
+  {
+    "id": "Q13",
+    "question": "Which type of BGC is the most abundant BGCs across the Lactobacillaceae family? Please only tell me the name of the BGC without extra information.",
+    "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+    "reference_answer": "The most abundant types of BGCs included RiPP-like (2,322), T3PKS (2,319), terpene (788), cyclic-lactone-autoinducer (643), lanthipeptide-class-iv (130), RRE-containing (90), lanthipeptide-class-i (82), lanthipeptide-class-iii (78), and beta lactone (72). Some BGCs were hybrid types, involving more than one type of BGC in the region."
+  },
+  {
+    "id": "Q14",
+    "question": "Which species of the Lactobacillaceae family have genes of flagella formation (flgJ)? Please only tell me the species' name without extra information.",
+    "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+    "reference_answer": "Interestingly, two important species, L. helveticus and L. ruminis, found in the human gut, possess the genes of T4PS and flagella formation (flgJ)."
+  },
+  {
+    "id": "Q15",
+    "question": "Tell me factors that may correlate to the openness of the Lactobacillaceae family.",
+    "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+    "reference_answer": "Therefore, the openness of a pangenome is likely to be correlated to the mobilome and genome instability rather than source of isolation. Future investigations into this hypothesis may help elucidate key evolutionary forces behind Lactobacillaceae diversification."
+  },
+  {
+    "id": "Q16",
+    "question": "Which genes may contribute to the phage resistance in Lactobacillus species?",
+    "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+    "reference_answer": "The accessory genomes also included genes from the Type I restriction-modification system and ABC-transport system specific to antimicrobial peptides and multi-drugs, which explains phage resistance (Suárez et al., 2009) and antibiotic resistance in Lactobacillus species (Orelle et al., 2019)."
+  },
+  {
+    "id": "Q17",
+    "question": "Please tell me the average of the normalized Heap's coefficient λ value of the Lactobacillaceae family. Only tell me the λ value without extra information.",
+    "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+    "reference_answer": "the normalized Heap's coefficient λ (a measure of pangenome openness) was found to have an average value of 0.27 (ranging from 0.07 to 0.37),"
+  },
+  {
+    "id": "Q18",
+    "question": "What proportion of BGCs in the Lactobacilliaceae have known functions? Please only tell me the number without extra information.",
+    "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+    "reference_answer": "Even after annotating BGCs with similarly known bacteriocins, we still find only 1796 of the 6950 BGCs (∼26%) with an assigned known secondary metabolite either from MIBIG database or Bactibase. Thus, a relatively large number of undiscovered BGCs spread acrsoss the rare genome, whereas many of the known BGCs coded for bacteriocins with industrial potential."
+  },
+  {
+    "id": "Q19",
+    "question": "Does Lactobacillus plantarum have BGCs with antioxidant properties?",
+    "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+    "reference_answer": "The second largest family of 638 BGCs coded for a terpene was detected mainly across the Lactiplantibacillus plantarum (606) species. Even though there was no similar MIBIG entry for this BGC, it is well known to code for a yellow-colored C(30) carotenoid 4,4′-diaponeurosporene with the antioxidant activity (Garrido-Fernández et al., 2010; Kim et al., 2020)."
+  },
+  {
+    "id": "Q20",
+    "question": "Which Bacillus species has the most conserved core genes? Please only tell me the species' name without extra information.",
+    "source_doi": "https://doi.org/10.1038/s41598-017-11385-9",
+    "reference_answer": "This result indicates that B. anthracis has the most well-conserved core genes among the strains. As discussed in the previous study, B. anthracis strains are significantly homologous, which possibly results from a recent evolution of the species17."
+  },
+  {
+    "id": "Q21",
+    "question": "Which proteins might contribute to the saline tolerance of Halobacteria?",
+    "source_doi": "https://doi.org/10.1038/s41598-020-77723-6",
+    "reference_answer": "Comparison of individual proteins of both the cores of Halobacteria and Euryarchaeota was done to get the proteins specifically conserved in this class and to examine the genes responsible for not only having salt tolerance properties but also for the factors involved in tolerating oxygen and nutrient depleted environments and thus for its longevity. Unique to core proteins of Halobacteria involved 50S ribosomal protein subunits L24P, L29P, L30P and L31e and 30S ribosomal protein S9. Transcriptional regulator PadR-like family protein37 and transcriptional regulator PhoU38 involved in negative regulation of phenolic and phosphate metabolism were also conserved. HTH-type transcriptional regulator LysM and HTH-type transcriptional regulator Ptr were also found which are the members of AsnC family38. These are the regulators of potassium ion transport probably aiding in maintaining potassium concentration in response to high saline environments."
+  },
+  {
+    "id": "Q22",
+    "question": "Which proteins might contribute to the UV radiation tolerance of Halobacteria?",
+    "source_doi": "https://doi.org/10.1038/s41598-020-77723-6",
+    "reference_answer": "Many DNA recombination and repair proteins were also reported in the core. DNA mismatch repair protein MutS and DNA repair41 and recombination protein RadA42, possibly help Halobacteria to repair its DNA damaged by UV radiation thus enhancing its longevity. Moreover, some studies have also shown that DNA can act as a nutrient source for some halophilic archaea. DNA integrity scanning protein DisA is also conserved and is known to check for DNA lesions and repairs DNA specifically at the time of sporulation43."
+  },
+  {
+    "id": "Q23",
+    "question": "How about the halobacteria pangenome openness?",
+    "source_doi": "https://doi.org/10.1038/s41598-020-77723-6",
+    "reference_answer": "Halobacterial genomes are highly heterogeneous and have an open pangenome\nOMCL21 algorithm was applied to protein sequences from all the genomes to get the pan Halobacteria comprising of 49,311 clusters. GET HOMOLOGUES22 divided the clusters into four categories viz Core, Softcore, Cloud and Shell. Core clusters are the clusters which have sequences from each genome whereas softcore in 95% of the genomes. Cloud can be defined as the gene clusters which have sequences from very few genomes. Its cut-off is based on most populated cluster which is not in core and its neighbouring clusters. Shell genome includes the clusters present in majority of genomes except the soft-core clusters. Pan Halobacteria with its compartments (Core: 300, Softcore: 998, Cloud:36531, Shell:11784) is described in Fig. 1. The strict core clusters which contain exactly one sequence from each taxa were reported to be 225 and can be considered as true orthologs. Alternatively, all the clusters except the core clusters can be called as variable genome clusters. The pan Euryarchaeota consist of total 60,809 clusters and 45 core clusters (Fig. 1). The large number of variable clusters shows the heterogeneity embedded in the class Halobacateriaand cues for horizontal gene transfer."
+  },
+  {
+    "id": "Q24",
+    "question": "Based on pangenome analysis and genome-scale model prediction, which auxotroph type is the whole Staphylococcus aureus species?",
+    "source_doi": "https://doi.org/10.1073/pnas.1523199113",
+    "reference_answer": "All models were predicted to be auxotrophic for the vitamins niacin (vitamin B3) and thiamin (vitamin B1), whereas strain-specific auxotrophies were predicted for riboflavin (vitamin B2), guanosine, leucine, methionine, and cysteine, among others."
+  },
+  {
+    "id": "Q25",
+    "question": "How many virulence factors are present in the Staphylococcus aureus species? Please tell me the number and list some significant VFs of Staphylococcus aureus species.",
+    "source_doi": "https://doi.org/10.1073/pnas.1523199113",
+    "reference_answer": "To gain insight into the conservation of virulence factors across the S. aureus species we curated a set of known virulence factors (VFs) present in different strains based on literature and database searches (30). We identified a total of 90 different VFs that were present in at least one of the 64 different S. aureus strains. Of the 90 VFs, 35 were shared by all of the strains, forming a core set of VFs. Nine of the conserved VFs are cap8 genes (B, C, E, F, L, M, N, O, and P), which are involved in the synthesis of the polysaccharide capsule (PC). Other conserved VFs included five involved in the production of two different cytotoxins, namely, the Panton–Valentine leukocidin (PVL), encoded by the genes lukS and lukF, and the gamma–hemolysin, encoded by hlgA, hlgB, and hlgC. Four other conserved VFs encode iron-regulated proteins (isdA, isdC, isdE, and isdF) that bind to extracellular matrix components such as fibrinogen and fibronectin to promote cell adherence. Among these, the isdA gene plays a role in the S. aureus iron acquisition system, important for S. aureus in vivo replication and disease pathogenesis (31). Other canonical S. aureus virulence factors were highly conserved but were not found across all 64 strains. Protein A (binds immunoglobin G to disrupt phagocytosis, encoded for by spa) was found in 90% of strains. Alpha toxin (disrupts the membrane and enhances invasiveness, encoded for by hla) was found in 96% of strains. Biosynthesis genes for the staphyloxanthin pigment (encoded for by crtMNPQ) were found in all but one of the strains. This strain (MSHR1132) was specifically sequenced because of its lack of the yellow pigment (17)."
+  },
+  {
+    "id": "Q26",
+    "question": "What functions does bgcflow have?",
+    "source_doi": "https://doi.org/10.1093/nar/gkae314",
+    "reference_answer": ""
+  },
+  {
+    "id": "Q27",
+    "question": "What is the potential industrial application of the Qipengyuania genus? Please only tell me its potential industrial application without extra information.",
+    "source_doi": "https://doi.org/10.1128/spectrum.01264-21",
+    "reference_answer": "Members of the genus Qipengyuania are heterotrophic bacteria frequently isolated from marine environments with great application potential in areas such as carotenoid production."
+  },
+  {
+    "id": "Q28",
+    "question": "Can the Qipengyuania genus utilize inorganic sulfur?",
+    "source_doi": "https://doi.org/10.1128/spectrum.01264-21",
+    "reference_answer": "Seawater and marine sediments contain a high concentration of sulfate (42). However, the genes related to assimilatory sulfate reduction were not detected in members of the genus Qipengyuania (Fig. 2b), indicating that they should not utilize inorganic sulfur."
+  },
+  {
+    "id": "Q29",
+    "question": "Does the Qipengyuania genus have photosynthesis genes? If yes, give me the gene names without extra information.",
+    "source_doi": "https://doi.org/10.1128/spectrum.01264-21",
+    "reference_answer": "Contrary to prevalent carotenoids in the genus Qipengyuania, the photosynthesis genes appeared in only the two strains 6B39T and 6D47AT. The arrangement and composition of the two photosynthesis gene clusters (PGC) were almost identical (Fig. 4e), indicating that they should come from a common ancestor. The PGC organization in the two strains comprised two conserved subclusters, bchIDO-crtCDF-bchCXYZ-pufBALM and bchFNBHLM-lhaA-puhABC-acsF-puhE-hemA. Strain 6B39T had the pufC gene encoding the photosynthetic reaction center subunit M, but strain 6D47AT did not, suggesting that the pufC gene may be inessential for photosynthetic growth (54)."
+  },
+  {
+    "id": "Q30",
+    "question": "Which type of nitrogen sources the Qipengyuania genus might prefer? Urea, Amino acid, or Ammonium?",
+    "source_doi": "https://doi.org/10.1128/spectrum.01264-21",
+    "reference_answer": "(iii) Qipengyuania may prefer ammonium as nitrogen source. Nitrogen is an essential nutrient and often limiting for microorganisms in all natural ecosystems, especially in marine environments (39). As such, microorganisms have evolved a variety of strategies to acquire nitrogen from the surroundings. Exception for strain Q. sediminis CGMCC 1.12928T, all investigated strains of the genus Qipengyuania harbored homologues for ammonia uptake (Fig. 2b), including the amtB gene encoding ammonium transporter, the gdhA/gdh2 gene encoding glutamate dehydrogenase, and the gltABD genes encoding glutamine synthetase. It was reported that the glnK and amtB genes could interact directly via protein-protein interaction to regulate ammonium assimilation during nitrogen starvation (40). Unlike the ammonium assimilation, the gene cluster narIJHGKR encoding enzymes responsible for the dissimilatory nitrate reduction existed in only five strains, including strains YG27T, Q. soli 6D36T, “Erythrobacter mangrovi” EB310T, “Erythrobacter aureus” YH-07T, and Q. citrea CGMCC 1.8703T (Fig. 2b). Unexpectedly, the genes encoding nitrite reductase were found only in strain “Erythrobacter mangrovi” EB310T. These analyses suggested that bacteria of the genus Qipengyuania may prefer ammonium as a nitrogen source, although a few bacteria could utilize nitrate (41) and nitrite (12)."
+  },
+  {
+    "id": "Q31",
+    "question": "Which virulence factors are virulence factors unique to the FNU (a strain in Fusobacterium nucleatum species)? Please only tell me the virulence factors without extra information.",
+    "source_doi": "https://doi.org/10.1128/spectrum.05184-22",
+    "reference_answer": "In this study, we proved that FNU belongs to a new subspecies. FNU maintained the smallest genomic size among 30 F. nucleatum strains, and the genes were mainly annotated as housekeeping genes, such as genes related to ribosomes, cytosolic large ribosomal subunits, ATP binding, carbon metabolism, and ABC transporters. While virulence factors, such as clpc, cdiA, aec27/clpV, clpV1, and yhvA, existed only in FNU, which suggests that FNU may contain some unique pathogenic characteristics. FNU only contained the common ARGs rpoB2 and Bado_rpoB_RIF. The distribution preference of this strain in the human body and the pathogenic characteristics of the strain needs further study."
+  },
+  {
+    "id": "Q32",
+    "question": "Which genes of Shewanella may contribute to its survival in an iron-rich environment?",
+    "source_doi": "https://doi.org/10.1186/s13068-018-1201-1",
+    "reference_answer": "This menD gene did not exist in other strains, which might be important for the survival of S. loihica PV-4 in the iron-rich environment."
+  },
+  {
+    "id": "Q33",
+    "question": "Give me some genes that contribute to microbial degradation of poly(ethylene)terephthalate (PET). Please only give me the genes and the species they come from.",
+    "source_doi": "https://doi.org/10.3390/ijms23105612",
+    "reference_answer": "Using molecular techniques, we identified a new EstB PETase encoded in Pseudomonas spp. The predicted PETases included two dienelactone hydrolases encoded in both Pseudomonas strains 10 and 13.2 and in Bacillus strain 9.1. Further transcriptomic analysis within the Pseudomonas strains indicated the upregulation of carboxylesterases NlhH in strains 10 and 13.2 and an aldehyde dehydrogenase upregulated in 9.2 (Table 4) when the strains were incubated on PET. Kumari et al. previously identified, through transcriptomic analysis, the complex interactions of carboxylesterases and aldehyde dehydrogenases on the degradation of PET, possibly through the generation of 4-[(2-hydroxyethoxy) carbonyl] [35]. This study gives further evidence of potential aldehyde dehydrogenase- and carboxylesterase-mediated PET degradation."
+  },
+  {
+    "id": "Q34",
+    "question": "What are the characteristics of the Campylobacter pangenome? Please answer from its pangenome openness, shape, etc.",
+    "source_doi": "https://doi.org/10.1128/spectrum.01029-22",
+    "reference_answer": "The Campylobacter pan-genome was open and showed extensive genome variability, with high levels of gene expansion and contraction as the organism evolved."
+  },
+  {
+    "id": "Q35",
+    "question": "What are the main functions of the virulence factors of Campylobacter?",
+    "source_doi": "https://doi.org/10.1128/spectrum.01029-22",
+    "reference_answer": "The virulence factors encoded by the pathogen genome enable the organism to manipulate host immune defenses, enhance a pathogen disease-inducing potential, and largely determine the outcome of infections (37). Thus, comprehensive knowledge of virulence factors is crucial to gain insights into the infection process. The pan-genome provided the opportunity to discover different pathogenic virulence genes present in diverse Campylobacter species and to explore the presence (or absence) information of all virulence genes among the Campylobacter species. We identified a total of 154 virulence genes in the 39 Campylobacter species, including 6 core genes, 147 accessory genes, and 1 unique gene. The virulence determinants of pathogenicity of these Campylobacter species include flagella, iron uptake, invasion, lipooligosaccharide (LOS), capsule, exotoxin, type IV secretion system (T4SS), and adherence."
+  },
+  {
+    "id": "Q36",
+    "question": "Which multidrug-resistance-related genes exist in all strains of the Campylobacter genus? Please only give me the genes without extra information.",
+    "source_doi": "https://doi.org/10.1128/spectrum.01029-22",
+    "reference_answer": "Furthermore, all studied Campylobacter species contained the gyrA, cmeA, and cmeC genes, variants of which have been reported to contribute to multidrug resistance."
+  },
+  {
+    "id": "Q37",
+    "question": "Which virulence genes are part of the core genome of the Campylobacter genus? Please only give me the genes without extra information.",
+    "source_doi": "https://doi.org/10.1128/spectrum.01029-22",
+    "reference_answer": "These Campylobacter members had diverse virulence gene content, and six potential core virulence genes (porA, PEB4, cheY, htrB, Cj1135, and kpsF) have been identified."
+  },
+  {
+    "id": "Q38",
+    "question": "What is the function of CheY, one of the virulence genes of the Campylobacter genus?",
+    "source_doi": "https://doi.org/10.1128/spectrum.01029-22",
+    "reference_answer": "These 39 Campylobacter species all shared a conserved gene encoding CheY, one of the essential core chemotactic components that can interact with flagella to coordinate directional motions (49). In addition, CheY is one of the response regulators of two-component signal transduction systems, which aid bacteria in sensing and responding to their surroundings (50)."
+  },
+  {
+    "id": "Q39",
+    "question": "Why can the Methylobacterium variabile utilize more types of carbon sources?",
+    "source_doi": "https://doi.org/10.1128/msystems.00248-24",
+    "reference_answer": "While all selected organisms possessed essential genes for the serine pathway, Methylooceanibacter marginalis lacked serine hydroxymethyltransferase (SHMT), and Methylobacterium variabile exhibited both isozymes of SHMT, suggesting its potential to utilize a broader range of carbon sources."
+  },
+  {
+    "id": "Q40",
+    "question": "Why are Type II methylotrophs important for forests?",
+    "source_doi": "https://doi.org/10.1128/msystems.00248-24",
+    "reference_answer": "Type II methanotrophs, exemplified by Methylosinus and Methylocella, are believed to play a significant role in N2 fixation within forest soil ecosystems and rice plants."
+  },
+  {
+    "id": "Q41",
+    "question": "What metabolic mechanism does the assimilation of formaldehyde in type II methylotrophs depend on?",
+    "source_doi": "https://doi.org/10.1128/msystems.00248-24",
+    "reference_answer": "The subsequent assimilation of formaldehyde in type II methylotrophs primarily relies on the serine cycle. This cycle allows the incorporation of formaldehyde into cellular metabolism for the synthesis of essential biomolecules (91). To complete the oxidation process, formaldehyde is further oxidized to formic acid by the action of formaldehyde dehydrogenase (92). Hence, methylotrophs derive the energy necessary for their growth by oxidizing C1 substrates through specific dehydrogenases. Unlike other organisms, they do not depend on a complete Krebs TCA cycle for their energy generation."
+  },
+  {
+    "id": "Q42",
+    "question": "Are the housekeeping genes used in the current MLST method enough for classifying Staphylococcus aureus?",
+    "source_doi": "https://doi.org/10.1128/spectrum.03117-22",
+    "reference_answer": "Pan-genomic analysis showed that some of the housekeeping genes of multilocus sequence typing (MLST) are carried at less than 60% in S. aureus strains. Consequently, we propose a new set of marker genes for the classification of S. aureus, which provides a reference for finding a new set of housekeeping genes to apply to MLST. In this study, we explored the role of driving factors influencing pan-genome composition, providing new insights into the study of bacterial pan-genomes."
+  },
+  {
+    "id": "Q43",
+    "question": "Give me some BGCs shared by all Corynebacterium glutamicum strains. Please only give me the BGCs' names without extra information.",
+    "source_doi": "https://doi.org/10.1371/journal.pone.0299588",
+    "reference_answer": "NAPAA of Nonribosomal peptide synthetases (NRPs) gene clusters and T1PKS of Polyketide synthases (PKSs) gene clusters were found in all the studied strains. Additionally, Terpene BGCs were found in 96.67% strains. T1PKS, Terpene, NAPAA and other NRPs were also most common in Gordonia hongkongensis EUFUS-Z298 [80], Burkholderia spp. [18], in activated sludge microbiome [81], and in Ktedonobacteria [82]. NAPAA, particularly e-poly-lysine, demonstrate notable antimicrobial efficacy, showcasing widespread utility in the food and pharmaceutical sectors."
+  },
+  {
+    "id": "Q44",
+    "question": "What is the potential industrial application of Corynebacterium glutamicum?",
+    "source_doi": "https://doi.org/10.1371/journal.pone.0299588",
+    "reference_answer": "Corynebacterium glutamicum is a gram-positive, non-sporulating, non-pathogenic, and generally recognized as safe (GRAS) organism. It remains very robust against oxygen and substrate supply oscillation in the case of large-scale fermentations [1,2]. It is one of the most used microorganisms in industrial fermentation for producing amino acids, like lysine and glutamate, for decades [3,4]. C. glutamicum has undergone substantial modification to provide a wide range of beneficial products including chemicals, proteins, polymers, natural products, and biofuels [5–8]. Many studies of C. glutamicum have been published in the past decade [9], yet the genetic variations among the strains are unexplored. In all, we can say that strains of C. glutamicum can be a good candidate for engineering to produce various novel compound through BGCs expression. Also the strain may have potential to produce antibiotic, plant growth promoting agent, antiviral agent and anti-cancer agent."
+  },
+  {
+    "id": "Q45",
+    "question": "How many genes in the A. baumannii core genome are virulence factors? Please only tell me the exact number without extra information.",
+    "source_doi": "https://doi.org/10.1186/s12864-016-2951-4",
+    "reference_answer": "To get insight into the virulence potential of A. baumannii, virulent genes present in core conserved genome were explored. Interestingly, the bacteria harbor a significant number of virulent genes (295) as part of its core genome which facilitates the organism in pathogenesis and probably survival in adverse conditions (Additional file 1)."
+  },
+  {
+    "id": "Q46",
+    "question": "Which proteins are good vaccine targets for Acinetobacter baumannii? Please tell me the proteins' names with a sentence introduction to them.",
+    "source_doi": "https://doi.org/10.1186/s12864-016-2951-4",
+    "reference_answer": "Among the conserved core genome, thirteen proteins, including P pilus assembly protein, pili assembly chaperone, AdeK, PonA, OmpA, general secretion pathway protein D, FhuE receptor, Type VI secretion system OmpA/MotB, TonB dependent siderophore receptor, general secretion pathway protein D, outer membrane protein, peptidoglycan associated lipoprotein and peptidyl-prolyl cis-trans isomerase are identified as highly antigenic. The study, based upon combinatorial approach of pan-genomics, core genomics, proteomics and reverse vaccinology led us to find out potential vaccine candidates against A. baumannii. The comprehensive analysis of all the completely sequenced genomes revealed thirteen putative antigens which could elicit substantial immune response."
+  },
+  {
+    "id": "Q47",
+    "question": "What is the recommended minimum number of genomes in a microbial pangenome analysis? Please only tell me the exact number without extra information.",
+    "source_doi": "https://doi.org/10.1007/978-3-030-38281-0_4",
+    "reference_answer": "The pangenome concept can be implemented either in reverse or in forward-thinking approaches; in the first case, we are interested to capture the genomic diversity of the group of interest, while in the second case we are more interested in exploring and predicting from a pragmatic perspective what is the minimum number of genome sequences required to capture the totality of the group. Obviously, limited or sparse datasets might lead to erroneous conclusions; therefore, it was recommended (Vernikos et al. 2015) that the minimum number of genomes to analyze be at least five."
+  },
+  {
+    "id": "Q48",
+    "question": "What factors may affect the quality of microbial pan-genome analyses?",
+    "source_doi": "https://doi.org/10.1093/bib/bbaa013",
+    "reference_answer": "Pan-genome analysis is widely used to study the evolution and genetic diversity of species, particularly in bacteria. However, the impact of strain selection on the outcome of pan-genome analysis is poorly understood. Furthermore, a standard protocol to ensure high-quality pan-genome results is lacking. In this study, we carried out a series of pan-genome analyses of different strain sets of Bacillus subtilis to understand the impact of various strains on the performance and output quality of pan-genome analyses. Consequently, we found that the results obtained by pan-genome analyses of B. subtilis can be influenced by the inclusion of incorrectly classified Bacillus subspecies strains, phylogenetically distinct strains, engineered genome-reduced strains, chimeric strains, strains with a large number of unique genes or a large proportion of pseudogenes, and multiple clonal strains. Since the presence of these confounding strains can seriously affect the quality and true landscape of the pan-genome, we should remove these deviations in the process of pan-genome analyses. Our study provides new insights into the removal of biases from confounding strains in pan-genome analyses at the beginning of data processing, which enables the achievement of a closer representation of a high-quality pan-genome landscape of B. subtilis that better reflects the performance and credibility of the B. subtilis pan-genome. This procedure could be added as an important quality control step in pan-genome analyses for improving the efficiency of analyses, and ultimately contributing to a better understanding of genome function, evolution and genome-reduction strategies for B. subtilis in the future."
+  },
+  {
+    "id": "Q49",
+    "question": "Can pangenome alone be applied to quantify the phenotypic effects of genetic variability in microbial species?",
+    "source_doi": "https://doi.org/10.1007/978-3-030-38281-0_10",
+    "reference_answer": "The pangenome alone cannot be used to quantify the phenotypic effects of genetic variability."
+  },
+  {
+    "id": "Q50",
+    "question": "Which strain in Lactobacillus plantarum have potential for production of γ-aminobutyric acid (GABA)?",
+    "source_doi": "https://doi.org/10.1016/j.micres.2021.126833",
+    "reference_answer": "Gamma-aminobutyric acid (GABA) is an amino that plays a major role as a neurotransmitter. It iscommonly produced by lactic acid bacteria (LAB) naturally found in fermented food and fruit. Lactiplantibacillus plantarum DW12 is a high potential GABA-producing strain isolated from a fermented beverage."
+  }
+]

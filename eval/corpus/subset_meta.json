@@ -1,0 +1,9 @@
+{
+ "source_branch": "origin/develop",
+ "source_path": "Paper_all",
+ "seed": 20260920,
+ "n_positive": 20,
+ "n_noise": 150,
+ "n_total": 170,
+ "missing_eval_dois": []
+}

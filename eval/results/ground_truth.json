@@ -1,0 +1,892 @@
+{
+ "meta": {
+  "source_db": "pankb_llm",
+  "source_collection": "pankb_vector_store",
+  "fuzzy_threshold": 0.7,
+  "n_questions": 50,
+  "stats": {
+   "exact": 19,
+   "fuzzy": 28,
+   "unmatched": 2,
+   "no_answer": 1
+  }
+ },
+ "questions": [
+  {
+   "id": "Q01",
+   "question": "What is the main factor that drives the gene acquisition in Bacillus subtilis species?",
+   "source_doi": "https://doi.org/10.1093/gbe/evx270",
+   "n_chunks_in_paper": 141,
+   "relevant_chunk_ids": [
+    "6676d3fe847e5bd614b0dae6"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 1539,
+    "end": 1789
+   }
+  },
+  {
+   "id": "Q02",
+   "question": "What contributes to the long-term maintenance of acquired genes in Bacillus subtilis species?",
+   "source_doi": "https://doi.org/10.1093/gbe/evx270",
+   "n_chunks_in_paper": 141,
+   "relevant_chunk_ids": [
+    "6676d3fe847e5bd614b0dae6"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 1539,
+    "end": 1789
+   }
+  },
+  {
+   "id": "Q03",
+   "question": "What are the most abundant Carbohydrate active enzymes (CAZymes) in Streptomyces pangenome?",
+   "source_doi": "https://doi.org/10.1038/s41598-022-21731-1",
+   "n_chunks_in_paper": 119,
+   "relevant_chunk_ids": [
+    "6676d809847e5bd614b11039"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 23767,
+    "end": 23927
+   }
+  },
+  {
+   "id": "Q04",
+   "question": "Which species in Streptomyces may be able to catabolize a wide range of plant biomass?",
+   "source_doi": "https://doi.org/10.1038/s41598-022-21731-1",
+   "n_chunks_in_paper": 119,
+   "relevant_chunk_ids": [
+    "6676d809847e5bd614b11040"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 27343,
+    "end": 27523
+   }
+  },
+  {
+   "id": "Q05",
+   "question": "What substances might streptomycetes use for interspecies communication?",
+   "source_doi": "https://doi.org/10.1038/s41598-022-21731-1",
+   "n_chunks_in_paper": 119,
+   "relevant_chunk_ids": [
+    "6676d809847e5bd614b1104b"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 32321,
+    "end": 32591
+   }
+  },
+  {
+   "id": "Q06",
+   "question": "Is the geosmin cyclase(GeoA) conservative in streptomycetes?",
+   "source_doi": "https://doi.org/10.1038/s41598-022-21731-1",
+   "n_chunks_in_paper": 119,
+   "relevant_chunk_ids": [
+    "6676d809847e5bd614b11047",
+    "6676d809847e5bd614b11048"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8639,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 30481,
+    "end": 31135
+   }
+  },
+  {
+   "id": "Q07",
+   "question": "Which genes in streptomycetes may be involved in clavulanic acid production?",
+   "source_doi": "https://doi.org/10.1038/s41598-022-21731-1",
+   "n_chunks_in_paper": 119,
+   "relevant_chunk_ids": [
+    "6676d813847e5bd614b11059",
+    "6676d813847e5bd614b1105a"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.7875,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 39180,
+    "end": 39420
+   }
+  },
+  {
+   "id": "Q08",
+   "question": "Can streptomycetes utilize benzoate?",
+   "source_doi": "https://doi.org/10.1038/s41598-022-21731-1",
+   "n_chunks_in_paper": 119,
+   "relevant_chunk_ids": [
+    "6676d809847e5bd614b1103d"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 25625,
+    "end": 25788
+   }
+  },
+  {
+   "id": "Q09",
+   "question": "Which streptomycetes strains might have both complete protocatechuate and catechol catabolic pathways?",
+   "source_doi": "https://doi.org/10.1038/s41598-022-21731-1",
+   "n_chunks_in_paper": 119,
+   "relevant_chunk_ids": [
+    "6676d809847e5bd614b1103f"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 26884,
+    "end": 27051
+   }
+  },
+  {
+   "id": "Q10",
+   "question": "Through pangenome analysis, which species in the Lactobacillaceae family has the most open pangenome? Please only tell me the species' name without extra information.",
+   "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+   "n_chunks_in_paper": 165,
+   "relevant_chunk_ids": [
+    "6676c6a9847e5bd614b0272b",
+    "6676c6a9847e5bd614b0272c"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8597,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 24475,
+    "end": 25138
+   }
+  },
+  {
+   "id": "Q11",
+   "question": "Based on Mash-based analysis, how many phylogroups are there in Lactiplantibacillus plantarum pangenome? Please only tell me the number without extra information.",
+   "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+   "n_chunks_in_paper": 165,
+   "relevant_chunk_ids": [
+    "6676c6a9847e5bd614b02725"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 22100,
+    "end": 22346
+   }
+  },
+  {
+   "id": "Q12",
+   "question": "Which phylogroup in Lactobacillus plantarum is the most unique? Why?",
+   "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+   "n_chunks_in_paper": 165,
+   "relevant_chunk_ids": [
+    "6676c6b2847e5bd614b02765",
+    "6676c6b2847e5bd614b02766",
+    "6676c6b2847e5bd614b02767",
+    "6676c6b2847e5bd614b02768",
+    "6676c6b2847e5bd614b02769"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8359,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 47829,
+    "end": 49352
+   }
+  },
+  {
+   "id": "Q13",
+   "question": "Which type of BGC is the most abundant BGCs across the Lactobacillaceae family? Please only tell me the name of the BGC without extra information.",
+   "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+   "n_chunks_in_paper": 165,
+   "relevant_chunk_ids": [
+    "6676c6b2847e5bd614b02772",
+    "6676c6b2847e5bd614b02773"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8358,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 52818,
+    "end": 53153
+   }
+  },
+  {
+   "id": "Q14",
+   "question": "Which species of the Lactobacillaceae family have genes of flagella formation (flgJ)? Please only tell me the species' name without extra information.",
+   "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+   "n_chunks_in_paper": 165,
+   "relevant_chunk_ids": [
+    "6676c6b2847e5bd614b02783"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.9595,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 60293,
+    "end": 60441
+   }
+  },
+  {
+   "id": "Q15",
+   "question": "Tell me factors that may correlate to the openness of the Lactobacillaceae family.",
+   "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+   "n_chunks_in_paper": 165,
+   "relevant_chunk_ids": [
+    "6676c6b2847e5bd614b02789",
+    "6676c6b2847e5bd614b0278a"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.947,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 63044,
+    "end": 63308
+   }
+  },
+  {
+   "id": "Q16",
+   "question": "Which genes may contribute to the phage resistance in Lactobacillus species?",
+   "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+   "n_chunks_in_paper": 165,
+   "relevant_chunk_ids": [
+    "6676c6b2847e5bd614b02785"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.9898,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 61072,
+    "end": 61367
+   }
+  },
+  {
+   "id": "Q17",
+   "question": "Please tell me the average of the normalized Heap's coefficient \u03bb value of the Lactobacillaceae family. Only tell me the \u03bb value without extra information.",
+   "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+   "n_chunks_in_paper": 165,
+   "relevant_chunk_ids": [
+    "6676c6a9847e5bd614b026f1"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 421,
+    "end": 562
+   }
+  },
+  {
+   "id": "Q18",
+   "question": "What proportion of BGCs in the Lactobacilliaceae have known functions? Please only tell me the number without extra information.",
+   "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+   "n_chunks_in_paper": 165,
+   "relevant_chunk_ids": [
+    "6676c6b2847e5bd614b0277b",
+    "6676c6b2847e5bd614b0277c"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8972,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 56709,
+    "end": 57069
+   }
+  },
+  {
+   "id": "Q19",
+   "question": "Does Lactobacillus plantarum have BGCs with antioxidant properties?",
+   "source_doi": "https://doi.org/10.1016/j.fm.2023.104334",
+   "n_chunks_in_paper": 165,
+   "relevant_chunk_ids": [
+    "6676c6b2847e5bd614b02777"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.9917,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 54696,
+    "end": 55057
+   }
+  },
+  {
+   "id": "Q20",
+   "question": "Which Bacillus species has the most conserved core genes? Please only tell me the species' name without extra information.",
+   "source_doi": "https://doi.org/10.1038/s41598-017-11385-9",
+   "n_chunks_in_paper": 85,
+   "relevant_chunk_ids": [
+    "6676dabb847e5bd614b13304",
+    "6676dabb847e5bd614b13305",
+    "6676dabb847e5bd614b13306"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8635,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 11685,
+    "end": 11934
+   }
+  },
+  {
+   "id": "Q21",
+   "question": "Which proteins might contribute to the saline tolerance of Halobacteria?",
+   "source_doi": "https://doi.org/10.1038/s41598-020-77723-6",
+   "n_chunks_in_paper": 118,
+   "relevant_chunk_ids": [
+    "6676c264847e5bd614afec1d",
+    "6676c264847e5bd614afec1e"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8995,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 24868,
+    "end": 25823
+   }
+  },
+  {
+   "id": "Q22",
+   "question": "Which proteins might contribute to the UV radiation tolerance of Halobacteria?",
+   "source_doi": "https://doi.org/10.1038/s41598-020-77723-6",
+   "n_chunks_in_paper": 118,
+   "relevant_chunk_ids": [
+    "6676c264847e5bd614afec21",
+    "6676c264847e5bd614afec22"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.9728,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 26928,
+    "end": 27442
+   }
+  },
+  {
+   "id": "Q23",
+   "question": "How about the halobacteria pangenome openness?",
+   "source_doi": "https://doi.org/10.1038/s41598-020-77723-6",
+   "n_chunks_in_paper": 118,
+   "relevant_chunk_ids": [
+    "6676c264847e5bd614afebfb",
+    "6676c264847e5bd614afebfc",
+    "6676c264847e5bd614afebfd"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8446,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 9983,
+    "end": 11251
+   }
+  },
+  {
+   "id": "Q24",
+   "question": "Based on pangenome analysis and genome-scale model prediction, which auxotroph type is the whole Staphylococcus aureus species?",
+   "source_doi": "https://doi.org/10.1073/pnas.1523199113",
+   "n_chunks_in_paper": 191,
+   "relevant_chunk_ids": [
+    "6676d426847e5bd614b0dd24"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 1992,
+    "end": 2239
+   }
+  },
+  {
+   "id": "Q25",
+   "question": "How many virulence factors are present in the Staphylococcus aureus species? Please tell me the number and list some significant VFs of Staphylococcus aureus species.",
+   "source_doi": "https://doi.org/10.1073/pnas.1523199113",
+   "n_chunks_in_paper": 191,
+   "relevant_chunk_ids": [
+    "6676d426847e5bd614b0dd4a",
+    "6676d426847e5bd614b0dd4b",
+    "6676d426847e5bd614b0dd4c",
+    "6676d426847e5bd614b0dd4d"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8282,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 18537,
+    "end": 20213
+   }
+  },
+  {
+   "id": "Q26",
+   "question": "What functions does bgcflow have?",
+   "source_doi": "https://doi.org/10.1093/nar/gkae314",
+   "n_chunks_in_paper": 181,
+   "relevant_chunk_ids": [],
+   "match_method": "none",
+   "match_score": null,
+   "excluded": true,
+   "exclusion_reason": "no_reference_answer"
+  },
+  {
+   "id": "Q27",
+   "question": "What is the potential industrial application of the Qipengyuania genus? Please only tell me its potential industrial application without extra information.",
+   "source_doi": "https://doi.org/10.1128/spectrum.01264-21",
+   "n_chunks_in_paper": 175,
+   "relevant_chunk_ids": [
+    "6676cee0847e5bd614b0965d"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 9,
+    "end": 187
+   }
+  },
+  {
+   "id": "Q28",
+   "question": "Can the Qipengyuania genus utilize inorganic sulfur?",
+   "source_doi": "https://doi.org/10.1128/spectrum.01264-21",
+   "n_chunks_in_paper": 175,
+   "relevant_chunk_ids": [
+    "6676cee0847e5bd614b096d3"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 48435,
+    "end": 48695
+   }
+  },
+  {
+   "id": "Q29",
+   "question": "Does the Qipengyuania genus have photosynthesis genes? If yes, give me the gene names without extra information.",
+   "source_doi": "https://doi.org/10.1128/spectrum.01264-21",
+   "n_chunks_in_paper": 175,
+   "relevant_chunk_ids": [
+    "6676cee9847e5bd614b096e2",
+    "6676cee9847e5bd614b096e3"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8609,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 55062,
+    "end": 55709
+   }
+  },
+  {
+   "id": "Q30",
+   "question": "Which type of nitrogen sources the Qipengyuania genus might prefer? Urea, Amino acid, or Ammonium?",
+   "source_doi": "https://doi.org/10.1128/spectrum.01264-21",
+   "n_chunks_in_paper": 175,
+   "relevant_chunk_ids": [
+    "6676cee0847e5bd614b096cf",
+    "6676cee0847e5bd614b096d0",
+    "6676cee0847e5bd614b096d1"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8598,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 46680,
+    "end": 48049
+   }
+  },
+  {
+   "id": "Q31",
+   "question": "Which virulence factors are virulence factors unique to the FNU (a strain in Fusobacterium nucleatum species)? Please only tell me the virulence factors without extra information.",
+   "source_doi": "https://doi.org/10.1128/spectrum.05184-22",
+   "n_chunks_in_paper": 102,
+   "relevant_chunk_ids": [
+    "6676c4c2847e5bd614b00d89",
+    "6676c4c2847e5bd614b00d8a"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8561,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 27200,
+    "end": 27881
+   }
+  },
+  {
+   "id": "Q32",
+   "question": "Which genes of Shewanella may contribute to its survival in an iron-rich environment?",
+   "source_doi": "https://doi.org/10.1186/s13068-018-1201-1",
+   "n_chunks_in_paper": 92,
+   "relevant_chunk_ids": [
+    "6676c2dd847e5bd614aff22e"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 16232,
+    "end": 16369
+   }
+  },
+  {
+   "id": "Q33",
+   "question": "Give me some genes that contribute to microbial degradation of poly(ethylene)terephthalate (PET). Please only give me the genes and the species they come from.",
+   "source_doi": "https://doi.org/10.3390/ijms23105612",
+   "n_chunks_in_paper": 150,
+   "relevant_chunk_ids": [
+    "6676d2bc847e5bd614b0ca78",
+    "6676d2bc847e5bd614b0ca79",
+    "6676d2bc847e5bd614b0ca7a"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8758,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 28925,
+    "end": 29746
+   }
+  },
+  {
+   "id": "Q34",
+   "question": "What are the characteristics of the Campylobacter pangenome? Please answer from its pangenome openness, shape, etc.",
+   "source_doi": "https://doi.org/10.1128/spectrum.01029-22",
+   "n_chunks_in_paper": 87,
+   "relevant_chunk_ids": [
+    "6676cd2d847e5bd614b07eae"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 550,
+    "end": 704
+   }
+  },
+  {
+   "id": "Q35",
+   "question": "What are the main functions of the virulence factors of Campylobacter?",
+   "source_doi": "https://doi.org/10.1128/spectrum.01029-22",
+   "n_chunks_in_paper": 87,
+   "relevant_chunk_ids": [
+    "6676cd2d847e5bd614b07ed9",
+    "6676cd2d847e5bd614b07eda"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8897,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 18080,
+    "end": 18987
+   }
+  },
+  {
+   "id": "Q36",
+   "question": "Which multidrug-resistance-related genes exist in all strains of the Campylobacter genus? Please only give me the genes without extra information.",
+   "source_doi": "https://doi.org/10.1128/spectrum.01029-22",
+   "n_chunks_in_paper": 87,
+   "relevant_chunk_ids": [
+    "6676cd2d847e5bd614b07ef6"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 30626,
+    "end": 30790
+   }
+  },
+  {
+   "id": "Q37",
+   "question": "Which virulence genes are part of the core genome of the Campylobacter genus? Please only give me the genes without extra information.",
+   "source_doi": "https://doi.org/10.1128/spectrum.01029-22",
+   "n_chunks_in_paper": 87,
+   "relevant_chunk_ids": [
+    "6676cd2d847e5bd614b07eae"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 705,
+    "end": 872
+   }
+  },
+  {
+   "id": "Q38",
+   "question": "What is the function of CheY, one of the virulence genes of the Campylobacter genus?",
+   "source_doi": "https://doi.org/10.1128/spectrum.01029-22",
+   "n_chunks_in_paper": 87,
+   "relevant_chunk_ids": [
+    "6676cd2d847e5bd614b07ee5",
+    "6676cd2d847e5bd614b07ee6",
+    "6676cd2d847e5bd614b07ee7"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.7863,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 23828,
+    "end": 24193
+   }
+  },
+  {
+   "id": "Q39",
+   "question": "Why can the Methylobacterium variabile utilize more types of carbon sources?",
+   "source_doi": "https://doi.org/10.1128/msystems.00248-24",
+   "n_chunks_in_paper": 206,
+   "relevant_chunk_ids": [
+    "6676c2b0847e5bd614aff029"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 647,
+    "end": 938
+   }
+  },
+  {
+   "id": "Q40",
+   "question": "Why are Type II methylotrophs important for forests?",
+   "source_doi": "https://doi.org/10.1128/msystems.00248-24",
+   "n_chunks_in_paper": 206,
+   "relevant_chunk_ids": [
+    "6676c2c2847e5bd614aff0c7",
+    "6676c2c2847e5bd614aff0c8"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.9176,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 60384,
+    "end": 60554
+   }
+  },
+  {
+   "id": "Q41",
+   "question": "What metabolic mechanism does the assimilation of formaldehyde in type II methylotrophs depend on?",
+   "source_doi": "https://doi.org/10.1128/msystems.00248-24",
+   "n_chunks_in_paper": 206,
+   "relevant_chunk_ids": [
+    "6676c2c2847e5bd614aff0d5",
+    "6676c2c2847e5bd614aff0d6",
+    "6676c2c2847e5bd614aff0d7"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8434,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 66264,
+    "end": 66858
+   }
+  },
+  {
+   "id": "Q42",
+   "question": "Are the housekeeping genes used in the current MLST method enough for classifying Staphylococcus aureus?",
+   "source_doi": "https://doi.org/10.1128/spectrum.03117-22",
+   "n_chunks_in_paper": 80,
+   "relevant_chunk_ids": [
+    "6676c510847e5bd614b01173",
+    "6676c510847e5bd614b01174",
+    "6676c510847e5bd614b01175"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.7764,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 1440,
+    "end": 1923
+   }
+  },
+  {
+   "id": "Q43",
+   "question": "Give me some BGCs shared by all Corynebacterium glutamicum strains. Please only give me the BGCs' names without extra information.",
+   "source_doi": "https://doi.org/10.1371/journal.pone.0299588",
+   "n_chunks_in_paper": 132,
+   "relevant_chunk_ids": [
+    "6676c280847e5bd614afedab",
+    "6676c280847e5bd614afedac",
+    "6676c289847e5bd614afedad"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8953,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 40071,
+    "end": 40625
+   }
+  },
+  {
+   "id": "Q44",
+   "question": "What is the potential industrial application of Corynebacterium glutamicum?",
+   "source_doi": "https://doi.org/10.1371/journal.pone.0299588",
+   "n_chunks_in_paper": 132,
+   "relevant_chunk_ids": [
+    "6676c280847e5bd614afed46",
+    "6676c280847e5bd614afed47",
+    "6676c280847e5bd614afed48",
+    "6676c280847e5bd614afed49",
+    "6676c280847e5bd614afed4a"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.7273,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 1550,
+    "end": 2529
+   }
+  },
+  {
+   "id": "Q45",
+   "question": "How many genes in the A. baumannii core genome are virulence factors? Please only tell me the exact number without extra information.",
+   "source_doi": "https://doi.org/10.1186/s12864-016-2951-4",
+   "n_chunks_in_paper": 167,
+   "relevant_chunk_ids": [
+    "6676c425847e5bd614b0047d"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 23383,
+    "end": 23725
+   }
+  },
+  {
+   "id": "Q46",
+   "question": "Which proteins are good vaccine targets for Acinetobacter baumannii? Please tell me the proteins' names with a sentence introduction to them.",
+   "source_doi": "https://doi.org/10.1186/s12864-016-2951-4",
+   "n_chunks_in_paper": 167,
+   "relevant_chunk_ids": [],
+   "match_method": "none",
+   "match_score": null,
+   "excluded": true,
+   "exclusion_reason": "no_text_match"
+  },
+  {
+   "id": "Q47",
+   "question": "What is the recommended minimum number of genomes in a microbial pangenome analysis? Please only tell me the exact number without extra information.",
+   "source_doi": "https://doi.org/10.1007/978-3-030-38281-0_4",
+   "n_chunks_in_paper": 90,
+   "relevant_chunk_ids": [
+    "6676d2aa847e5bd614b0c968",
+    "6676d2aa847e5bd614b0c969",
+    "6676d2aa847e5bd614b0c96a"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.8517,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 2755,
+    "end": 3335
+   }
+  },
+  {
+   "id": "Q48",
+   "question": "What factors may affect the quality of microbial pan-genome analyses?",
+   "source_doi": "https://doi.org/10.1093/bib/bbaa013",
+   "n_chunks_in_paper": 206,
+   "relevant_chunk_ids": [
+    "6676cc49847e5bd614b072dd",
+    "6676cc49847e5bd614b072de",
+    "6676cc49847e5bd614b072df",
+    "6676cc49847e5bd614b072e0"
+   ],
+   "match_method": "fuzzy",
+   "match_score": 0.7911,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 0,
+    "end": 1704
+   }
+  },
+  {
+   "id": "Q49",
+   "question": "Can pangenome alone be applied to quantify the phenotypic effects of genetic variability in microbial species?",
+   "source_doi": "https://doi.org/10.1007/978-3-030-38281-0_10",
+   "n_chunks_in_paper": 63,
+   "relevant_chunk_ids": [
+    "6676c4fd847e5bd614b0105b"
+   ],
+   "match_method": "exact",
+   "match_score": 1.0,
+   "excluded": false,
+   "exclusion_reason": null,
+   "answer_span": {
+    "start": 1687,
+    "end": 1780
+   }
+  },
+  {
+   "id": "Q50",
+   "question": "Which strain in Lactobacillus plantarum have potential for production of \u03b3-aminobutyric acid (GABA)?",
+   "source_doi": "https://doi.org/10.1016/j.micres.2021.126833",
+   "n_chunks_in_paper": 77,
+   "relevant_chunk_ids": [],
+   "match_method": "none",
+   "match_score": null,
+   "excluded": true,
+   "exclusion_reason": "no_text_match"
+  }
+ ]
+}

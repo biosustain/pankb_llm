@@ -1,0 +1,50 @@
+{
+ "n_chunks": 18156,
+ "n_positive_chunks": 2627,
+ "runs": [
+  {
+   "collection": "voyage_large_2_instruct",
+   "model": "voyage-large-2-instruct",
+   "provider": "voyage",
+   "dimensions": 1024,
+   "inserted": 18156,
+   "total_documents": 18156,
+   "seconds": 510.8,
+   "vector_norm_min": 1.0,
+   "vector_norm_max": 1.0
+  },
+  {
+   "collection": "voyage_4_large",
+   "model": "voyage-4-large",
+   "provider": "voyage",
+   "dimensions": 1024,
+   "inserted": 18156,
+   "total_documents": 18156,
+   "seconds": 155.8,
+   "vector_norm_min": 1.0,
+   "vector_norm_max": 1.0
+  },
+  {
+   "collection": "openai_3_large_1024",
+   "model": "text-embedding-3-large",
+   "provider": "openai",
+   "dimensions": 1024,
+   "inserted": 18156,
+   "total_documents": 18156,
+   "seconds": 154.8,
+   "vector_norm_min": 0.999423,
+   "vector_norm_max": 1.000684
+  },
+  {
+   "collection": "cohere_embed_v4",
+   "model": "embed-v4.0",
+   "provider": "cohere",
+   "dimensions": 1536,
+   "inserted": 18156,
+   "total_documents": 18000,
+   "seconds": 311.2,
+   "vector_norm_min": 1.0,
+   "vector_norm_max": 1.0
+  }
+ ]
+}

@@ -1,0 +1,53 @@
+{
+ "database": "eval",
+ "collections": [
+  {
+   "collection": "voyage_large_2_instruct",
+   "model": "voyage-large-2-instruct",
+   "provider": "voyage",
+   "dimensions": 1024,
+   "normalized": true,
+   "hnsw": {
+    "m": 16,
+    "efConstruction": 100,
+    "similarity": "L2"
+   }
+  },
+  {
+   "collection": "voyage_4_large",
+   "model": "voyage-4-large",
+   "provider": "voyage",
+   "dimensions": 1024,
+   "normalized": true,
+   "hnsw": {
+    "m": 16,
+    "efConstruction": 100,
+    "similarity": "L2"
+   }
+  },
+  {
+   "collection": "openai_3_large_1024",
+   "model": "text-embedding-3-large",
+   "provider": "openai",
+   "dimensions": 1024,
+   "normalized": true,
+   "hnsw": {
+    "m": 16,
+    "efConstruction": 100,
+    "similarity": "L2"
+   }
+  },
+  {
+   "collection": "cohere_embed_v4",
+   "model": "embed-v4.0",
+   "provider": "cohere",
+   "dimensions": 1536,
+   "normalized": true,
+   "hnsw": {
+    "m": 16,
+    "efConstruction": 100,
+    "similarity": "L2"
+   }
+  }
+ ]
+}

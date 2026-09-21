@@ -1,0 +1,205 @@
+GROUND TRUTH — HUMAN REVIEW
+For each question: does at least one chunk below actually contain
+the reference answer? Mark VERDICT ok / wrong / partial.
+Low-overlap questions are listed first (most likely to be wrong).
+==============================================================================
+
+[Q39]  match=exact align=1.0 token_overlap=1.0
+Q: Why can the Methylobacterium variabile utilize more types of carbon sources?
+
+REFERENCE ANSWER:
+While all selected organisms possessed essential genes for the serine pathway, Methylooceanibacter marginalis lacked serine hydroxymethyltransferase (SHMT), and Methylobacterium variabile exhibited both isozymes of SHMT, suggesting its potential to utilize a broader range of carbon sources.
+
+CHUNKS MARKED RELEVANT (1):
+  --- chunk 1 (6676c2b0847e5bd614aff029) ---
+  array of genes associated with key metabolic pathways, including methane, serine, glyoxylate, and ethylmalonyl-CoA (EMC) metabolic pathways. While all selected organisms possessed essential genes for the serine pathway, Methylooceanibacter marginalis lacked serine hydroxymethyltransferase (SHMT), and Methylobacterium variabile exhibited both isozymes of SHMT, suggesting its potential to utilize a broader range of carbon sources. Notably, Methylobrevis sp. displayed a unique serine-glyoxylate
+
+VERDICT: ____
+------------------------------------------------------------------------------
+
+[Q42]  match=fuzzy align=0.7764 token_overlap=1.0
+Q: Are the housekeeping genes used in the current MLST method enough for classifying Staphylococcus aureus?
+
+REFERENCE ANSWER:
+Pan-genomic analysis showed that some of the housekeeping genes of multilocus sequence typing (MLST) are carried at less than 60% in S. aureus strains. Consequently, we propose a new set of marker genes for the classification of S. aureus, which provides a reference for finding a new set of housekeeping genes to apply to MLST. In this study, we explored the role of driving factors influencing pan-genome composition, providing new insights into the study of bacterial pan-genomes.
+
+CHUNKS MARKED RELEVANT (3):
+  --- chunk 1 (6676c510847e5bd614b01173) ---
+  showed “local core gene regions” in the same ST. Therefore, we propose that ST may be a key factor driving the dynamic distribution of bacterial genomes and that phylogenetic analyses using whole-genome alignment are no longer appropriate in populations containing multiple ST strains. Pan-genomic analysis showed that some of the housekeeping genes of multilocus sequence typing (MLST) are carried at less than 60% in S. aureus strains. Consequently, we propose a new set of marker genes for the
+
+  --- chunk 2 (6676c510847e5bd614b01174) ---
+  at less than 60% in S. aureus strains. Consequently, we propose a new set of marker genes for the classification of S. aureus, which provides a reference for finding a new set of housekeeping genes to apply to MLST. In this study, we explored the role of driving factors influencing pan-genome composition, providing new insights into the study of bacterial pan-genomes.
+
+  --- chunk 3 (6676c510847e5bd614b01175) ---
+  IMPORTANCE We sought to explore the impact of driving factors influencing pan-genome composition using Staphylococcus aureus as a model organism to provide new insights for the study of bacterial pan-genomes. We believe that the sequence type (ST) of the strains under consideration plays a significant role in the dynamic distribution of bacterial genes. Our findings indicate that there are a certain number of essential genes in Staphylococcus aureus; however, the number of core genes is not as
+
+VERDICT: ____
+------------------------------------------------------------------------------
+
+[Q18]  match=fuzzy align=0.8972 token_overlap=1.0
+Q: What proportion of BGCs in the Lactobacilliaceae have known functions? Please only tell me the number without extra information.
+
+REFERENCE ANSWER:
+Even after annotating BGCs with similarly known bacteriocins, we still find only 1796 of the 6950 BGCs (∼26%) with an assigned known secondary metabolite either from MIBIG database or Bactibase. Thus, a relatively large number of undiscovered BGCs spread acrsoss the rare genome, whereas many of the known BGCs coded for bacteriocins with industrial potential.
+
+CHUNKS MARKED RELEVANT (2):
+  --- chunk 1 (6676c6b2847e5bd614b0277b) ---
+  ), penocin A (46 genomes from Pediococcus pentosaceus ), Bacillocin 1580 (38 genomes from Ligilactobacillus ruminis ), lactacin-F (38 genomes from Lactobacillus spp.). Even after annotating BGCs with similarly known bacteriocins, we still find only 1796 of the 6950 BGCs (∼26%) with an assigned known secondary metabolite either from MIBIG database or Bactibase. Thus, a relatively large number of undiscovered BGCs spread acrsoss the rare genome, whereas many of the known BGCs coded for
+
+  --- chunk 2 (6676c6b2847e5bd614b0277c) ---
+  of undiscovered BGCs spread acrsoss the rare genome, whereas many of the known BGCs coded for bacteriocins with industrial potential.
+
+VERDICT: ____
+------------------------------------------------------------------------------
+
+[Q09]  match=exact align=1.0 token_overlap=1.0
+Q: Which streptomycetes strains might have both complete protocatechuate and catechol catabolic pathways?
+
+REFERENCE ANSWER:
+Only S. bingchenggensis BCW-1 and Streptomyces viridosporus ATCC 39115 were predicted to encode both of the protocatechuate and catechol catabolic pathways completely.
+
+CHUNKS MARKED RELEVANT (1):
+  --- chunk 1 (6676d809847e5bd614b1103f) ---
+  reactions, of which the last 3 reactions are shared by both pathways. Of the 205 strains, 114 strains were predicted to encode the complete protocatechuate catabolic pathway (Fig. 1D). However, only 5 strains were predicted to encode the complete catechol catabolic pathway (Fig. 1D). Only S. bingchenggensis BCW-1 and Streptomyces viridosporus ATCC 39115 were predicted to encode both of the protocatechuate and catechol catabolic pathways completely. S. bingchenggensis BCW-1 also encoded the
+
+VERDICT: ____
+------------------------------------------------------------------------------
+
+[Q30]  match=fuzzy align=0.8598 token_overlap=0.968
+Q: Which type of nitrogen sources the Qipengyuania genus might prefer? Urea, Amino acid, or Ammonium?
+
+REFERENCE ANSWER:
+(iii) Qipengyuania may prefer ammonium as nitrogen source. Nitrogen is an essential nutrient and often limiting for microorganisms in all natural ecosystems, especially in marine environments (39). As such, microorganisms have evolved a variety of strategies to acquire nitrogen from the surroundings. Exception for strain Q. sediminis CGMCC 1.12928T, all investigated strains of the genus Qipengyuania harbored homologues for ammonia uptake (Fig. 2b), including the amtB gene encoding ammonium transporter, the gdhA/gdh2 gene encoding glutamate dehydrogenase, and the gltABD genes encoding glutamine synthetase. It was reported that the glnK and amtB genes could interact directly via protein-protein interaction to regulate ammonium assimilation during nitrogen starvation (40). Unlike the ammonium assimilation, the gene cluster narIJHGKR encoding enzymes responsible for the dissimilatory nitrate reduction existed in only five strains, including strains YG27T, Q. soli 6D36T, “Erythrobacter mangrovi” EB310T, “Erythrobacter aureus” YH-07T, and Q. citrea CGMCC 1.8703T (Fig. 2b). Unexpectedly, the genes encoding nitrite reductase were found only in strain “Erythrobacter mangrovi” EB310T. These analyses suggested that bacteria of the genus Qipengyuania may prefer ammonium as a nitrogen source, although a few bacteria could utilize nitrate (41) and nitrite (12).
+
+CHUNKS MARKED RELEVANT (3):
+  --- chunk 1 (6676cee0847e5bd614b096cf) ---
+  (iii) Qipengyuania may prefer ammonium as nitrogen source. Nitrogen is an essential nutrient and often limiting for microorganisms in all natural ecosystems, especially in marine environments (39). As such, microorganisms have evolved a variety of strategies to acquire nitrogen from the surroundings. Exception for strain Q. sediminis CGMCC 1.12928T, all investigated strains of the genus Qipengyuania harbored homologues for ammonia uptake (Fig. 2b), including the amtB gene encoding ammonium
+
+  --- chunk 2 (6676cee0847e5bd614b096d0) ---
+  harbored homologues for ammonia uptake (Fig. 2b), including the amtB gene encoding ammonium transporter, the gdhA/gdh2 gene encoding glutamate dehydrogenase, and the gltABD genes encoding glutamine synthetase. It was reported that the glnK and amtB genes could interact directly via protein-protein interaction to regulate ammonium assimilation during nitrogen starvation (40). Unlike the ammonium assimilation, the gene cluster narIJHGKR encoding enzymes responsible for the dissimilatory nitrate
+
+  --- chunk 3 (6676cee0847e5bd614b096d1) ---
+  assimilation, the gene cluster narIJHGKR encoding enzymes responsible for the dissimilatory nitrate reduction existed in only five strains, including strains YG27T, Q. soli 6D36T, “Erythrobacter mangrovi” EB310T, “Erythrobacter aureus” YH-07T, and Q. citrea CGMCC 1.8703T (Fig. 2b). Unexpectedly, the genes encoding nitrite reductase were found only in strain “Erythrobacter mangrovi” EB310T. These analyses suggested that bacteria of the genus Qipengyuania may prefer ammonium as a nitrogen source,
+
+VERDICT: ____
+------------------------------------------------------------------------------
+
+[Q28]  match=exact align=1.0 token_overlap=1.0
+Q: Can the Qipengyuania genus utilize inorganic sulfur?
+
+REFERENCE ANSWER:
+Seawater and marine sediments contain a high concentration of sulfate (42). However, the genes related to assimilatory sulfate reduction were not detected in members of the genus Qipengyuania (Fig. 2b), indicating that they should not utilize inorganic sulfur.
+
+CHUNKS MARKED RELEVANT (1):
+  --- chunk 1 (6676cee0847e5bd614b096d3) ---
+  (iv) Qipengyuania holds the potential to utilize organosulfur compounds and inorganic phosphates as sulfur and phosphorus sources. Seawater and marine sediments contain a high concentration of sulfate (42). However, the genes related to assimilatory sulfate reduction were not detected in members of the genus Qipengyuania (Fig. 2b), indicating that they should not utilize inorganic sulfur. Likewise, all strains lacked the genes encoding the transporter responsible for the alkanesulfonate
+
+VERDICT: ____
+------------------------------------------------------------------------------
+
+[Q23]  match=fuzzy align=0.8446 token_overlap=0.94
+Q: How about the halobacteria pangenome openness?
+
+REFERENCE ANSWER:
+Halobacterial genomes are highly heterogeneous and have an open pangenome
+OMCL21 algorithm was applied to protein sequences from all the genomes to get the pan Halobacteria comprising of 49,311 clusters. GET HOMOLOGUES22 divided the clusters into four categories viz Core, Softcore, Cloud and Shell. Core clusters are the clusters which have sequences from each genome whereas softcore in 95% of the genomes. Cloud can be defined as the gene clusters which have sequences from very few genomes. Its cut-off is based on most populated cluster which is not in core and its neighbouring clusters. Shell genome includes the clusters present in majority of genomes except the soft-core clusters. Pan Halobacteria with its compartments (Core: 300, Softcore: 998, Cloud:36531, Shell:11784) is described in Fig. 1. The strict core clusters which contain exactly one sequence from each taxa were reported to be 225 and can be considered as true orthologs. Alternatively, all the clusters except the core clusters can be called as variable genome clusters. The pan Euryarchaeota consist of total 60,809 clusters and 45 core clusters (Fig. 1). The large number of variable clusters shows the heterogeneity embedded in the class Halobacateriaand cues for horizontal gene transfer.
+
+CHUNKS MARKED RELEVANT (3):
+  --- chunk 1 (6676c264847e5bd614afebfb) ---
+  OMCL21 algorithm was applied to protein sequences from all the genomes to get the pan Halobacteria comprising of 49,311 clusters. GET HOMOLOGUES22 divided the clusters into four categories viz Core, Softcore, Cloud and Shell. Core clusters are the clusters which have sequences from each genome whereas softcore in 95% of the genomes. Cloud can be defined as the gene clusters which have sequences from very few genomes. Its cut-off is based on most populated cluster which is not in core and its
+
+  --- chunk 2 (6676c264847e5bd614afebfc) ---
+  from very few genomes. Its cut-off is based on most populated cluster which is not in core and its neighbouring clusters. Shell genome includes the clusters present in majority of genomes except the soft-core clusters. Pan Halobacteria with its compartments (Core: 300, Softcore: 998, Cloud:36531, Shell:11784) is described in Fig. 1. The strict core clusters which contain exactly one sequence from each taxa were reported to be 225 and can be considered as true orthologs. Alternatively, all the
+
+  --- chunk 3 (6676c264847e5bd614afebfd) ---
+  each taxa were reported to be 225 and can be considered as true orthologs. Alternatively, all the clusters except the core clusters can be called as variable genome clusters. The pan Euryarchaeota consist of total 60,809 clusters and 45 core clusters (Fig. 1). The large number of variable clusters shows the heterogeneity embedded in the class Halobacateriaand cues for horizontal gene transfer.
+
+VERDICT: ____
+------------------------------------------------------------------------------
+
+[Q16]  match=fuzzy align=0.9898 token_overlap=1.0
+Q: Which genes may contribute to the phage resistance in Lactobacillus species?
+
+REFERENCE ANSWER:
+The accessory genomes also included genes from the Type I restriction-modification system and ABC-transport system specific to antimicrobial peptides and multi-drugs, which explains phage resistance (Suárez et al., 2009) and antibiotic resistance in Lactobacillus species (Orelle et al., 2019).
+
+CHUNKS MARKED RELEVANT (1):
+  --- chunk 1 (6676c6b2847e5bd614b02785) ---
+  the genes within the accessory genomes show enrichment in metabolism-related functions such as amino acid and carbohydrate metabolism. The accessory genomes also included genes from the Type I restriction-modification system and ABC-transport system specific to antimicrobial peptides and multi-drugs, which explains phage resistance ( Suárez et al., 2009 ) and antibiotic resistance in Lactobacillus species ( Orelle et al., 2019 ). Therefore, the COG enrichments suggest that the core and
+
+VERDICT: ____
+------------------------------------------------------------------------------
+
+[Q44]  match=fuzzy align=0.7273 token_overlap=0.735
+Q: What is the potential industrial application of Corynebacterium glutamicum?
+
+REFERENCE ANSWER:
+Corynebacterium glutamicum is a gram-positive, non-sporulating, non-pathogenic, and generally recognized as safe (GRAS) organism. It remains very robust against oxygen and substrate supply oscillation in the case of large-scale fermentations [1,2]. It is one of the most used microorganisms in industrial fermentation for producing amino acids, like lysine and glutamate, for decades [3,4]. C. glutamicum has undergone substantial modification to provide a wide range of beneficial products including chemicals, proteins, polymers, natural products, and biofuels [5–8]. Many studies of C. glutamicum have been published in the past decade [9], yet the genetic variations among the strains are unexplored. In all, we can say that strains of C. glutamicum can be a good candidate for engineering to produce various novel compound through BGCs expression. Also the strain may have potential to produce antibiotic, plant growth promoting agent, antiviral agent and anti-cancer agent.
+
+CHUNKS MARKED RELEVANT (5):
+  --- chunk 1 (6676c280847e5bd614afed46) ---
+  advantages of C. glutamicum, different strains can be potential applicants for natural drug discovery.
+
+  --- chunk 2 (6676c280847e5bd614afed47) ---
+  1. Introduction
+
+  --- chunk 3 (6676c280847e5bd614afed48) ---
+  Corynebacterium glutamicum is a gram-positive, non-sporulating, non-pathogenic, and generally recognized as safe (GRAS) organism. It remains very robust against oxygen and substrate supply oscillation in the case of large-scale fermentations [1,2]. It is one of the most used microorganisms in industrial fermentation for producing amino acids, like lysine and glutamate, for decades [3,4]. C. glutamicum has undergone substantial modification to provide a wide range of beneficial products
+
+  --- chunk 4 (6676c280847e5bd614afed49) ---
+  C. glutamicum has undergone substantial modification to provide a wide range of beneficial products including chemicals, proteins, polymers, natural products, and biofuels [5–8]. Many studies of C. glutamicum have been published in the past decade [9], yet the genetic variations among the strains are unexplored.
+
+  --- chunk 5 (6676c280847e5bd614afed4a) ---
+  Whole genomes of closely related and geographically co-occurring microbial strains show enormous variation within species, resulting from allelic and gene content changes [10–13]. However, it is challenging to distinguish between two lineages that are thought to be the same species yet have significantly different gene contents using conventional taxonomic approaches [14–16]. Hence, a better understanding of the genomic characteristics of different C. glutamicum strains is required.
+
+VERDICT: ____
+------------------------------------------------------------------------------
+
+[Q48]  match=fuzzy align=0.7911 token_overlap=0.991
+Q: What factors may affect the quality of microbial pan-genome analyses?
+
+REFERENCE ANSWER:
+Pan-genome analysis is widely used to study the evolution and genetic diversity of species, particularly in bacteria. However, the impact of strain selection on the outcome of pan-genome analysis is poorly understood. Furthermore, a standard protocol to ensure high-quality pan-genome results is lacking. In this study, we carried out a series of pan-genome analyses of different strain sets of Bacillus subtilis to understand the impact of various strains on the performance and output quality of pan-genome analyses. Consequently, we found that the results obtained by pan-genome analyses of B. subtilis can be influenced by the inclusion of incorrectly classified Bacillus subspecies strains, phylogenetically distinct strains, engineered genome-reduced strains, chimeric strains, strains with a large number of unique genes or a large proportion of pseudogenes, and multiple clonal strains. Since the presence of these confounding strains can seriously affect the quality and true landscape of the pan-genome, we should remove these deviations in the process of pan-genome analyses. Our study provides new insights into the removal of biases from confounding strains in pan-genome analyses at the beginning of data processing, which enables the achievement of a closer representation of a high-quality pan-genome landscape of B. subtilis that better reflects the performance and credibility of the B. subtilis pan-genome. This procedure could be added as an important quality control step in pan-genome analyses for improving the efficiency of analyses, and ultimately contributing to a better understanding of genome function, evolution and genome-reduction strategies for B. subtilis in the future.
+
+CHUNKS MARKED RELEVANT (4):
+  --- chunk 1 (6676cc49847e5bd614b072dd) ---
+  Pan-genome analysis is widely used to study the evolution and genetic diversity of species, particularly in bacteria. However, the impact of strain selection on the outcome of pan-genome analysis is poorly understood. Furthermore, a standard protocol to ensure high-quality pan-genome results is lacking. In this study, we carried out a series of pan-genome analyses of different strain sets of Bacillus subtilis to understand the impact of various strains on the performance and output quality of
+
+  --- chunk 2 (6676cc49847e5bd614b072de) ---
+  subtilis to understand the impact of various strains on the performance and output quality of pan-genome analyses. Consequently, we found that the results obtained by pan-genome analyses of B. subtilis can be influenced by the inclusion of incorrectly classified Bacillus subspecies strains, phylogenetically distinct strains, engineered genome-reduced strains, chimeric strains, strains with a large number of unique genes or a large proportion of pseudogenes, and multiple clonal strains. Since
+
+  --- chunk 3 (6676cc49847e5bd614b072df) ---
+  number of unique genes or a large proportion of pseudogenes, and multiple clonal strains. Since the presence of these confounding strains can seriously affect the quality and true landscape of the pan-genome, we should remove these deviations in the process of pan-genome analyses. Our study provides new insights into the removal of biases from confounding strains in pan-genome analyses at the beginning of data processing, which enables the achievement of a closer representation of a
+
+  --- chunk 4 (6676cc49847e5bd614b072e0) ---
+  at the beginning of data processing, which enables the achievement of a closer representation of a high-quality pan-genome landscape of B. subtilis that better reflects the performance and credibility of the B. subtilis pan-genome. This procedure could be added as an important quality control step in pan-genome analyses for improving the efficiency of analyses, and ultimately contributing to a better understanding of genome function, evolution and genome-reduction strategies for B. subtilis in
+
+VERDICT: ____
+------------------------------------------------------------------------------
+
+[Q02]  match=exact align=1.0 token_overlap=1.0
+Q: What contributes to the long-term maintenance of acquired genes in Bacillus subtilis species?
+
+REFERENCE ANSWER:
+While not excluding the contributions of other mechanisms, our results strongly suggest a process of gene acquisition that is largely driven by competence, where the long-term maintenance of acquired genes depends on local and global fitness effects.
+
+CHUNKS MARKED RELEVANT (1):
+  --- chunk 1 (6676d3fe847e5bd614b0dae6) ---
+  propagate laterally among strains within a niche. While not excluding the contributions of other mechanisms, our results strongly suggest a process of gene acquisition that is largely driven by competence, where the long-term maintenance of acquired genes depends on local and global fitness effects. This competence-driven genomic diversity provides B. subtilis with its generalist character, enabling it to occupy a wide range of ecological niches and cycle through them.
+
+VERDICT: ____
+------------------------------------------------------------------------------
+
+[Q45]  match=exact align=1.0 token_overlap=1.0
+Q: How many genes in the A. baumannii core genome are virulence factors? Please only tell me the exact number without extra information.
+
+REFERENCE ANSWER:
+To get insight into the virulence potential of A. baumannii, virulent genes present in core conserved genome were explored. Interestingly, the bacteria harbor a significant number of virulent genes (295) as part of its core genome which facilitates the organism in pathogenesis and probably survival in adverse conditions (Additional file 1).
+
+CHUNKS MARKED RELEVANT (1):
+  --- chunk 1 (6676c425847e5bd614b0047d) ---
+  Relative to other gram negative pathogens, very little is known in relation to the pathogenic potential and virulence repertoire of A. baumannii [73]. To get insight into the virulence potential of A. baumannii, virulent genes present in core conserved genome were explored. Interestingly, the bacteria harbor a significant number of virulent genes (295) as part of its core genome which facilitates the organism in pathogenesis and probably survival in adverse conditions (Additional file 1). In
+
+VERDICT: ____
+------------------------------------------------------------------------------
+
