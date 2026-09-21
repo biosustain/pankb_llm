@@ -12,6 +12,7 @@ Method, scripts and known defects: [README.md](README.md).
 | 1 | Embedding model comparison | ✅ complete | 2026-09-20 |
 | 2 | Reranker comparison and threshold calibration | ✅ complete | 2026-09-20 |
 | 3 | Generation, end-to-end and faithfulness | ✅ complete | 2026-09-21 |
+| 4 | Production upgrade, verified at full scale | ✅ complete | 2026-09-21 |
 
 ---
 
@@ -570,3 +571,109 @@ grounded answers              ~85%   <- and 0% right-by-luck
 The system's headroom is in retrieval, and phases 1–2 name the specific defects:
 a legacy embedding model, a reranker two generations behind, and a threshold
 calibrated for neither.
+
+---
+
+## Phase 4 — Production upgrade, verified at full corpus scale
+
+**Date**: 2026-09-21
+**Scripts**: `10_build_production_v2_store.py`, `11_verify_production_v2.py`
+**Raw data**: `results/production_v2_build.json`, `results/production_v2_verification.json`
+
+Phases 1–3 were all measured on a 170-paper subset, which is optimistic by
+construction. This phase applies the findings and re-measures on the **real
+106,717-chunk store**, so the recommendation rests on production-scale numbers
+rather than extrapolation.
+
+### What was built
+
+`pankb_vector_store_v2` — every chunk of the production store re-embedded with
+`voyage-4-large`, 106,717/106,717, 15.9 minutes, ~$1.34.
+
+Re-embedding the stored `textContent` rather than re-splitting the papers keeps
+chunk boundaries **byte-identical** to the live store, so the embedding model
+is the only thing that changed. Verification: same document count, same 1,011
+papers, 106,717 unique `source_id` values, 1024 dims, vector norms exactly
+1.0 (so the L2 index remains valid), same HNSW parameters.
+
+The previous collection is untouched and remains a zero-cost rollback.
+
+### Full-corpus comparison
+
+Two complete pipelines, each end to end, metrics computed **after** threshold
+filtering — i.e. on what the LLM actually receives:
+
+| | old | new |
+|---|---|---|
+| store | `pankb_vector_store` | `pankb_vector_store_v2` |
+| embedding | voyage-large-2-instruct | **voyage-4-large** |
+| reranker | cohere rerank-english-v3.0 | **voyage rerank-2.5** |
+| threshold | 0.50 | **0.45** |
+
+| Metric | old | new | Δ |
+|---|---|---|---|
+| **recall** | 0.614 | **0.714** | **+0.100** |
+| nDCG | 0.561 | 0.615 | +0.053 |
+| MRR | 0.655 | 0.671 | +0.016 |
+| hit rate | 0.766 | **0.872** | **+0.106** |
+| **docs reaching the LLM** | 11.3 | **19.6** | **+8.4** |
+
+Per question: **12 improved, 5 regressed, 30 unchanged.**
+
+### Observations
+
+**① The subset was indeed optimistic — as predicted.**
+
+Subset recall@30 was 0.893 for voyage-4-large; at full scale, after reranking
+and thresholding, the same configuration yields 0.714. The subset had 150
+distractor papers against production's 1,011, so absolute numbers fell exactly
+as the limitation sections warned. **The relative ordering held: the new
+configuration wins on every metric.** This is the case for always stating
+which corpus a number came from.
+
+**② The largest single change is how much reaches the LLM.**
+
+11.3 → 19.6 documents, a 74% increase. Two causes compound: the better
+retriever surfaces more relevant chunks, and the recalibrated threshold stops
+discarding them. Phase 3 established that this is safe here — faithfulness
+measured 0% ungrounded, so the model demonstrably reasons over its context
+rather than falling back on memory, and extra context is recoverable where a
+discarded correct answer is not.
+
+**③ Five questions regressed.**
+
+Not every question improves, and the report says so rather than quoting only
+the mean. With 47 questions and two changed components, some movement is
+noise; the aggregate gain (+0.100 recall, +0.106 hit rate) is well beyond it,
+but per-question regressions are worth inspecting before deployment.
+
+**④ MRR barely moved (+0.016).**
+
+Recall and hit rate improved far more than MRR, meaning the new pipeline mostly
+*finds more* rather than *ranking better at the very top*. For this system that
+is the more useful direction, since the LLM reads all ~20 documents rather than
+only the first.
+
+### Deployment status
+
+**Not deployed.** The code change is committed on the `eval` branch only; it is
+not merged to `prod` and CI/CD has not run. The live service is unchanged.
+
+Rollback is a one-line change of `collection_name`, since both collections are
+1024-dim with identical HNSW settings. `PANKB_USE_LEGACY_EMBEDDINGS` switches
+the embedding model back without editing code.
+
+### Limitations
+
+1. **Retrieval metrics only.** Whether +0.100 recall translates into better
+   answers has not been measured on the full corpus; phase 3's 9–18 point
+   oracle-to-rag gap suggests it should, but that was subset-scale.
+2. **Ground truth covers 20 of 1,011 papers.** The eval questions only probe
+   the papers they were drawn from; behaviour on the rest of the corpus is
+   unmeasured.
+3. **Two components changed together** (embedding and reranker, plus the
+   threshold that must move with the reranker). The phase 1–2 subset
+   experiments isolate each, but this full-corpus number is for the
+   configuration as a whole.
+4. **No production logging**, so post-deployment behaviour cannot be compared
+   against these numbers. That gap remains the highest-value fix.

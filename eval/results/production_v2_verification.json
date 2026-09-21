@@ -1,0 +1,237 @@
+{
+ "n_questions": 47,
+ "retrieve_k": 30,
+ "top_n": 20,
+ "results": {
+  "old": {
+   "config": {
+    "collection": "pankb_vector_store",
+    "embed": "voyage-large-2-instruct",
+    "embed_kw": {},
+    "rerank_vendor": "cohere",
+    "rerank": "rerank-english-v3.0",
+    "threshold": 0.5,
+    "id_field": "_id"
+   },
+   "n_questions": 47,
+   "recall": 0.6138,
+   "ndcg": 0.5613,
+   "mrr": 0.655,
+   "hit": 0.766,
+   "mean_docs_to_llm": 11.26,
+   "pct_empty_context": 0.0,
+   "seconds": 6.3
+  },
+  "new": {
+   "config": {
+    "collection": "pankb_vector_store_v2",
+    "embed": "voyage-4-large",
+    "embed_kw": {
+     "output_dimension": 1024
+    },
+    "rerank_vendor": "voyage",
+    "rerank": "rerank-2.5",
+    "threshold": 0.45,
+    "id_field": "source_id"
+   },
+   "n_questions": 47,
+   "recall": 0.7138,
+   "ndcg": 0.6147,
+   "mrr": 0.6706,
+   "hit": 0.8723,
+   "mean_docs_to_llm": 19.64,
+   "pct_empty_context": 0.0,
+   "seconds": 4.5
+  }
+ },
+ "per_question": {
+  "Q03": {
+   "old": 0.0,
+   "new": 1.0
+  },
+  "Q04": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q02": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q01": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q05": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q06": {
+   "old": 0.5,
+   "new": 1.0
+  },
+  "Q07": {
+   "old": 1.0,
+   "new": 0.5
+  },
+  "Q09": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q08": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q10": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q12": {
+   "old": 0.0,
+   "new": 0.2
+  },
+  "Q11": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q13": {
+   "old": 0.5,
+   "new": 1.0
+  },
+  "Q15": {
+   "old": 0.5,
+   "new": 0.5
+  },
+  "Q14": {
+   "old": 0.0,
+   "new": 1.0
+  },
+  "Q16": {
+   "old": 0.0,
+   "new": 1.0
+  },
+  "Q17": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q19": {
+   "old": 0.0,
+   "new": 1.0
+  },
+  "Q18": {
+   "old": 0.5,
+   "new": 0.5
+  },
+  "Q20": {
+   "old": 0.6667,
+   "new": 0.6667
+  },
+  "Q21": {
+   "old": 0.5,
+   "new": 0.0
+  },
+  "Q22": {
+   "old": 0.5,
+   "new": 0.5
+  },
+  "Q23": {
+   "old": 0.0,
+   "new": 0.3333
+  },
+  "Q24": {
+   "old": 0.0,
+   "new": 1.0
+  },
+  "Q25": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q27": {
+   "old": 1.0,
+   "new": 0.0
+  },
+  "Q28": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q29": {
+   "old": 0.5,
+   "new": 1.0
+  },
+  "Q30": {
+   "old": 0.6667,
+   "new": 0.6667
+  },
+  "Q31": {
+   "old": 1.0,
+   "new": 0.5
+  },
+  "Q32": {
+   "old": 0.0,
+   "new": 0.0
+  },
+  "Q33": {
+   "old": 0.0,
+   "new": 0.6667
+  },
+  "Q34": {
+   "old": 1.0,
+   "new": 0.0
+  },
+  "Q36": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q35": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q37": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q38": {
+   "old": 0.6667,
+   "new": 0.6667
+  },
+  "Q39": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q41": {
+   "old": 0.3333,
+   "new": 0.3333
+  },
+  "Q40": {
+   "old": 0.5,
+   "new": 1.0
+  },
+  "Q42": {
+   "old": 0.6667,
+   "new": 0.6667
+  },
+  "Q43": {
+   "old": 0.0,
+   "new": 0.0
+  },
+  "Q44": {
+   "old": 0.6,
+   "new": 0.6
+  },
+  "Q45": {
+   "old": 1.0,
+   "new": 1.0
+  },
+  "Q47": {
+   "old": 0.0,
+   "new": 0.0
+  },
+  "Q48": {
+   "old": 0.25,
+   "new": 0.25
+  },
+  "Q49": {
+   "old": 1.0,
+   "new": 1.0
+  }
+ }
+}

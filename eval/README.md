@@ -9,9 +9,11 @@ Three layers, evaluated separately so failures can be attributed:
 
 | Layer | Question | Metrics | Status |
 |---|---|---|---|
-| Retrieval | Did we find the passages that contain the answer? | recall@k, nDCG@k, MRR | in progress |
-| Generation | Given correct context, does the model use it? | accuracy, faithfulness | planned |
-| End-to-end | How does the whole chain perform? | accuracy (4-way), faithfulness | planned |
+| Retrieval | Did we find the passages that contain the answer? | recall@k, nDCG@k, MRR | ✅ complete |
+| Generation | Given correct context, does the model use it? | accuracy, faithfulness | ✅ complete |
+| End-to-end | How does the whole chain perform? | accuracy (4-way), faithfulness | ✅ complete |
+
+Results for all four phases are in [FINDINGS.md](FINDINGS.md).
 
 ## Evaluation set
 
@@ -66,14 +68,39 @@ absolute numbers as subset numbers.
 Run in order from the repo root.
 
 ```bash
-python3 eval/scripts/01_build_subset_corpus.py       # rebuild corpus from git
-python3 eval/scripts/02_build_chunk_ground_truth.py  # locate answers in chunks
-python3 eval/scripts/03_verify_ground_truth.py       # check the ground truth
+# Phase 0 — evaluation set and ground truth
+python3 eval/scripts/01_build_subset_corpus.py        # rebuild corpus from git
+python3 eval/scripts/02_build_chunk_ground_truth.py   # locate answers in chunks
+python3 eval/scripts/03_verify_ground_truth.py        # check the ground truth
+
+# Phase 1 — embedding model comparison
+python3 eval/scripts/04_probe_embedders.py            # dims + norms, no writes
+python3 eval/scripts/05_create_eval_collections.py    # --apply to create
+python3 eval/scripts/06_populate_eval_collections.py  # --apply to embed
+python3 eval/scripts/07_run_retrieval_eval.py         # recall/nDCG/MRR
+
+# Phase 2 — reranker comparison and threshold calibration
+python3 eval/scripts/08_run_rerank_eval.py
+
+# Phase 3 — generation, end-to-end, faithfulness
+python3 eval/scripts/09_run_generation_eval.py        # --apply to run
+
+# Phase 4 — full-corpus production upgrade
+python3 eval/scripts/10_build_production_v2_store.py  # --apply to build
+python3 eval/scripts/11_verify_production_v2.py       # old vs new, full corpus
 ```
 
-`01` and `02`/`03` differ in what they touch: `01` only reads git; `02` and
-`03` read the **production** vector store (`pankb_llm.pankb_vector_store`)
-read-only, never writing to it.
+**What each script touches.** `01` only reads git. `02`, `03`, `07`, `08` and
+`11` read vector stores but never write to them. `05`, `06` write only to the
+`eval` database. `10` is the sole script that writes to the production
+database, and only ever to a **new** collection — the live
+`pankb_vector_store` is read-only throughout.
+
+Scripts that write default to a dry run and require `--apply`. `06`, `09` and
+`10` resume from where they stopped, so an interrupted run neither duplicates
+documents nor pays twice.
+
+Phases 0–3 use the 170-paper subset; phase 4 uses the full production corpus.
 
 ### Ground truth (`02`)
 
@@ -142,6 +169,26 @@ Current result: token overlap median **1.00**, minimum **0.73**, nothing below
 the 0.55 warning line, all chunk ids resolve. The two weakest alignments
 (Q44 0.73, Q42 0.78) were inspected by hand and are correct — both score below
 1.0 only because the answer spans a chunk boundary.
+
+## Full-corpus verification (`10`, `11`)
+
+Phases 0–3 run on the 170-paper subset, which is optimistic by construction.
+`10` rebuilds the **entire** production corpus (106,717 chunks) with the
+winning embedding model into a new collection, and `11` re-measures the old
+and new pipelines end to end against it — so the recommendation rests on
+production-scale numbers rather than extrapolation.
+
+`10` re-embeds the stored `textContent` rather than re-splitting the papers.
+That keeps chunk boundaries byte-identical to the live store, so the embedding
+model is the only thing that changes and the subset comparison transfers. It
+writes only to the new collection; the live one is untouched and remains a
+zero-cost rollback.
+
+`11` compares whole configurations rather than single components, because the
+relevance threshold is calibrated per reranker — pairing a new reranker with
+the old cutoff would measure neither. Metrics are computed **after** threshold
+filtering, i.e. on what the LLM actually receives: a chunk discarded there is
+invisible downstream and no generation metric can recover it.
 
 ## Results
 

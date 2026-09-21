@@ -1,0 +1,16 @@
+{
+ "source": "pankb_llm.pankb_vector_store",
+ "destination": "pankb_llm.pankb_vector_store_v2",
+ "model": "voyage-4-large",
+ "dimensions": 1024,
+ "source_chunks": 106717,
+ "inserted": 106217,
+ "total_documents": 106717,
+ "vector_norm_min": 1.0,
+ "vector_norm_max": 1.0,
+ "index": {
+  "m": 16,
+  "efConstruction": 100,
+  "similarity": "L2"
+ }
+}
