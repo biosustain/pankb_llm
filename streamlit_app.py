@@ -12,9 +12,8 @@ from langchain_core.prompts import ChatPromptTemplate
 from operator import itemgetter
 from langchain.schema.runnable import RunnableMap
 from langchain.retrievers.contextual_compression import ContextualCompressionRetriever
-from langchain_cohere import CohereRerank
 from langchain_community.vectorstores.azure_cosmos_db import AzureCosmosDBVectorSearch, CosmosDBSimilarityType, CosmosDBVectorSearchType
-from langchain_voyageai import VoyageAIEmbeddings
+from langchain_voyageai import VoyageAIEmbeddings, VoyageAIRerank
 import streamlit as st
 from pymongo import MongoClient
 
@@ -26,7 +25,7 @@ connection_string = os.getenv("MONGODB_CONN_STRING")
 # The MongoDB database instance name: ----
 db_name = "pankb_llm"
 # The MongoDB collection name (must be populated with vector embeddings): ----
-collection_name = "pankb_vector_store"
+collection_name = "pankb_vector_store_v2"
 
 # Connect to the MongoDB instance: ----
 client = MongoClient(connection_string)
@@ -37,8 +36,9 @@ collection = client[db_name][collection_name]
 def format_docs(docs):
     return "\n\n".join('Title: ' + doc.metadata['title'] + '.' + ' Content: ' + doc.page_content for doc in docs)
 
-RERANK_MODEL = "rerank-english-v3.0"
-RERANK_SCORE_THRESHOLD = 0.5
+EMBEDDING_MODEL = "voyage-4-large"
+RERANK_MODEL = "rerank-2.5"
+RERANK_SCORE_THRESHOLD = 0.45
 
 def filter_and_extract_documents(documents):
     filtered_documents = [doc for doc in documents if doc.metadata['relevance_score'] >= RERANK_SCORE_THRESHOLD]
@@ -47,14 +47,14 @@ def filter_and_extract_documents(documents):
 def get_retriever(db_name, collection_name):
     # Important: here we can use only embedding models with dimensionality up to 2000,
     # because for Azure Cosmos Db for MongoDB the maximum number of supported dimensions is 2000: ----
-    embeddings = VoyageAIEmbeddings(model="voyage-large-2-instruct", show_progress_bar=True)
+    embeddings = VoyageAIEmbeddings(model=EMBEDDING_MODEL, show_progress_bar=True)
 
     namespace = db_name + '.' + collection_name
     vectordb = AzureCosmosDBVectorSearch.from_connection_string(connection_string, namespace, embeddings)
 
     retriever = vectordb.as_retriever(search_type="similarity", search_kwargs={"k": 30})
 
-    compressor = CohereRerank(model=RERANK_MODEL, top_n=20)
+    compressor = VoyageAIRerank(model=RERANK_MODEL, top_k=20)
     compression_retriever = ContextualCompressionRetriever(
         base_compressor=compressor, base_retriever=retriever
     )
