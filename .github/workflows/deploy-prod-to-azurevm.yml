@@ -45,6 +45,5 @@ jobs:
             echo "# Had to multiply maxIdleTimeMS by 10 to handle" >> .env
             echo "# urllib3.exceptions.ProtocolError: (\"Connection broken: ConnectionResetError(104, 'Connection reset by peer')\", ConnectionResetError(104, 'Connection reset by peer'))" >> .env
             echo MONGODB_CONN_STRING="${{secrets.PANKB_PROD_AZURE_MONGODB_CONN_STRING}}" >> .env
-            cat .env
             docker compose up -d --build --force-recreate
             docker system prune --all --force
