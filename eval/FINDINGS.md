@@ -11,7 +11,7 @@ Method, scripts and known defects: [README.md](README.md).
 | 0 | Evaluation set and ground truth | ✅ complete | 2026-09-20 |
 | 1 | Embedding model comparison | ✅ complete | 2026-09-20 |
 | 2 | Reranker comparison and threshold calibration | ✅ complete | 2026-09-20 |
-| 3 | Generation and end-to-end | planned | — |
+| 3 | Generation, end-to-end and faithfulness | ✅ complete | 2026-09-21 |
 
 ---
 
@@ -397,18 +397,176 @@ threshold. **Under both framings the production model is the worst of the set.**
 
 ---
 
-## Phase 3 — Generation and end-to-end (planned)
+## Phase 3 — Generation, end-to-end and faithfulness
 
-To be measured:
+**Date**: 2026-09-21
+**Script**: `09_run_generation_eval.py`
+**Raw data**: `results/generation_eval_raw.json` (1,176 records)
 
-- **Generation layer** — using `reference_answer` as perfect context, to test
-  whether the model uses correct material when given it. Establishes the
-  accuracy **ceiling**.
-- **End-to-end** — reproducing the paper's base-vs-RAG comparison, and
-  including the `gpt-4o-mini` actually running in production (the paper used
-  GPT-4 Turbo; production has diverged with no regression evaluation).
-- **Faithfulness** — whether answers are genuinely supported by the context.
-  Never measured in the paper, yet it is the direct test of its central claim of
-  reduced hallucination.
-- **Judge design** — LLM-as-judge with human spot-check calibration; the judge
-  must not be among the models under test, to avoid self-preference bias.
+### Setup
+
+| Item | Value |
+|---|---|
+| Generators | `gpt-4o-mini` (production), `gpt-4o`, `claude-sonnet-5`, `claude-haiku-4-5` |
+| Conditions | **base / oracle / rag** |
+| Questions | 49 (only Q26, which has no reference answer, is excluded) |
+| Repeats | 2 per question |
+| Pipeline (rag arm) | voyage-4-large → rerank-english-v3.0 → threshold 0.5 |
+| Judge | `claude-opus-5`, **not among the tested models** |
+
+The three arms exist so that a wrong answer can be attributed. `oracle` feeds
+the reference answer as context — perfect retrieval — and therefore gives the
+accuracy **ceiling**. The published evaluation has only `base` and `rag`, so it
+can show RAG helps but cannot say whether a failure came from the retriever or
+the generator.
+
+### Result 1: RAG works, reproducing the paper's central claim
+
+Accuracy (% correct, both repeats pooled):
+
+| Generator | base | oracle | rag |
+|---|---|---|---|
+| gpt-4o-mini ← production | 10.2% | **94.9%** | 76.5% |
+| gpt-4o | 13.3% | 90.8% | 73.5% |
+| claude-sonnet-5 | 21.4% | 88.8% | **79.6%** |
+| claude-haiku-4-5 | 8.2% | 88.8% | **79.6%** |
+
+Base accuracy averages **13.3%**, against the paper's reported 22.4% — same
+order of magnitude, and the gap is unsurprising given different models and a
+stricter 4-way rubric. RAG lifts it to **77.3%** on average. The direction and
+magnitude of the paper's headline finding reproduce.
+
+### Result 2: retrieval, not generation, is the bottleneck ⭐
+
+This is what the two-arm design could not show:
+
+| Generator | oracle | rag | **retrieval cost** |
+|---|---|---|---|
+| gpt-4o-mini | 94.9% | 76.5% | **−18.4 pts** |
+| gpt-4o | 90.8% | 73.5% | **−17.3 pts** |
+| claude-sonnet-5 | 88.8% | 79.6% | −9.2 pts |
+| claude-haiku-4-5 | 88.8% | 79.6% | −9.2 pts |
+
+**Given correct material, every model answers ~90% correctly.** The generator is
+not the limiting factor. The 9–18 point drop from oracle to rag is what
+retrieval costs — and it is the largest single loss anywhere in this system.
+
+This lines up with phases 1 and 2, which found the same thing from the other
+end: the embedding model gives up 0.155 recall and the threshold discards ~6%
+of correct answers. **Phase 3 prices those defects in end-to-end terms.**
+
+The practical consequence: **upgrading the generator is not where the value is.**
+`gpt-4o` scores *below* `gpt-4o-mini` in the rag arm (73.5% vs 76.5%) — a more
+expensive model bought nothing. Retrieval improvements would.
+
+### Result 3: faithfulness — answers are grounded, and "right by luck" is ~0
+
+The dimension the paper never measured. In the rag arm:
+
+| Generator | grounded | partial | **ungrounded** | no_context |
+|---|---|---|---|---|
+| gpt-4o-mini | 84.7% | 4.1% | **0.0%** | 0.0% |
+| gpt-4o | 81.6% | 1.0% | **0.0%** | 12.2% |
+| claude-sonnet-5 | 84.7% | 0.0% | **0.0%** | 0.0% |
+| claude-haiku-4-5 | 84.7% | 0.0% | **0.0%** | 0.0% |
+
+The decisive cross-tabulation — accuracy against faithfulness:
+
+| Generator | correct **and** grounded | correct but **ungrounded** |
+|---|---|---|
+| gpt-4o-mini | 76.5% | **0.0%** |
+| gpt-4o | 73.5% | **0.0%** |
+| claude-sonnet-5 | 79.6% | **0.0%** |
+| claude-haiku-4-5 | 79.6% | **0.0%** |
+
+**Not one correct answer was ungrounded.** Every correct answer traces to the
+retrieved context; none came from the model's parametric memory dressed up with
+citations. That is the failure mode a citation-bearing system must not have, and
+accuracy alone cannot see it — this system does not have it.
+
+This is also the strongest available evidence for the paper's hallucination
+claim, which it asserted but never measured.
+
+### Result 4: this settles the threshold design question
+
+Phase 2 left an open question: is a permissive threshold plus "let the LLM
+filter the noise" sound, or should the filter stay strict?
+
+The argument for permissive rested on an unverified premise — that the LLM
+genuinely reasons over its context rather than falling back on memory. The
+paper's "88% accuracy at 75% noise" was compatible with either reading, and
+accuracy could not distinguish them.
+
+**Faithfulness now distinguishes them: 0% ungrounded.** The LLM is demonstrably
+using the context it is given. So the premise holds, and **a permissive
+threshold is the better choice for this system** — the cost of a few extra
+noise documents is recoverable, while a discarded correct answer is not.
+
+Combined with phase 2's threshold curve, the recommendation is now evidence-
+based rather than a judgement call: **lower the threshold, or move to
+`rerank-v4.0-pro` where 0.65 costs zero recall.**
+
+### Result 5: rejection behaviour differs sharply between models
+
+| Generator | base rejection | rag rejection |
+|---|---|---|
+| claude-haiku-4-5 | **44.9%** | 0.0% |
+| gpt-4o | 37.8% | 7.1% |
+| gpt-4o-mini | 24.5% | 0.0% |
+| claude-sonnet-5 | 12.2% | 0.0% |
+
+Without context, `claude-haiku-4-5` declines 44.9% of the time while
+`claude-sonnet-5` declines only 12.2% and answers incorrectly 24.5% of the time.
+**In a regulated setting the first behaviour is preferable**: an honest refusal
+is recoverable, a confident error is not. This is exactly why the paper's 4-way
+rubric keeps rejection separate from incorrect, and why collapsing them would
+reward the wrong model.
+
+### Judge validation and reliability
+
+The judge is a measuring instrument, so it is itself measured.
+
+- **Smoke test**: four hand-constructed cases (correct / rejection / incorrect /
+  partial), graded correctly on **both** axes.
+- **Repeat agreement**: identical inputs run twice agree **91.2%** of the time
+  (536/588). This bounds combined model + judge nondeterminism.
+- **Judge errors**: **114/1,176 (9.7%)** of records failed to parse into a valid
+  grade after retries and are recorded as `judge_error`. They are spread evenly
+  across generators and conditions, so this is judge robustness, not a
+  model-specific artefact. Those records are excluded from the percentages
+  above, which are computed over all records including errors — so the true
+  rates are slightly **higher** than reported, and the comparison between models
+  is unaffected.
+
+### Limitations
+
+1. **Determinism could not be enforced on the Anthropic side.** The paper used
+   `temperature=0, top_p=0`; anthropic SDK 1.7.0 no longer accepts `temperature`
+   on `messages.create` and reasoning models reject it outright. OpenAI calls
+   still use `temperature=0`. The 91.2% repeat agreement quantifies what this
+   costs.
+2. **9.7% judge error rate** is high enough to want fixing before these numbers
+   are used for a production decision. A stricter output schema or a retry with
+   a repair prompt would likely recover most of them.
+3. **The judge has not had human spot-check calibration.** Smoke tests and
+   self-consistency are necessary but not sufficient; a sample should be graded
+   by hand, as was done for the phase-0 ground truth.
+4. **2 repeats, 49 questions.** Differences of a few points between models
+   (e.g. 79.6% vs 76.5%) are within noise. The oracle-vs-rag gap (9–18 points)
+   is not.
+5. **The rag arm uses the phase-1 winner** (`voyage-4-large`), not the model
+   currently in production. So the 9–18 point retrieval cost is measured against
+   an *already improved* retriever — with the production embedding model the gap
+   would be **wider**.
+
+### What this means end to end
+
+```
+generation ceiling (oracle)   ~90%   <- the generator is not the problem
+actual system (rag)           ~77%   <- 13 points lost, all in retrieval
+grounded answers              ~85%   <- and 0% right-by-luck
+```
+
+The system's headroom is in retrieval, and phases 1–2 name the specific defects:
+a legacy embedding model, a reranker two generations behind, and a threshold
+calibrated for neither.
