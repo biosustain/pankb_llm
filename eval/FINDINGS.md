@@ -1,153 +1,192 @@
-# PanKB RAG 评估 — 实验成果记录
+# PanKB RAG Evaluation — Findings
 
-本文件按阶段累积记录实验结论。每完成一个阶段追加一节,**不修改已有结论** —— 结论的演变过程本身是审计轨迹的一部分。
+Results accumulate by phase. Each completed phase is appended; **earlier
+conclusions are not edited** — how the conclusions evolved is itself part of
+the audit trail.
 
-方法、脚本与已知缺陷见 [README.zh-CN.md](README.zh-CN.md)。
+Method, scripts and known defects: [README.md](README.md).
 
-| 阶段 | 内容 | 状态 | 日期 |
+| Phase | Subject | Status | Date |
 |---|---|---|---|
-| 0 | 评测集与 ground truth 构建 | ✅ 完成 | 2026-09-20 |
-| 1 | Embedding 模型对比 | ✅ 完成 | 2026-09-20 |
-| 2 | Reranker 对比与阈值标定 | ✅ 完成 | 2026-09-20 |
-| 3 | 生成层与端到端 | 计划中 | — |
+| 0 | Evaluation set and ground truth | ✅ complete | 2026-09-20 |
+| 1 | Embedding model comparison | ✅ complete | 2026-09-20 |
+| 2 | Reranker comparison and threshold calibration | ✅ complete | 2026-09-20 |
+| 3 | Generation and end-to-end | planned | — |
 
 ---
 
-## 阶段 0 — 评测集与 ground truth
+## Phase 0 — Evaluation set and ground truth
 
-### 产出
+### Deliverables
 
-- **50 题评测集**,来自 PanKB 论文补充材料 Table S1(doi:10.1093/nar/gkae1042),经 EuropePMC API 取得。含 `question` / `source_doi` / `reference_answer` 三字段。
-- **170 篇子集语料**(20 篇正样本 + 150 篇固定种子随机噪声),从 git 历史恢复,可逐字节复现。
-- **chunk 级 ground truth**:47/50 题可用,每题中位数 2 个相关 chunk(范围 1–5)。
+- **50-question evaluation set** from Supplementary Table S1 of the PanKB paper
+  (doi:10.1093/nar/gkae1042), retrieved via the EuropePMC API. Carries
+  `question` / `source_doi` / `reference_answer`.
+- **170-paper subset corpus** (20 positives + 150 seeded-random noise papers),
+  recovered from git history and reproducible byte-for-byte.
+- **Chunk-level ground truth**: 47/50 questions usable, median 2 relevant
+  chunks per question (range 1–5).
 
-### 关键发现
+### Key findings
 
-**① `source_doi` 字段让检索评估成为可能**
+**① The `source_doi` field is what makes retrieval evaluation possible**
 
-论文方法部分**从未提及**数据里有这一栏。正是它把"答案出自哪篇论文"变成可机读的信息,否则无法建立检索层的 ground truth。原论文完全没有检索指标,这大概是原因之一。
+The paper's methods section **never mentions** this column. It is what turns
+"which paper does this answer come from" into machine-readable information;
+without it there is no way to build retrieval ground truth. That is plausibly
+why the original work reports no retrieval metrics at all.
 
-**② 答案跨 chunk 边界是常态,不是例外**
+**② Answers spanning chunk boundaries is the norm, not the exception**
 
-第一版 ground truth 构建逐个 chunk 与答案比对,**6/50 题匹配失败** —— 尽管那些段落明明就在论文里。
+The first ground-truth builder scored each chunk against the answer
+independently and **failed on 6/50 questions** — despite the passages being
+plainly present in the papers.
 
-诊断结果:答案(中位数约 300 字符,最长 1704)比 500 字符的 chunk 长,**开头或结尾常常落在相邻 chunk 里**,100 字符的 overlap 接不住。
+Diagnosis: answers (median ~300 chars, max 1704) are longer than the 500-char
+chunks, so their opening or closing words routinely land in an adjacent chunk
+and the 100-char overlap does not bridge the gap.
 
-最清楚的例子是 Q40 —— 标准答案以 *"Type II methanotrophs, exemplified by Methylosinus..."* 开头,而库中对应 chunk 从 *"exemplified by Methylosinus..."* 才开始。
+The clearest case is Q40 — the reference answer begins *"Type II methanotrophs,
+exemplified by Methylosinus..."* while the stored chunk begins at
+*"exemplified by Methylosinus..."*.
 
-改为「重组全文 → 定位答案 → 标记所有覆盖的 chunk」后:**43 → 47 题可用**。
+Reworking it as «reconstruct the paper → locate the answer → mark every
+overlapping chunk» took usable questions from **43 to 47**.
 
-> 这不只是修 bug。它**实证了当前 chunking 策略会切断语义单元**,与后文的碎片 chunk 问题指向同一根因。
+> This is more than a bug fix. It is empirical evidence that **the current
+> chunking strategy severs semantic units**, pointing at the same root cause as
+> the fragment-chunk problem below.
 
-**③ 语料中存在无信息量的碎片 chunk**
+**③ The corpus contains information-free fragment chunks**
 
 ```
-chunk 字符数: min 8 | median 493 | max 500
-过短 (<80 字符): 81 个 (占 0.4%)
+chunk chars: min 8 | median 493 | max 500
+very short (<80 chars): 81 (0.4%)
 ```
 
-最短的 chunk 只有 **8 个字符**。这类碎片(多为标题、图注)会因字面匹配获得高相似度分,**占用 k=30 的名额却不携带信息**。
+The shortest chunk is **8 characters**. Fragments like these (titles, figure
+captions) score well on lexical similarity and **occupy a slot in the k=30
+budget while carrying no information**.
 
-### ground truth 可信度
+### Ground-truth credibility
 
-不接受未经验证的分母。三重检查结果:
+An unverified denominator is not accepted. Three checks:
 
-| 检查 | 结果 |
+| Check | Result |
 |---|---|
-| Token 重叠(独立于构建算法) | 中位数 **1.00**,最低 **0.73**,无一低于 0.55 警戒线 |
-| chunk id 可解析性 | 89/89 全部可解析 |
-| 人工抽检 | 最弱的两条(Q44 0.73、Q42 0.78)已人工核对,**均正确** |
+| Token overlap (independent of the build algorithm) | median **1.00**, min **0.73**, none below the 0.55 warning line |
+| Chunk-id resolvability | 89/89 resolve |
+| Human review | the two weakest (Q44 0.73, Q42 0.78) inspected by hand — **both correct** |
 
-两条低分对齐的原因均为答案跨 chunk 边界,非误匹配。
+Both low-scoring alignments are explained by answers spanning chunk
+boundaries, not by mismatches.
 
 ---
 
-## 阶段 1 — Embedding 模型对比
+## Phase 1 — Embedding model comparison
 
-**日期**:2026-09-20
-**脚本**:`04_probe_embedders.py` → `05_create_eval_collections.py` → `06_populate_eval_collections.py` → `07_run_retrieval_eval.py`
-**原始数据**:`results/retrieval_eval.json`、`results/retrieval_eval_detail.json`
+**Date**: 2026-09-20
+**Scripts**: `04_probe_embedders.py` → `05_create_eval_collections.py` →
+`06_populate_eval_collections.py` → `07_run_retrieval_eval.py`
+**Raw data**: `results/retrieval_eval.json`, `results/retrieval_eval_detail.json`
 
-### 实验设置
+### Setup
 
-| 项 | 值 |
+| Item | Value |
 |---|---|
-| 语料 | 170 篇 / **18,156 chunks**(正样本 2,627 / 噪声 15,529) |
-| 题目 | 47(50 题中排除 1 题无答案、2 题无法定位) |
-| chunk 策略 | **固定**为生产配置(500 / 100),复用生产 chunk |
-| 索引 | HNSW m=16, efConstruction=100, **similarity=L2**(对齐生产) |
-| 指标 | 严格 recall、nDCG、MRR、hit rate |
+| Corpus | 170 papers / **18,156 chunks** (2,627 positive / 15,529 noise) |
+| Questions | 47 (of 50: 1 has no answer, 2 could not be located) |
+| Chunking | **held fixed** at the production setting (500 / 100); production chunks reused |
+| Index | HNSW m=16, efConstruction=100, **similarity=L2** (mirrors production) |
+| Metrics | strict recall, nDCG, MRR, hit rate |
 
-**唯一变量是 embedding 模型** —— 所有模型面对逐字节相同的 chunk 集合。
+**The embedding model is the only variable** — every model sees a
+byte-identical chunk set.
 
-### 前置验证:L2 索引的安全性
+### Precondition: is the L2 index safe?
 
-生产索引建在 **L2** 而非 cosine 上。两者**仅对归一化向量**排序等价 —— 这个前提代码里从未写明。若某模型返回非单位向量,排序会静默出错,且下游任何检查都发现不了。
+The production index is built on **L2**, not cosine. The two rank identically
+**only for normalized vectors** — an assumption stated nowhere in the code. A
+model returning non-unit vectors would rank wrongly and silently, and no
+downstream check would catch it.
 
-实测四个候选模型的输出模长:
+Measured output norms:
 
-| 模型 | 维度 | 模长范围 | 归一化 |
+| Model | Dims | Norm range | Normalized |
 |---|---|---|---|
 | voyage-large-2-instruct | 1024 | [1.0, 1.0] | ✅ |
 | voyage-4-large | 1024 | [1.0, 1.0] | ✅ |
 | text-embedding-3-large | 1024 | [0.9994, 1.0007] | ✅ |
 | embed-v4.0 | 1536 | [1.0, 1.0] | ✅ |
 
-**全部归一化**,L2 索引安全。特别值得注意的是 OpenAI 那行:它从原生 3072 维**截断**到 1024 后模长仍约等于 1,说明截断后做了重新归一化 —— 这是最可能出问题的一项,现在有实测数据证明无碍。
+**All normalized**, so the L2 index is safe here. The OpenAI row matters most:
+truncated from a native 3072 dims to 1024, its norms are still ~1, meaning the
+truncation is re-normalized. That was the likeliest thing to break, and it is
+now settled by measurement rather than assumption.
 
-### 结果:生产模型四个里排最后
+### Result: the production model ranks last of four
 
-**k=30(生产配置)**
+**At k=30 (production setting)**
 
-| 模型 | recall@30 | nDCG@30 | hit@30 | MRR |
+| Model | recall@30 | nDCG@30 | hit@30 | MRR |
 |---|---|---|---|---|
 | **voyage-4-large** | **0.893** | **0.620** | **1.000** | **0.617** |
 | embed-v4.0 (Cohere) | 0.863 | 0.605 | 0.979 | 0.592 |
 | text-embedding-3-large@1024 | 0.807 | 0.543 | 0.915 | 0.546 |
-| **voyage-large-2-instruct** ← 生产 | **0.738** | **0.424** | **0.894** | **0.399** |
+| **voyage-large-2-instruct** ← production | **0.738** | **0.424** | **0.894** | **0.399** |
 
-**recall@k 曲线**
+**recall@k curve**
 
-| 模型 | @1 | @3 | @5 | @10 | @20 | @30 | @50 | @100 |
+| Model | @1 | @3 | @5 | @10 | @20 | @30 | @50 | @100 |
 |---|---|---|---|---|---|---|---|---|
 | voyage-4-large | 0.285 | 0.500 | 0.607 | 0.756 | 0.855 | 0.893 | 0.914 | 0.914 |
 | cohere embed-v4 | 0.309 | 0.541 | 0.683 | 0.749 | 0.834 | 0.863 | 0.863 | 0.863 |
 | openai 3-large | 0.283 | 0.400 | 0.454 | 0.635 | 0.784 | 0.807 | 0.819 | 0.819 |
 | voyage-large-2-instruct | 0.166 | 0.296 | 0.361 | 0.540 | 0.694 | 0.738 | 0.745 | 0.745 |
 
-### 结论
+### Conclusions
 
-**① 升级路径明确且代价极低**
+**① The upgrade path is clear and nearly free**
 
-`voyage-large-2-instruct` → `voyage-4-large`:**recall@30 +0.155**。
+`voyage-large-2-instruct` → `voyage-4-large`: **+0.155 recall@30**.
 
-而且是 **drop-in 替换** —— 同为 1024 维、同价($0.12/M)、索引定义不变,**无需 schema 迁移**,只需重新 embedding 一次。
+It is a **drop-in replacement** — same 1024 dims, same price ($0.12/M), same
+index definition. **No schema migration**; only a re-embed.
 
-补充事实:`voyage-large-2-instruct` 在上游**已标记为 Legacy**,官方给出的升级路径正是 `voyage-4-large`。目前没有任何流程会发现线上模型进入了 legacy 状态。
+Additionally: `voyage-large-2-instruct` is marked **Legacy** upstream, and
+`voyage-4-large` is the vendor's own stated successor. **No process would have
+surfaced that the production model had entered legacy status.**
 
-**② 排序质量的差距比召回更大,而且更要命**
+**② The ranking gap is larger than the recall gap, and matters more**
 
 ```
 recall@30  +0.155
-nDCG@30    +0.196   ← 更大
-MRR        +0.218   ← 最大
+nDCG@30    +0.196   <- larger
+MRR        +0.218   <- largest
 ```
 
-这比表面更重要:**线上流程是 rerank top-30 → 砍掉 relevance < 0.5**。排序靠后的正确答案,**最可能在送进 LLM 之前就被阈值砍掉**。所以排序差不只是"排得靠后",而是"答案直接丢失"。
+This matters more than it appears: production reranks the top 30 and then
+**discards anything scoring below 0.5**. Correct answers ranked low are exactly
+the ones the threshold cuts. Poor ranking is therefore not "answers appear
+later" but **answers are lost**.
 
-**③ k=30 不是瓶颈,不必调**
+**③ k=30 is not the bottleneck**
 
-四个模型**全部满足 `recall@50 == recall@100`** —— 召回曲线在 k=50 已饱和。加大 k 几乎捞不回任何东西,只会推高 rerank 成本。**k=30 的选择是合理的。**
+All four models satisfy `recall@50 == recall@100` — the curve saturates by
+k=50. Raising k recovers almost nothing and only adds rerank cost. **k=30 is a
+sound choice.**
 
-**④ 但答案很少排在第一位**
+**④ But the answer is rarely the top hit**
 
-`recall@1` 仅 **0.17 ~ 0.31**。说明 **reranker 承担了实质性工作**,向量检索本身远不足以把正确答案顶到前面。这也印证了线上架构中 rerank 层的必要性。
+`recall@1` is only **0.17–0.31**. The reranker is doing substantial work;
+vector search alone is far from sufficient to surface the answer first.
 
-### 分层核对:提升不是被少数论文带出来的
+### Stratified check: the gain is not driven by a few papers
 
-评测集 44% 的题目来自 3 篇论文,总分可能被主导论文带偏。按来源论文分层(base → voyage-4-large,recall@30):
+44% of questions come from 3 papers, so an aggregate could be skewed by them.
+By source paper (base → voyage-4-large, recall@30):
 
-| 来源论文 | 题数 | base | v4-large | 变化 |
+| Source paper | Questions | base | v4-large | Δ |
 |---|---|---|---|---|
 | 10.1016/j.fm.2023.104334 | 10 | 0.74 | 0.89 | +0.15 |
 | 10.1038/s41598-022-21731-1 | 7 | 0.93 | 1.00 | +0.07 |
@@ -158,177 +197,218 @@ MRR        +0.218   ← 最大
 | 10.1371/journal.pone.0299588 | 2 | 0.30 | 0.57 | +0.27 |
 | 10.1186/s13068-018-1201-1 | 1 | 0.00 | 1.00 | **+1.00** |
 
-**18 篇来源论文中,没有任何一篇出现退步**(最差为持平)。提升幅度最大的恰是 base 表现最差的论文 —— 说明这不是对主导论文的过拟合,而是普遍改善。
+**Not one of the 18 source papers regresses** (worst case is unchanged), and
+the largest gains land on the papers where the baseline was weakest. This is
+general improvement, not overfitting to the dominant papers.
 
-### 限制(引用结论时必须同时说明)
+### Limitations (state these whenever citing the numbers)
 
-1. **绝对数字偏乐观。** 子集只有 150 篇噪声论文,生产库有 10 万+ chunk,干扰项少得多。**相对排序是结论,绝对水平不是。**
-2. **47 题样本偏小。** 模型之间 0.03 量级的差距(如 voyage-4-large 与 Cohere)可能不具统计显著性;0.155 的差距则明显超出噪声范围。
-3. **只测了检索层。** recall 高不等于最终答案质量好 —— 还要看 rerank、阈值和生成。这是阶段 2、3 的内容。
-4. **题目独立性不完美。** Q01/Q02 指向同一段原文。
+1. **Absolute numbers are optimistic.** The subset has only 150 noise papers
+   against production's 100k+ chunks. **The relative ranking is the result; the
+   absolute level is not.**
+2. **47 questions is a small sample.** Gaps around 0.03 (voyage-4-large vs
+   Cohere) may not be significant; the 0.155 gap is clearly beyond noise.
+3. **Retrieval only.** High recall does not imply good final answers — rerank,
+   threshold and generation still apply. That is phases 2 and 3.
+4. **Questions are not fully independent**: Q01/Q02 target the same passage.
 
 ---
 
-## 阶段 2 — Reranker 对比与阈值标定
+## Phase 2 — Reranker comparison and threshold calibration
 
-**日期**:2026-09-20
-**脚本**:`08_run_rerank_eval.py`
-**原始数据**:`results/rerank_eval.json`
+**Date**: 2026-09-20
+**Script**: `08_run_rerank_eval.py`
+**Raw data**: `results/rerank_eval.json`
 
-### 实验设置
+### Setup
 
-| 项 | 值 |
+| Item | Value |
 |---|---|
-| 检索器 | `voyage_4_large`(阶段 1 最优) |
-| 候选集 | k=30,**一次性冻结** —— 所有 reranker 面对完全相同的候选列表 |
-| 输出 | top 20(对齐生产配置) |
-| 题目 | 47 |
-| 阈值扫描 | 0.00 → 0.95,步长 0.05 |
+| Retriever | `voyage_4_large` (phase-1 winner) |
+| Candidates | k=30, **frozen once** — every reranker sees an identical list |
+| Output | top 20 (production setting) |
+| Questions | 47 |
+| Threshold sweep | 0.00 → 0.95, step 0.05 |
 
-**唯一变量是 reranker。**
+**The reranker is the only variable.**
 
-### 结果一:rerank 确实有用,但作用不在 recall 上
+### Result 1: reranking helps, but not via recall
 
 | Reranker | recall@20 | nDCG@20 | MRR |
 |---|---|---|---|
 | **voyage rerank-2.5** | 0.865 | **0.751** | **0.804** |
 | voyage rerank-2.5-lite | 0.858 | 0.749 | 0.802 |
 | cohere rerank-v4.0-pro | 0.865 | 0.712 | 0.745 |
-| cohere rerank-english-v3.0 ← 生产 | 0.867 | 0.705 | 0.745 |
+| cohere rerank-english-v3.0 ← production | 0.867 | 0.705 | 0.745 |
 | cohere rerank-v4.0-fast | 0.856 | 0.700 | 0.742 |
-| **不用 rerank**(纯向量序) | 0.855 | 0.610 | 0.618 |
+| **no reranking** (vector order) | 0.855 | 0.610 | 0.618 |
 
-**关键观察:recall 几乎没有变化(0.855 → 0.867,差距 0.012),但 nDCG +0.14、MRR +0.19。**
+**Recall barely moves (0.855 → 0.867, a 0.012 spread) while nDCG gains 0.14 and
+MRR 0.19.**
 
-这完全符合预期且值得讲清楚:**rerank 不会凭空变出新文档** —— 它只能对向量检索已召回的 30 篇重新排序。所以它**不可能提升 recall**,它提升的是**排序质量**。
+This is exactly as it should be, and worth stating plainly: **a reranker cannot
+conjure new documents** — it only reorders the 30 the retriever already
+returned. It therefore *cannot* raise recall. What it improves is ordering.
 
-用 recall 评价 rerank 层是用错了指标。**nDCG 和 MRR 才是这一层的指标。**
+**Judging a rerank stage by recall is the wrong metric. nDCG and MRR are the
+metrics for this layer.**
 
-### 结果二:分数分布差异巨大,单一阈值无法通用 ⚠️
+### Result 2: score distributions differ enough that no single threshold ports ⚠️
 
-这是本阶段最重要的发现。同一批候选文档,五个 reranker 给出的分数分布:
+The most important finding of this phase. Same candidates, five rerankers:
 
-| Reranker | min | p25 | median | p75 | max | **≥0.5 占比** |
+| Reranker | min | p25 | median | p75 | max | **% ≥0.5** |
 |---|---|---|---|---|---|---|
-| cohere rerank-english-v3.0 ← 生产 | 0.0000 | **0.0372** | 0.5851 | 0.9474 | 1.0000 | **53.2%** |
+| cohere rerank-english-v3.0 ← production | 0.0000 | **0.0372** | 0.5851 | 0.9474 | 1.0000 | **53.2%** |
 | cohere rerank-v4.0-pro | 0.4164 | **0.7199** | 0.8208 | 0.8919 | 0.9886 | **97.3%** |
 | cohere rerank-v4.0-fast | 0.1857 | 0.5133 | 0.6239 | 0.7421 | 0.9671 | 77.3% |
 | voyage rerank-2.5 | 0.3828 | 0.5312 | 0.6250 | 0.7227 | 0.9414 | 83.5% |
 | voyage rerank-2.5-lite | 0.3809 | 0.5352 | 0.6094 | 0.7070 | 0.9453 | 81.9% |
 
-**生产模型 v3.0 的 p25 是 0.037,而 v4.0-pro 的 p25 是 0.72。** 差了近 20 倍。
+**The production model's p25 is 0.037; v4.0-pro's is 0.72** — a ~20x
+difference.
 
-同样是 0.5 这个数字:
-- 在 **v3.0** 上砍掉约一半文档
-- 在 **v4.0-pro** 上几乎什么都不砍(97.3% 的分数都 ≥0.5)
+The same number 0.5:
+- on **v3.0** discards roughly half the documents
+- on **v4.0-pro** discards almost nothing (97.3% of scores clear it)
 
-> 💡 这印证了早先在 notebook 里的观察:v3.0 的分数分布是**极端双峰**的 —— 一个 0.93,第二名 0.006。当时看着像 bug,现在有了完整分布数据,确认是模型特性。
+> 💡 This confirms an earlier notebook observation was not a bug: v3.0's score
+> distribution is **sharply bimodal** — one document at 0.93, the next at 0.006.
+> It is a property of the model.
 
-**结论:`0.5` 不是一个可移植的常数,是一个必须按模型实测标定的参数。** 换 reranker 而不重新标定阈值,过滤器行为会静默改变。
+**Conclusion: `0.5` is not a portable constant. It is a parameter that must be
+calibrated per model.** Swapping rerankers without recalibrating changes the
+filter's behaviour silently.
 
-### 结果三:生产阈值 0.5 正在丢弃正确答案
+### Result 3: the production threshold is discarding correct answers
 
-阈值扫描(recall / 平均保留文档数):
+Threshold sweep (recall / mean documents kept):
 
 | Reranker | 0.0 | 0.2 | 0.4 | **0.5** | 0.6 | 0.7 | 0.8 |
 |---|---|---|---|---|---|---|---|
-| **v3.0**(生产) recall | 0.867 | 0.824 | 0.817 | **0.810** | 0.782 | 0.764 | 0.728 |
-| 保留文档数 | 20.0 | 12.7 | 11.3 | **10.6** | 9.9 | 8.8 | 7.6 |
+| **v3.0** (production) recall | 0.867 | 0.824 | 0.817 | **0.810** | 0.782 | 0.764 | 0.728 |
+| docs kept | 20.0 | 12.7 | 11.3 | **10.6** | 9.9 | 8.8 | 7.6 |
 | v4.0-pro recall | 0.865 | 0.865 | 0.865 | **0.865** | 0.865 | 0.840 | 0.808 |
-| 保留文档数 | 20.0 | 20.0 | 20.0 | **19.5** | 18.3 | 15.7 | 11.3 |
+| docs kept | 20.0 | 20.0 | 20.0 | **19.5** | 18.3 | 15.7 | 11.3 |
 | voyage-2.5 recall | 0.865 | 0.865 | 0.865 | **0.858** | 0.832 | 0.747 | 0.615 |
-| 保留文档数 | 20.0 | 20.0 | 20.0 | **16.7** | 11.6 | 5.9 | 2.7 |
+| docs kept | 20.0 | 20.0 | 20.0 | **16.7** | 11.6 | 5.9 | 2.7 |
 
-**生产配置(v3.0 + 阈值 0.5)损失 recall 0.057**,即约 **6% 的正确答案在送进 LLM 之前就被丢弃**。
+**The production configuration (v3.0 + threshold 0.5) costs 0.057 recall** —
+roughly **6% of correct answers are discarded before reaching the LLM**.
 
-更值得注意的是 v3.0 的曲线形状:**recall 从 0.0 到 0.2 就掉了 0.043**,说明它把一部分正确答案打了极低分。而 v4.0-pro 在 0.0 → 0.6 区间 **recall 完全不变**,阈值在这个范围内是"免费"的。
+Note also the shape of v3.0's curve: **recall drops 0.043 between 0.0 and 0.2**,
+meaning it assigns very low scores to some correct answers. v4.0-pro's recall is
+**completely flat from 0.0 to 0.6**.
 
-被丢弃的 chunk **在下游完全不可见** —— 它不会进入 LLM,任何生成层指标都无法把它找回来。
+A discarded chunk is **invisible downstream** — it never reaches the LLM, and no
+generation metric can recover it.
 
-### 阈值建议:每个模型的可用阈值都不同
+### Threshold guidance: every model has a different usable cutoff
 
-对每个 reranker 求「recall 损失 ≤ 0.005 的前提下能设的最高阈值」:
+For each reranker, the highest threshold costing ≤0.005 recall:
 
-| Reranker | recall@0.0 | **可用最高阈值** | 该阈值下保留 | 生产 0.5 的损失 |
+| Reranker | recall@0.0 | **Highest usable threshold** | Docs kept there | Cost of production's 0.5 |
 |---|---|---|---|---|
-| **rerank-english-v3.0** ← 生产 | 0.867 | **0.0**(任何阈值都有损失) | 20.0 | **−0.057** |
+| **rerank-english-v3.0** ← production | 0.867 | **0.0** (any cutoff costs recall) | 20.0 | **−0.057** |
 | rerank-v4.0-pro | 0.865 | **0.65** | 17.4 | −0.000 |
 | rerank-v4.0-fast | 0.856 | 0.30 | 19.1 | −0.022 |
 | voyage rerank-2.5 | 0.865 | **0.45** | 18.6 | −0.007 |
 | voyage rerank-2.5-lite | 0.858 | 0.50 | 16.4 | −0.000 |
 
-**五个模型的可用阈值从 0.0 到 0.65 不等** —— 再次证明这个参数不可移植。
+**Usable thresholds range from 0.0 to 0.65 across five models** — further
+evidence the parameter does not port.
 
-**生产模型 v3.0 的阈值—代价曲线**(保留篇数含相关与不相关):
+**The production model's cost curve** (docs kept includes relevant and not):
 
-| 阈值 | 0.0 | 0.05 | 0.1 | 0.2 | 0.3 | 0.4 | **0.5** | 0.6 | 0.7 |
+| Threshold | 0.0 | 0.05 | 0.1 | 0.2 | 0.3 | 0.4 | **0.5** | 0.6 | 0.7 |
 |---|---|---|---|---|---|---|---|---|---|
 | recall | 0.867 | 0.846 | 0.842 | 0.824 | 0.817 | 0.817 | **0.810** | 0.782 | 0.764 |
-| 保留篇数 | 20.0 | 14.6 | 13.8 | 12.7 | 12.0 | 11.3 | **10.6** | 9.9 | 8.8 |
+| docs kept | 20.0 | 14.6 | 13.8 | 12.7 | 12.0 | 11.3 | **10.6** | 9.9 | 8.8 |
 
-v3.0 **没有"免费"区间** —— 阈值一从 0 抬起(0.05)就损失 0.021 recall,因为它给部分正确答案打了极低分。
+v3.0 has **no free range** — recall starts falling as soon as the threshold
+leaves zero (0.021 by 0.05), because it scores some correct answers very low.
 
-**建议(按优先级):**
+**Recommendations, in priority order:**
 
-1. **不改模型的前提下:阈值降到 0.2~0.3。** recall 从 0.810 回升到 0.817~0.824(挽回约 1~1.4 个百分点),平均保留 12~12.7 篇 —— 仍比 0.0 少 7~8 篇噪声。这是在"保住答案"和"控制 context 噪声"之间更好的折中点。
-   - 依据:阶段 1 已证明该系统的 LLM 在 75% 噪声下仍有 88% 准确率(论文数据),**多放几篇噪声的代价,小于丢失正确答案的代价**。
-2. **更优解:换模型。** 迁移到 `rerank-v4.0-pro` 后,阈值可设到 **0.65** 而 recall 零损失 —— 既保住全部答案,又过滤掉更多噪声。这比调阈值本身收益更大。
-3. **最稳健:改用相对阈值。** 由于没有任何厂商文档支持分数跨 query 可比,绝对阈值本质是经验调节钮。改用 top-n,或"相对于本次最高分的比例",能消除模型迁移时静默失效的风险。
+1. **Without changing models: lower the threshold to 0.2–0.3.** Recall recovers
+   from 0.810 to 0.817–0.824 while still filtering 7–8 noise documents. Grounds:
+   the paper's own data shows this system reaching 88% accuracy at 75% mean
+   noise, so **the cost of a few extra noise documents is lower than the cost of
+   losing correct answers**.
+2. **Better: change the model.** On `rerank-v4.0-pro` a threshold of **0.65**
+   costs zero recall — keeping every answer *and* filtering more noise. This is
+   worth more than tuning the threshold alone.
+3. **Most robust: use a relative cutoff.** Since no vendor documents
+   cross-query score comparability, an absolute threshold is an empirical knob.
+   A top-n, or a fraction of the top score, removes the risk of silent failure
+   when models change.
 
-> ⚠️ **本节数字的适用范围**:阈值标定依赖 ground truth,而绝对 recall 是**子集数字**(偏乐观)。阈值的**相对排序与曲线形状**可信,但迁移到生产前应在全量库上复核。
+> ⚠️ **Scope of these numbers**: calibration depends on ground truth, and
+> absolute recall is a **subset** figure (optimistic). The *shape* of the curves
+> and the *relative* ordering are trustworthy; re-check against the full store
+> before changing production.
 
-### 指标口径说明:结果一与结果三的关系
+### Note on metric scope: how Results 1 and 3 relate
 
-两组结果衡量的是不同的东西,**不可混为一谈**:
+They measure different things and **must not be conflated**:
 
-- **结果一(排序质量)**:rerank 输出的 top 20 **全部保留,不施加任何阈值**。衡量的是 reranker 把正确答案往前排的能力(nDCG / MRR)。
-- **结果三(阈值代价)**:在结果一的排序基础上**再施加分数过滤**,衡量过滤丢弃了多少正确答案。
+- **Result 1 (ranking quality)**: the reranker's top 20, **with no threshold
+  applied**. Measures its ability to order correct answers early (nDCG / MRR).
+- **Result 3 (threshold cost)**: applies score filtering *on top of* that
+  ordering, measuring how many correct answers the filter discards.
 
-即 **结果一不是"各模型在自己最优阈值下"的成绩** —— 它是无阈值的纯排序能力。之所以分开,是因为排序能力和阈值标定是两个正交的决策:先选排序最好的模型,再为它标定阈值。
+So **Result 1 is not "each model at its own best threshold"** — it is
+threshold-free ranking ability. They are separated because ranking quality and
+threshold calibration are orthogonal decisions: choose the best ranker first,
+then calibrate its threshold.
 
-若按「各自最优阈值 + recall」重排,`rerank-v4.0-pro` 与 `voyage rerank-2.5` 并列最优(recall 0.865,且分别可在 0.65 / 0.45 阈值下零损失),而生产的 v3.0 在任何非零阈值下都有损失。**两种口径下,生产模型都是最差的。**
+Re-ranked by «own best threshold + recall», `rerank-v4.0-pro` and `voyage
+rerank-2.5` tie for best (recall 0.865, at zero cost with thresholds of 0.65 and
+0.45 respectively), while production's v3.0 loses recall at any non-zero
+threshold. **Under both framings the production model is the worst of the set.**
 
-### 结论与建议
+### Production code issues surfaced
 
-**① rerank 层确实必要,但生产模型不是最优**
+1. ⚠️ **[streamlit_app.py:54](../streamlit_app.py#L54) calls
+   `CohereRerank(top_n=20)` with no `model=`** — it relies on
+   `langchain_cohere`'s default. **Which rerank model serves production is not
+   visible in the code**, and a library upgrade could change it with no diff.
+   Same class of problem as the embedding model entering legacy unnoticed:
+   dependency lifecycle is unmonitored.
+2. **`0.5` is hardcoded twice** ([streamlit_app.py:41](../streamlit_app.py#L41),
+   [streamlit_app_native.py:152](../streamlit_app_native.py#L152)) and must move
+   together.
+3. `rerank-english-v3.0` is two generations behind and English-only. Migrating
+   to v4.0 leaves the SDK signature essentially unchanged (`documents` still
+   accepts a list of strings, `top_n` survives), but **`model` becomes
+   mandatory** on `ClientV2`.
+4. **Voyage uses `top_k` where Cohere uses `top_n`** — an easy silent error when
+   porting.
 
-`voyage rerank-2.5` 在 nDCG(+0.046)和 MRR(+0.059)上明显优于生产的 v3.0,而且:
-- 上下文 32k vs 4k
-- **$0.05/1M token,前 2 亿 token 免费**
+### Limitations
 
-**② 阈值必须重新标定,不能照搬**
-
-若迁移到 `rerank-v4.0-pro`,0.5 几乎不再起过滤作用(97.3% 分数高于它),等于**静默移除了这道质量闸门**。
-
-若迁移到 Voyage,风险更大:**Voyage 文档从未声明分数归一化到 [0,1]**,示例输出是 `0.94140625` 这类二进制分数,像是模型原始量化输出而非校准概率。
-
-**③ 建议改用相对阈值而非绝对阈值**
-
-由于没有任何厂商文档支持"分数可跨 query 比较",绝对阈值本质上是个经验调节钮。更稳健的做法是 **top-n** 或**相对于最高分的比例**。
-
-### 发现的代码问题
-
-调研与实验中发现的、与本阶段直接相关的生产代码问题:
-
-1. ⚠️ **[streamlit_app.py:54](../streamlit_app.py#L54) 的 `CohereRerank(top_n=20)` 没有指定 `model=`** —— 依赖 `langchain_cohere` 的默认值。**线上实际在用哪个 rerank 模型,从代码里看不出来。** 与 embedding 模型进入 legacy 无人察觉是同一类问题:依赖生命周期缺乏监控。
-2. **`0.5` 在两处硬编码**([streamlit_app.py:41](../streamlit_app.py#L41)、[streamlit_app_native.py:152](../streamlit_app_native.py#L152)),重新标定时必须同步修改。
-3. `rerank-english-v3.0` 落后两代且仅支持英文;迁移到 v4.0 系列 SDK 签名基本不变(`documents` 仍接受字符串列表、`top_n` 保留),但 **`model` 参数在 ClientV2 中变为必填**。
-4. **Voyage 用 `top_k`,Cohere 用 `top_n`** —— 移植时容易静默出错。
-
-### 限制
-
-1. **候选集固定来自 `voyage_4_large`。** 换检索器可能改变 rerank 层的相对表现。
-2. **绝对数字仍是子集数字**(150 篇噪声),偏乐观。
-3. **reranker 之间差距较小**(nDCG 0.700~0.751),47 题样本下部分差异可能不具统计显著性。但 **rerank vs 不 rerank 的差距(0.610 → 0.751)远超噪声范围**。
-4. 未测 Jina 等其他厂商。
+1. **Candidates come from `voyage_4_large` only.** A different retriever could
+   shift the rerankers' relative standing.
+2. **Absolute numbers remain subset numbers** (150 noise papers), optimistic.
+3. **Rerankers are close together** (nDCG 0.700–0.751); at 47 questions some of
+   those gaps may not be significant. The **rerank-vs-no-rerank gap (0.610 →
+   0.751) is well beyond noise.**
+4. Other vendors (e.g. Jina) were not tested.
 
 ---
 
-## 阶段 3 — 生成层与端到端(计划)
+## Phase 3 — Generation and end-to-end (planned)
 
-待测:
+To be measured:
 
-- **生成层** —— 用 `reference_answer` 作为完美 context,测"给了正确材料模型会不会用",得到准确率**天花板**
-- **端到端** —— 复现论文的 base vs RAG 对照,并纳入线上实际使用的 `gpt-4o-mini`(论文用的是 GPT-4 Turbo,线上已分叉且无回归评测)
-- **faithfulness** —— 答案是否真有 context 支撑。论文完全没测过这一项,而它正是"减少幻觉"这一核心承诺的直接验证
-- **判分器设计** —— LLM-as-judge + 人工抽检校准;判分模型必须独立于被测模型(避免自我偏好偏差)
+- **Generation layer** — using `reference_answer` as perfect context, to test
+  whether the model uses correct material when given it. Establishes the
+  accuracy **ceiling**.
+- **End-to-end** — reproducing the paper's base-vs-RAG comparison, and
+  including the `gpt-4o-mini` actually running in production (the paper used
+  GPT-4 Turbo; production has diverged with no regression evaluation).
+- **Faithfulness** — whether answers are genuinely supported by the context.
+  Never measured in the paper, yet it is the direct test of its central claim of
+  reduced hallucination.
+- **Judge design** — LLM-as-judge with human spot-check calibration; the judge
+  must not be among the models under test, to avoid self-preference bias.

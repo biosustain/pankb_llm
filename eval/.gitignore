@@ -1,1 +1,7 @@
 .venv/
+__pycache__/
+*.pyc
+
+# Chinese translations kept locally only, not committed
+README.zh-CN.md
+FINDINGS.zh-CN.md
