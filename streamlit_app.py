@@ -37,8 +37,11 @@ collection = client[db_name][collection_name]
 def format_docs(docs):
     return "\n\n".join('Title: ' + doc.metadata['title'] + '.' + ' Content: ' + doc.page_content for doc in docs)
 
+RERANK_MODEL = "rerank-english-v3.0"
+RERANK_SCORE_THRESHOLD = 0.5
+
 def filter_and_extract_documents(documents):
-    filtered_documents = [doc for doc in documents if doc.metadata['relevance_score'] >= 0.5]
+    filtered_documents = [doc for doc in documents if doc.metadata['relevance_score'] >= RERANK_SCORE_THRESHOLD]
     return filtered_documents
 
 def get_retriever(db_name, collection_name):
@@ -51,7 +54,7 @@ def get_retriever(db_name, collection_name):
 
     retriever = vectordb.as_retriever(search_type="similarity", search_kwargs={"k": 30})
 
-    compressor = CohereRerank(top_n=20)
+    compressor = CohereRerank(model=RERANK_MODEL, top_n=20)
     compression_retriever = ContextualCompressionRetriever(
         base_compressor=compressor, base_retriever=retriever
     )
