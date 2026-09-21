@@ -61,8 +61,10 @@ import json
 import os
 import re
 import sys
+import threading
 import time
 from collections import Counter, defaultdict
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import dotenv
 from pymongo import MongoClient
@@ -206,17 +208,25 @@ def judge(question, reference, answer, context, attempts=4):
 
 # --- retrieval (the real pipeline) -----------------------------------------
 
-def build_rag_contexts(questions):
+def build_rag_contexts(questions, cache_path, workers=8):
     """Run the production pipeline once; all generators then share it, so the
-    generator is the only variable across the rag condition."""
+    generator is the only variable across the rag condition.
+
+    Cached to disk: this costs real API calls and never changes between runs.
+    """
+    if os.path.exists(cache_path):
+        cached = json.load(open(cache_path, encoding="utf-8"))
+        if set(cached) >= {q["id"] for q in questions}:
+            print(f"  reusing cached RAG contexts from {cache_path}")
+            return cached
+
     import voyageai
     import cohere
     conn = os.getenv("MONGODB_CONN_STRING")
     col = MongoClient(conn, serverSelectionTimeoutMS=30000)[EVAL_DB][RETRIEVER]
     vo, co = voyageai.Client(), cohere.ClientV2()
 
-    out = {}
-    for q in questions:
+    def one(q):
         vec = vo.embed(texts=[q["question"]], model="voyage-4-large",
                        input_type="query", output_dimension=1024).embeddings[0]
         docs = list(col.aggregate([
@@ -225,17 +235,23 @@ def build_rag_contexts(questions):
                          "returnStoredSource": True}},
             {"$project": {"chunk_id": 1, "textContent": 1, "title": 1}}]))
         if not docs:
-            out[q["id"]] = {"context": "", "n_docs": 0, "chunk_ids": []}
-            continue
+            return q["id"], {"context": "", "n_docs": 0, "chunk_ids": []}
         rr = co.rerank(model=RERANK_MODEL, query=q["question"],
                        documents=[d.get("textContent", "") for d in docs],
                        top_n=TOP_N)
         kept = [(docs[x.index], x.relevance_score) for x in rr.results
                 if x.relevance_score >= RERANK_THRESHOLD]
         ctx = "\n\n".join(f"Title: {d.get('title', '')}. "
-                          f"Content: {d.get('textContent', '')}" for d, _ in kept)
-        out[q["id"]] = {"context": ctx, "n_docs": len(kept),
-                        "chunk_ids": [d["chunk_id"] for d, _ in kept]}
+                           f"Content: {d.get('textContent', '')}" for d, _ in kept)
+        return q["id"], {"context": ctx, "n_docs": len(kept),
+                         "chunk_ids": [d["chunk_id"] for d, _ in kept]}
+
+    out = {}
+    with ThreadPoolExecutor(max_workers=workers) as ex:
+        for fut in as_completed([ex.submit(one, q) for q in questions]):
+            qid, val = fut.result()
+            out[qid] = val
+    json.dump(out, open(cache_path, "w"), indent=1)
     return out
 
 
@@ -246,6 +262,8 @@ def main():
     ap.add_argument("--only", help="test a single generator by key")
     ap.add_argument("--repeats", type=int, default=2,
                     help="runs per question; the paper used 3")
+    ap.add_argument("--workers", type=int, default=8,
+                    help="parallel generate+judge pipelines")
     ap.add_argument("--out", default=os.path.join(REPO, "eval", "results"))
     args = ap.parse_args()
 
@@ -268,7 +286,7 @@ def main():
     print(f"questions   : {len(questions)}")
     print(f"generators  : {[g['key'] for g in gens]}")
     print(f"conditions  : {conditions}")
-    print(f"repeats     : {args.repeats}")
+    print(f"repeats     : {args.repeats} | workers: {args.workers}")
     print(f"judge       : {JUDGE_MODEL} (not among the tested models)")
     print(f"generation calls: {n_calls:,}  + judge calls: {n_calls:,}\n")
 
@@ -276,58 +294,127 @@ def main():
         print("Dry run — nothing called. Re-run with --apply.")
         return
 
+    raw_path = os.path.join(args.out, "generation_eval_raw.json")
+    ckpt_path = os.path.join(args.out, "generation_eval_checkpoint.jsonl")
+    ctx_cache = os.path.join(args.out, "generation_rag_contexts.json")
+
+    # Resume: every completed unit of work is already on disk as one JSONL line.
+    # A run this long cannot assume it will survive to the end -- the first
+    # attempt lost ~1h of work to a session teardown.
+    done = set()
+    if os.path.exists(ckpt_path):
+        with open(ckpt_path, encoding="utf-8") as f:
+            for line in f:
+                try:
+                    r = json.loads(line)
+                    done.add((r["generator"], r["condition"], r["qid"], r["repeat"]))
+                except Exception:
+                    continue  # tolerate a torn final line from a hard kill
+        print(f"resuming: {len(done):,} of {n_calls:,} results already on disk\n")
+
     print("building RAG contexts via the production pipeline "
           f"({RETRIEVER} -> {RERANK_MODEL} -> >={RERANK_THRESHOLD}) ...")
-    rag_ctx = build_rag_contexts(questions)
+    rag_ctx = build_rag_contexts(questions, ctx_cache, workers=args.workers)
     kept = [v["n_docs"] for v in rag_ctx.values()]
     print(f"  mean {sum(kept) / len(kept):.1f} docs per question; "
           f"{sum(1 for k in kept if k == 0)} questions got EMPTY context\n")
 
+    def build_prompt(q, cond):
+        if cond == "base":
+            return "", BASE_PROMPT.format(question=q["question"])
+        if cond == "oracle":
+            ctx = f"Title: source paper. Content: {q['reference']}"
+        else:
+            ctx = rag_ctx[q["id"]]["context"]
+        return ctx, RAG_PROMPT.format(question=q["question"], context=ctx)
+
+    def unit(g, cond, q, rep):
+        """One generate + judge. Returns a record ready to append."""
+        ctx, prompt = build_prompt(q, cond)
+        try:
+            ans = generate(g, prompt)
+        except Exception as e:
+            ans = f"<<GENERATION FAILED: {type(e).__name__}>>"
+        v = judge(q["question"], q["reference"], ans, ctx)
+        return {
+            "generator": g["key"], "condition": cond, "qid": q["id"],
+            "repeat": rep, "source_doi": q["source_doi"], "answer": ans,
+            "accuracy": v["accuracy"], "faithfulness": v.get("faithfulness"),
+            "reason": v.get("reason", ""),
+            "n_context_docs": rag_ctx[q["id"]]["n_docs"] if cond == "rag" else None,
+        }
+
+    todo = [(g, cond, q, rep)
+            for g in gens for cond in conditions
+            for q in questions for rep in range(args.repeats)
+            if (g["key"], cond, q["id"], rep) not in done]
+
+    if not todo:
+        print("nothing left to run")
+    else:
+        print(f"running {len(todo):,} units across {args.workers} workers ...")
+        lock = threading.Lock()
+        ckpt = open(ckpt_path, "a", encoding="utf-8")
+        completed, t0 = 0, time.time()
+        try:
+            with ThreadPoolExecutor(max_workers=args.workers) as ex:
+                futs = [ex.submit(unit, g, c, q, r) for g, c, q, r in todo]
+                for fut in as_completed(futs):
+                    rec = fut.result()
+                    with lock:
+                        # Flush every record: a crash then costs one unit, not
+                        # the whole run.
+                        ckpt.write(json.dumps(rec, ensure_ascii=False) + "\n")
+                        ckpt.flush()
+                        completed += 1
+                        if completed % 25 == 0 or completed == len(todo):
+                            rate = completed / max(1e-9, time.time() - t0)
+                            eta = (len(todo) - completed) / max(1e-9, rate)
+                            print(f"\r  {completed:,}/{len(todo):,}  "
+                                  f"{rate * 60:.0f}/min  ETA {eta / 60:.0f} min",
+                                  end="", flush=True)
+        finally:
+            ckpt.close()
+        print()
+
+    # Assemble the full result set from the checkpoint.
     records = []
+    with open(ckpt_path, encoding="utf-8") as f:
+        for line in f:
+            try:
+                records.append(json.loads(line))
+            except Exception:
+                continue
+    # Last write wins, so a re-run of a unit supersedes the earlier attempt.
+    dedup = {}
+    for r in records:
+        dedup[(r["generator"], r["condition"], r["qid"], r["repeat"])] = r
+    records = list(dedup.values())
+
+    print("\n=== accuracy by generator and condition ===")
+    print("  " + "generator".ljust(18) + "cond".ljust(8) + "correct".rjust(9)
+          + "partial".rjust(9) + "reject".rjust(9) + "wrong".rjust(9))
     for g in gens:
         for cond in conditions:
-            t0 = time.time()
-            tally = Counter()
-            for q in questions:
-                if cond == "base":
-                    ctx, prompt = "", BASE_PROMPT.format(question=q["question"])
-                elif cond == "oracle":
-                    ctx = f"Title: source paper. Content: {q['reference']}"
-                    prompt = RAG_PROMPT.format(question=q["question"], context=ctx)
-                else:
-                    ctx = rag_ctx[q["id"]]["context"]
-                    prompt = RAG_PROMPT.format(question=q["question"], context=ctx)
-
-                for rep in range(args.repeats):
-                    try:
-                        ans = generate(g, prompt)
-                    except Exception as e:
-                        ans = f"<<GENERATION FAILED: {type(e).__name__}>>"
-                    v = judge(q["question"], q["reference"], ans, ctx)
-                    tally[v["accuracy"]] += 1
-                    records.append({
-                        "generator": g["key"], "condition": cond, "qid": q["id"],
-                        "repeat": rep, "source_doi": q["source_doi"],
-                        "answer": ans, "accuracy": v["accuracy"],
-                        "faithfulness": v.get("faithfulness"),
-                        "reason": v.get("reason", ""),
-                        "n_context_docs": rag_ctx[q["id"]]["n_docs"] if cond == "rag" else None,
-                    })
-            n = sum(tally.values())
-            print(f"  {g['key']:<18} {cond:<7} "
-                  f"correct={tally['correct'] / n:6.1%}  "
-                  f"partial={tally['partially_correct'] / n:5.1%}  "
-                  f"reject={tally['rejection'] / n:5.1%}  "
-                  f"wrong={tally['incorrect'] / n:5.1%}  ({time.time() - t0:.0f}s)")
+            rows = [r for r in records
+                    if r["generator"] == g["key"] and r["condition"] == cond]
+            if not rows:
+                continue
+            t = Counter(r["accuracy"] for r in rows)
+            n = len(rows)
+            print("  " + g["key"].ljust(18) + cond.ljust(8)
+                  + f"{t['correct'] / n:>8.1%}{t['partially_correct'] / n:>9.1%}"
+                  + f"{t['rejection'] / n:>9.1%}{t['incorrect'] / n:>9.1%}")
 
     json.dump({"judge": JUDGE_MODEL, "repeats": args.repeats,
                "n_questions": len(questions), "conditions": conditions,
+               "workers": args.workers,
                "pipeline": {"retriever": RETRIEVER, "reranker": RERANK_MODEL,
                             "threshold": RERANK_THRESHOLD, "k": RETRIEVE_K,
                             "top_n": TOP_N},
                "records": records},
-              open(os.path.join(args.out, "generation_eval_raw.json"), "w"), indent=1)
-    print(f"\nwrote {os.path.join(args.out, 'generation_eval_raw.json')}")
+              open(raw_path, "w"), indent=1)
+    print(f"\nwrote {raw_path}  ({len(records):,} records)")
     print("NEXT: 10_summarize_generation_eval.py")
 
 

@@ -5,3 +5,6 @@ __pycache__/
 # Chinese translations kept locally only, not committed
 README.zh-CN.md
 FINDINGS.zh-CN.md
+
+# Resume checkpoint: rebuilt by re-running step 09, large and append-only
+results/generation_eval_checkpoint.jsonl
