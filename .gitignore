@@ -1,1 +1,7 @@
 .env
+/papers
+
+# alternative scripts
+make_vectordb_native.py
+streamlit_app_native.py
+rag_play.ipynb
