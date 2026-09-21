@@ -5,3 +5,7 @@
 make_vectordb_native.py
 streamlit_app_native.py
 rag_play.ipynb
+
+# Python bytecode cache
+__pycache__/
+*.pyc
