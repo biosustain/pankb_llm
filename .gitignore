@@ -1,5 +1,6 @@
 .env
 /papers
+CLAUDE.md
 
 # alternative scripts
 make_vectordb_native.py
@@ -9,3 +10,7 @@ rag_play.ipynb
 # Python bytecode cache
 __pycache__/
 *.pyc
+
+# paper ingestion: downloads and generated corpora
+ingest/data/
+ingest/pdf/inbox/*.pdf
