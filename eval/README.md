@@ -1,33 +1,26 @@
 # PanKB LLM — Retrieval & Generation Evaluation
 
-Evaluation harness for the PanKB RAG system. Built to answer questions the
-published evaluation does not: the paper reports one **end-to-end** accuracy
-number (88%, 92% for the best system) and no retrieval metrics at all, so a
-wrong answer cannot be attributed to the retriever or the generator.
-
+Evaluation harness for the PanKB RAG system. 
 Three layers, evaluated separately so failures can be attributed:
 
 | Layer | Question | Metrics | Status |
-|---|---|---|---|
-| Retrieval | Did we find the passages that contain the answer? | recall@k, nDCG@k, MRR | ✅ complete |
-| Generation | Given correct context, does the model use it? | accuracy, faithfulness | ✅ complete |
-| End-to-end | How does the whole chain perform? | accuracy (4-way), faithfulness | ✅ complete |
+|---|---|---|
+| Retrieval | Did we find the passages that contain the answer? | recall@k, nDCG@k, MRR | 
+| Generation | Given correct context, does the model use it? | accuracy, faithfulness | 
+| End-to-end | How does the whole chain perform? | accuracy (4-way), faithfulness | 
 
 Results for all four phases are in [FINDINGS.md](FINDINGS.md).
 
 ## Evaluation set
 
 `questions.json` / `questions.csv` — the 50-question set from Supplementary
-Table S1 of the PanKB paper (doi:10.1093/nar/gkae1042), recovered from the
-EuropePMC supplementary-files API. `Table_S1_original.xlsx` is the unmodified
+Table S1 of the PanKB paper (doi:10.1093/nar/gkae1042). `Table_S1_original.xlsx` is the unmodified
 source file, kept for provenance.
 
 Each question carries:
 
 - `question` — the query
-- `source_doi` — the paper the answer was taken from (**not** mentioned in the
-  paper's methods, but present in the data; it is what makes retrieval
-  evaluation possible at all)
+- `source_doi` — the paper the answer was taken from 
 - `reference_answer` — the verbatim passage from that paper
 
 Known defects, handled explicitly rather than silently:
@@ -41,10 +34,6 @@ Known defects, handled explicitly rather than silently:
 - Answers are verbatim excerpts, up to 1704 chars, so scoring answers requires
   a judge (string equality is useless here).
 
-Licensing: the question set is redistributable (the PanKB paper is CC-BY), but
-`reference_answer` quotes 20 third-party papers that are mostly not CC-BY.
-Fine as a private eval set; publishing it needs a second look.
-
 ## Corpus
 
 `corpus/papers_subset/` — 170 papers used to build the experimental vector
@@ -52,16 +41,12 @@ stores:
 
 - **20 positives** — the source papers of the 50 questions
 - **150 noise** — seeded random sample of the rest of the bibliome, as
-  distractors so retrieval metrics have discriminative power
-
-Recovered from `origin/develop:Paper_all/` (833 papers); nothing is downloaded.
-The noise sample uses a fixed seed, so the corpus is byte-identical on re-run.
+  distractors 
 
 A subset rather than the full 106k-chunk production store, because comparing
 embedding models means re-embedding everything once per model. **This inflates
 absolute recall** (fewer distractors than production) but does not bias the
-*relative* ranking of models, since all models face the same corpus. Cite
-absolute numbers as subset numbers.
+*relative* ranking of models. 
 
 ## Scripts
 
