@@ -3,7 +3,7 @@
 Evaluation harness for the PanKB RAG system. 
 Three layers, evaluated separately so failures can be attributed:
 
-| Layer | Question | Metrics | Status |
+| Layer | Question | Metrics |
 |---|---|---|
 | Retrieval | Did we find the passages that contain the answer? | recall@k, nDCG@k, MRR | 
 | Generation | Given correct context, does the model use it? | accuracy, faithfulness | 
