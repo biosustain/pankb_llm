@@ -208,10 +208,7 @@ against.
 
 ## Notes on the vector store
 
-- **Azure Cosmos DB for MongoDB vCore caps vectors at 2000 dimensions.** This
-  constrains model choice more than quality does.
-- The production HNSW index is built with `similarity: "L2"`, not cosine. These
-  rank identically **only for normalized vectors** — an assumption that holds
-  for the current model but is written down nowhere in the code. Any candidate
-  embedding model must have its output norms checked before its numbers are
-  trusted, and dimension-truncated vectors especially so.
+- **Azure Cosmos DB for MongoDB vCore caps vectors at 2000 dimensions.** 
+  Model native size is larger can only be used at a reduced dimension, requested through the provider's API parameter.
+- **The production HNSW index is built with similarity: L2, not cosine.** 
+  These rank identically only for normalized vectors, because for unit vectors, L2 distance = sqrt(2 - 2*cos), so a smaller L2 distance always means a closer semantic meaning and the ranking matches cosine. To use L2 similarity safely, before trusting a new embedding model's numbers, check that its output vectors are unit-length, unless the vendor's documentation explicitly states that they are.
