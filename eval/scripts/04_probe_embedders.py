@@ -10,7 +10,7 @@ back. Nothing is written to the database. This has to happen first because:
      measured, not assumed.
   2. The production index uses `similarity: "L2"`, not cosine. L2 and cosine
      rank identically ONLY for normalized vectors -- an assumption that holds
-     for the current model but is written down nowhere. A model returning
+     for the current model since all vectors are unit-length. A model returning
      non-unit vectors would silently produce a wrong ranking, and every recall
      number computed from it would be wrong in a way no sanity check catches.
      Truncated vectors are the real risk: shortening a unit vector generally
