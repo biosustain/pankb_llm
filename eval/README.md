@@ -48,6 +48,30 @@ embedding models means re-embedding everything once per model. **This inflates
 absolute recall** (fewer distractors than production) but does not bias the
 *relative* ranking of models. 
 
+## Candidate models
+
+Each layer follows the same recipe: the model production used at the time
+(the **baseline**), the vendor's own successor to it, and peers from other
+vendors so the result is not one vendor grading itself. All candidates are
+hosted APIs from four providers: Voyage, Cohere, OpenAI and Anthropic.
+
+- **Embedders** (`04`): `voyage-large-2-instruct` (baseline, now legacy
+  upstream), `voyage-4-large` (Voyage's recommended successor), OpenAI
+  `text-embedding-3-large` and Cohere `embed-v4.0` (cross-vendor). The Cosmos
+  DB cap of 2000 dimensions was a hard filter: `voyage-4-large` runs at 1024
+  rather than 2048, and `text-embedding-3-large` is truncated from 3072 to 1024.
+- **Rerankers** (`08`): Cohere `rerank-english-v3.0` (baseline, 4k context)
+  against the current lines of both reranking vendors, each with a flagship and
+  a fast/lite tier: Cohere `rerank-v4.0-pro` / `rerank-v4.0-fast` and Voyage
+  `rerank-2.5` / `rerank-2.5-lite` (all 32k context). The tiers are included to
+  show whether the cheaper model gives up any quality.
+- **Generators** (`09`): `gpt-4o-mini` (baseline), `gpt-4o` (same-vendor
+  upgrade), and Anthropic `claude-sonnet-5` and `claude-haiku-4-5`
+  (cross-vendor, one mid-size and one small). The judge, `claude-opus-5`, is
+  deliberately not one of the models under test.
+
+Open-weight and self-hosted models were not included.
+
 ## Scripts
 
 Run in order from the repo root.
