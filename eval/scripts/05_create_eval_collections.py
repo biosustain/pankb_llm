@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Step 05 — Create the `eval` database and one collection per embedding model.
+Before inserting any data, the HNSW index is created with the measured vector width.
 
 This is the first script that WRITES to the Cosmos DB cluster. It touches only
 the `eval` database; the production database is never opened.
