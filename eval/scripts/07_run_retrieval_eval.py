@@ -26,10 +26,6 @@ production k. If recall@30 ~ recall@100 then k=30 is already saturated and
 raising it only adds rerank cost; if they diverge sharply, k=30 is discarding
 answers.
 
-Results are ALSO broken down per source paper. The question set draws 44% of
-its questions from 3 papers, so an aggregate score partly measures fit to
-those papers; a model that suits them looks better than it is.
-
 Usage:
     python3 eval/scripts/07_run_retrieval_eval.py
     python3 eval/scripts/07_run_retrieval_eval.py --only voyage_4_large
@@ -190,7 +186,7 @@ def main():
         print(f"  {name:<26} ({n_docs:,} docs) ", end="", flush=True)
 
         t0 = time.time()
-        scores, by_paper = [], defaultdict(list)
+        scores = []
         for q in questions:
             vec = embed_with_retry(cfg, q["question"])
             retrieved = search(col, vec, max_k)
@@ -199,7 +195,6 @@ def main():
             s["n_relevant"] = len(q["relevant_chunk_ids"])
             s["n_retrieved"] = len(retrieved)
             scores.append(s)
-            by_paper[q["source_doi"]].append(s)
             per_question[q["id"]][name] = {
                 "recall@30": round(s.get("recall@30", 0.0), 4),
                 "first_relevant_rank": s["first_relevant_rank"],
@@ -213,13 +208,6 @@ def main():
             agg[f"recall@{k}"] = round(mean([s[f"recall@{k}"] for s in scores]), 4)
             agg[f"ndcg@{k}"] = round(mean([s[f"ndcg@{k}"] for s in scores]), 4)
             agg[f"hit@{k}"] = round(mean([s[f"hit@{k}"] for s in scores]), 4)
-
-        # Per-paper, because 3 papers supply 44% of the questions.
-        agg["per_paper"] = {
-            doi: {"n_questions": len(rows),
-                  "recall@30": round(mean([r.get("recall@30", 0.0) for r in rows]), 4)}
-            for doi, rows in sorted(by_paper.items())
-        }
         all_runs[name] = agg
         all_runs[name]["_per_question"] = scores
         print(f"recall@30={agg.get('recall@30'):.3f}  "

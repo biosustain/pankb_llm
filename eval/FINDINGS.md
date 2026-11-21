@@ -182,26 +182,6 @@ sound choice.**
 `recall@1` is only **0.17–0.31**. The reranker is doing substantial work;
 vector search alone is far from sufficient to surface the answer first.
 
-### Stratified check: the gain is not driven by a few papers
-
-44% of questions come from 3 papers, so an aggregate could be skewed by them.
-By source paper (base → voyage-4-large, recall@30):
-
-| Source paper | Questions | base | v4-large | Δ |
-|---|---|---|---|---|
-| 10.1016/j.fm.2023.104334 | 10 | 0.74 | 0.89 | +0.15 |
-| 10.1038/s41598-022-21731-1 | 7 | 0.93 | 1.00 | +0.07 |
-| 10.1128/spectrum.01029-22 | 5 | 0.93 | 0.93 | +0.00 |
-| 10.1128/spectrum.01264-21 | 4 | 0.79 | 0.92 | +0.12 |
-| 10.1038/s41598-020-77723-6 | 3 | 0.33 | 0.83 | **+0.50** |
-| 10.1128/msystems.00248-24 | 3 | 0.61 | 0.89 | +0.28 |
-| 10.1371/journal.pone.0299588 | 2 | 0.30 | 0.57 | +0.27 |
-| 10.1186/s13068-018-1201-1 | 1 | 0.00 | 1.00 | **+1.00** |
-
-**Not one of the 18 source papers regresses** (worst case is unchanged), and
-the largest gains land on the papers where the baseline was weakest. This is
-general improvement, not overfitting to the dominant papers.
-
 ### Limitations (state these whenever citing the numbers)
 
 1. **Absolute numbers are optimistic.** The subset has only 150 noise papers

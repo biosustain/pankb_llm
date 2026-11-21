@@ -26,10 +26,6 @@ Each question carries:
 Known defects, handled explicitly rather than silently:
 
 - **Q26 has no reference answer** in Table S1. Excluded from scoring.
-- **Coverage is uneven.** The 50 questions come from only 20 papers, and the
-  top 3 papers supply 22 of them (44%). Report results per source paper as
-  well as in aggregate; a model that happens to suit the dominant papers will
-  otherwise look better than it is.
 - **Q01/Q02 target the same passage**, so questions are not fully independent.
 - Answers are verbatim excerpts, up to 1704 chars, so scoring answers requires
   a judge (string equality is useless here).
