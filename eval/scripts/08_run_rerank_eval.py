@@ -13,10 +13,8 @@ Three questions the published work never asked:
      is included as a cross-vendor comparison.
 
   3. What should the threshold be? This is the important one. Production hard-
-     filters reranked documents at `relevance_score >= 0.5` -- a number carried
-     over from the paper, where it applied to embedding SIMILARITY, not to a
-     reranker's relevance score. Those are different scales.
-
+     filters reranked documents at `relevance_score >= 0.5` -- it was never proved
+     to be the best choice.
      Cohere documents its scores as normalized to [0,1] but publishes no
      guidance on picking a cutoff and never claims scores are comparable across
      queries; normalized range is not calibration. Voyage documents no
