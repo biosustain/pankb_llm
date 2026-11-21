@@ -9,10 +9,7 @@ into that model's collection in the `eval` database.
 Reusing production chunks rather than re-splitting the papers is the point:
 chunk boundaries then match the live system exactly, and — more importantly —
 every model sees a byte-identical chunk set, so the embedding model is the
-only variable. Re-splitting locally would silently introduce a second one,
-since the production store was built with LangChain's
-RecursiveCharacterTextSplitter while make_vectordb_native.py uses a different
-splitter that does not reproduce the same boundaries.
+only variable. Re-splitting locally would silently introduce a second one.
 
 `chunk_id` carries the production `_id` of each chunk, which is what the
 ground truth from step 02 refers to. Without it, retrieval results could not
@@ -94,10 +91,10 @@ EMBEDDERS = {"voyage": embed_voyage, "openai": embed_openai, "cohere": embed_coh
 # text-embedding-3-large MUST pass dimensions (native 3072 > the 2000 cap), and
 # voyage-4-large must never be set to 2048 for the same reason.
 MODEL_ARGS = {
-    "voyage_large_2_instruct": {},
+    "voyage_large_2_instruct": {}, # default dimensions=1024
     "voyage_4_large": {"output_dimension": 1024},
     "openai_3_large_1024": {"dimensions": 1024},
-    "cohere_embed_v4": {},
+    "cohere_embed_v4": {}, # default dimensions=1536
 }
 
 
@@ -125,7 +122,7 @@ def load_chunks(client, dois):
         if not text.strip():
             continue
         chunks.append({
-            "chunk_id": str(d["_id"]),      # ties results back to the ground truth
+            "chunk_id": str(d["_id"]),      # are returned automatically by default; ties results back to the ground truth
             "textContent": text,
             "source": d.get("source", ""),
             "title": d.get("title", ""),
@@ -137,7 +134,7 @@ def load_chunks(client, dois):
 def populate(db, cfg, chunks, force):
     name = cfg["collection"]
     col = db[name]
-    existing = col.estimated_document_count()
+    existing = col.estimated_document_count() # count of existing documents
 
     if existing and not force:
         if existing >= len(chunks):
@@ -241,7 +238,7 @@ def main():
           f"{PROD_DB}.{PROD_COLLECTION} (read-only) ...")
     chunks = load_chunks(client, dois)
     n_pos = sum(1 for c in chunks if roles.get(normalize_doi(c["source"])) == "positive")
-    approx_tokens = sum(len(c["textContent"]) for c in chunks) / 4
+    approx_tokens = sum(len(c["textContent"]) for c in chunks) / 4 # rough token estimate
     print(f"  {len(chunks):,} chunks  (positives {n_pos:,} | noise "
           f"{len(chunks) - n_pos:,})")
     print(f"  ~{approx_tokens:,.0f} tokens per model, "
