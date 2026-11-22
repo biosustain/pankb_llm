@@ -92,7 +92,7 @@ python3 eval/scripts/09_run_generation_eval.py        # --apply to run
 
 # Phase 4 — full-corpus production upgrade
 python3 eval/scripts/10_build_production_v2_store.py  # --apply to build
-python3 eval/scripts/11_verify_production_v2.py       # old vs new, full corpus
+python3 eval/scripts/11_compare_stacks_full_corpus.py # old vs new, full corpus
 ```
 
 **What each script touches.** `01` only reads git. `02`, `03`, `07`, `08` and

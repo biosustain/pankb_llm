@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Step 11 — Verify the upgraded pipeline on the FULL production corpus.
+Step 11 — Compare the old and new stacks on the FULL production corpus.
 
 Everything in phases 1-2 was measured on a 170-paper subset, which is
 optimistic by construction: 18k chunks of distractors rather than 107k. This
@@ -23,8 +23,8 @@ actually receives -- a chunk discarded there is invisible downstream and no
 generation metric can recover it.
 
 Usage:
-    python3 eval/scripts/11_verify_production_v2.py
-    python3 eval/scripts/11_verify_production_v2.py --limit 10
+    python3 eval/scripts/11_compare_stacks_full_corpus.py
+    python3 eval/scripts/11_compare_stacks_full_corpus.py --limit 10
 """
 
 import argparse
@@ -193,9 +193,9 @@ def main():
 
     json.dump({"n_questions": len(questions), "retrieve_k": RETRIEVE_K,
                "top_n": TOP_N, "results": results, "per_question": per_q},
-              open(os.path.join(args.out, "production_v2_verification.json"), "w"),
+              open(os.path.join(args.out, "full_corpus_comparison.json"), "w"),
               indent=1)
-    print(f"\nwrote {os.path.join(args.out, 'production_v2_verification.json')}")
+    print(f"\nwrote {os.path.join(args.out, 'full_corpus_comparison.json')}")
 
 
 if __name__ == "__main__":

@@ -557,8 +557,8 @@ calibrated for neither.
 ## Phase 4 — Production upgrade, verified at full corpus scale
 
 **Date**: 2026-09-21
-**Scripts**: `10_build_production_v2_store.py`, `11_verify_production_v2.py`
-**Raw data**: `results/production_v2_build.json`, `results/production_v2_verification.json`
+**Scripts**: `10_build_production_v2_store.py`, `11_compare_stacks_full_corpus.py`
+**Raw data**: `results/production_v2_build.json`, `results/full_corpus_comparison.json`
 
 Phases 1–3 were all measured on a 170-paper subset, which is optimistic by
 construction. This phase applies the findings and re-measures on the **real
