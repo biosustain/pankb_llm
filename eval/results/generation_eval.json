@@ -15,6 +15,194 @@
   "k": 30,
   "top_n": 20
  },
+ "summary": {
+  "gpt-4o-mini": {
+   "base": {
+    "n": 98,
+    "accuracy": {
+     "correct": 0.1122,
+     "partially_correct": 0.2653,
+     "rejection": 0.2449,
+     "incorrect": 0.2857,
+     "judge_error": 0.0918
+    },
+    "faithfulness": {
+     "no_context": 89,
+     "judge_error": 9
+    }
+   },
+   "oracle": {
+    "n": 98,
+    "accuracy": {
+     "correct": 0.949,
+     "partially_correct": 0.0306,
+     "rejection": 0.0,
+     "incorrect": 0.0,
+     "judge_error": 0.0204
+    },
+    "faithfulness": {
+     "grounded": 93,
+     "partial": 3,
+     "judge_error": 2
+    }
+   },
+   "rag": {
+    "n": 98,
+    "accuracy": {
+     "correct": 0.7653,
+     "partially_correct": 0.102,
+     "rejection": 0.0,
+     "incorrect": 0.0204,
+     "judge_error": 0.1122
+    },
+    "faithfulness": {
+     "grounded": 83,
+     "partial": 4,
+     "judge_error": 11
+    }
+   }
+  },
+  "gpt-4o": {
+   "base": {
+    "n": 98,
+    "accuracy": {
+     "correct": 0.1327,
+     "partially_correct": 0.2653,
+     "rejection": 0.3776,
+     "incorrect": 0.1122,
+     "judge_error": 0.1122
+    },
+    "faithfulness": {
+     "no_context": 87,
+     "judge_error": 11
+    }
+   },
+   "oracle": {
+    "n": 98,
+    "accuracy": {
+     "correct": 0.9082,
+     "partially_correct": 0.0204,
+     "rejection": 0.0204,
+     "incorrect": 0.0,
+     "judge_error": 0.051
+    },
+    "faithfulness": {
+     "grounded": 89,
+     "no_context": 2,
+     "judge_error": 5,
+     "partial": 2
+    }
+   },
+   "rag": {
+    "n": 98,
+    "accuracy": {
+     "correct": 0.7347,
+     "partially_correct": 0.0714,
+     "rejection": 0.0714,
+     "incorrect": 0.0714,
+     "judge_error": 0.051
+    },
+    "faithfulness": {
+     "grounded": 80,
+     "no_context": 12,
+     "partial": 1,
+     "judge_error": 5
+    }
+   }
+  },
+  "claude-sonnet-5": {
+   "base": {
+    "n": 98,
+    "accuracy": {
+     "correct": 0.2143,
+     "partially_correct": 0.2857,
+     "rejection": 0.1224,
+     "incorrect": 0.2449,
+     "judge_error": 0.1327
+    },
+    "faithfulness": {
+     "no_context": 85,
+     "judge_error": 13
+    }
+   },
+   "oracle": {
+    "n": 98,
+    "accuracy": {
+     "correct": 0.8878,
+     "partially_correct": 0.0306,
+     "rejection": 0.0102,
+     "incorrect": 0.0204,
+     "judge_error": 0.051
+    },
+    "faithfulness": {
+     "grounded": 85,
+     "partial": 5,
+     "no_context": 3,
+     "judge_error": 5
+    }
+   },
+   "rag": {
+    "n": 98,
+    "accuracy": {
+     "correct": 0.7959,
+     "partially_correct": 0.051,
+     "rejection": 0.0,
+     "incorrect": 0.0,
+     "judge_error": 0.1531
+    },
+    "faithfulness": {
+     "grounded": 83,
+     "judge_error": 15
+    }
+   }
+  },
+  "claude-haiku-4-5": {
+   "base": {
+    "n": 98,
+    "accuracy": {
+     "correct": 0.0816,
+     "partially_correct": 0.2143,
+     "rejection": 0.449,
+     "incorrect": 0.102,
+     "judge_error": 0.1531
+    },
+    "faithfulness": {
+     "no_context": 83,
+     "judge_error": 15
+    }
+   },
+   "oracle": {
+    "n": 98,
+    "accuracy": {
+     "correct": 0.8878,
+     "partially_correct": 0.0102,
+     "rejection": 0.0204,
+     "incorrect": 0.0,
+     "judge_error": 0.0816
+    },
+    "faithfulness": {
+     "grounded": 79,
+     "partial": 9,
+     "no_context": 2,
+     "judge_error": 8
+    }
+   },
+   "rag": {
+    "n": 98,
+    "accuracy": {
+     "correct": 0.7959,
+     "partially_correct": 0.0306,
+     "rejection": 0.0,
+     "incorrect": 0.0204,
+     "judge_error": 0.1531
+    },
+    "faithfulness": {
+     "grounded": 83,
+     "judge_error": 15
+    }
+   }
+  }
+ },
  "records": [
   {
    "generator": "gpt-4o-mini",

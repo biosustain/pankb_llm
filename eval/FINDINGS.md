@@ -382,7 +382,7 @@ threshold. **Under both framings the production model is the worst of the set.**
 
 **Date**: 2026-09-21
 **Script**: `09_run_generation_eval.py`
-**Raw data**: `results/generation_eval_raw.json` (1,176 records)
+**Raw data**: `results/generation_eval.json` (1,176 records)
 
 ### Setup
 
@@ -407,12 +407,12 @@ Accuracy (% correct, both repeats pooled):
 
 | Generator | base | oracle | rag |
 |---|---|---|---|
-| gpt-4o-mini ← production | 10.2% | **94.9%** | 76.5% |
+| gpt-4o-mini ← production | 11.2% | **94.9%** | 76.5% |
 | gpt-4o | 13.3% | 90.8% | 73.5% |
 | claude-sonnet-5 | 21.4% | 88.8% | **79.6%** |
 | claude-haiku-4-5 | 8.2% | 88.8% | **79.6%** |
 
-Base accuracy averages **13.3%**, against the paper's reported 22.4% — same
+Base accuracy averages **13.5%**, against the paper's reported 22.4% — same
 order of magnitude, and the gap is unsurprising given different models and a
 stricter 4-way rubric. RAG lifts it to **77.3%** on average. The direction and
 magnitude of the paper's headline finding reproduce.

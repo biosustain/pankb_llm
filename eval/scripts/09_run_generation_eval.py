@@ -294,7 +294,7 @@ def main():
         print("Dry run — nothing called. Re-run with --apply.")
         return
 
-    raw_path = os.path.join(args.out, "generation_eval_raw.json")
+    out_path = os.path.join(args.out, "generation_eval.json")
     ckpt_path = os.path.join(args.out, "generation_eval_checkpoint.jsonl")
     ctx_cache = os.path.join(args.out, "generation_rag_contexts.json")
 
@@ -393,7 +393,9 @@ def main():
 
     print("\n=== accuracy by generator and condition ===")
     print("  " + "generator".ljust(18) + "cond".ljust(8) + "correct".rjust(9)
-          + "partial".rjust(9) + "reject".rjust(9) + "wrong".rjust(9))
+          + "partial".rjust(9) + "reject".rjust(9) + "wrong".rjust(9)
+          + "j_err".rjust(9))
+    summary = {}
     for g in gens:
         for cond in conditions:
             rows = [r for r in records
@@ -404,7 +406,15 @@ def main():
             n = len(rows)
             print("  " + g["key"].ljust(18) + cond.ljust(8)
                   + f"{t['correct'] / n:>8.1%}{t['partially_correct'] / n:>9.1%}"
-                  + f"{t['rejection'] / n:>9.1%}{t['incorrect'] / n:>9.1%}")
+                  + f"{t['rejection'] / n:>9.1%}{t['incorrect'] / n:>9.1%}"
+                  + f"{t['judge_error'] / n:>9.1%}")
+            summary.setdefault(g["key"], {})[cond] = {
+                "n": n,
+                "accuracy": {k: round(t[k] / n, 4) for k in
+                             ["correct", "partially_correct", "rejection",
+                              "incorrect", "judge_error"]},
+                "faithfulness": dict(Counter(r["faithfulness"] for r in rows)),
+            }
 
     json.dump({"judge": JUDGE_MODEL, "repeats": args.repeats,
                "n_questions": len(questions), "conditions": conditions,
@@ -412,10 +422,10 @@ def main():
                "pipeline": {"retriever": RETRIEVER, "reranker": RERANK_MODEL,
                             "threshold": RERANK_THRESHOLD, "k": RETRIEVE_K,
                             "top_n": TOP_N},
+               "summary": summary,
                "records": records},
-              open(raw_path, "w"), indent=1)
-    print(f"\nwrote {raw_path}  ({len(records):,} records)")
-    print("NEXT: 10_summarize_generation_eval.py")
+              open(out_path, "w"), indent=1)
+    print(f"\nwrote {out_path}  ({len(records):,} records)")
 
 
 if __name__ == "__main__":
