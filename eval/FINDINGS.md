@@ -642,7 +642,8 @@ only the first.
 
 **Retrieval stack deployed.** `streamlit_app.py` on `prod` uses
 `pankb_vector_store_v2`, `voyage-4-large`, voyage `rerank-2.5` and threshold
-0.45. The generator is still `gpt-4o-mini`; phase 3 recommends `gpt-6-luna`.
+0.45. The generator was switched from `gpt-4o-mini` to `gpt-6-luna` on
+2026-11-22, following phase 3.
 
 Rollback: point `collection_name` back to `pankb_vector_store` and restore
 `EMBEDDING_MODEL`, `RERANK_MODEL` and the threshold together. Both collections

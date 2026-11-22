@@ -70,7 +70,8 @@ def question_answer(retriever, question):
 
     prompt = ChatPromptTemplate.from_template(template)
 
-    llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0, model_kwargs={"top_p": 0.0})
+    llm = ChatOpenAI(model_name="gpt-6-luna", temperature=0,
+                     model_kwargs={"reasoning_effort": "none"})
 
     rag_chain_from_docs = (
             {
