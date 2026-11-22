@@ -61,10 +61,13 @@ hosted APIs from four providers: Voyage, Cohere, OpenAI and Anthropic.
   a fast/lite tier: Cohere `rerank-v4.0-pro` / `rerank-v4.0-fast` and Voyage
   `rerank-2.5` / `rerank-2.5-lite` (all 32k context). The tiers are included to
   show whether the cheaper model gives up any quality.
-- **Generators** (`09`): `gpt-4o-mini` (baseline), `gpt-4o` (same-vendor
-  upgrade), and Anthropic `claude-sonnet-5` and `claude-haiku-4-5`
-  (cross-vendor, one mid-size and one small). The judge, `claude-opus-5`, is
-  deliberately not one of the models under test.
+- **Generators** (`09`): `gpt-4o-mini` (baseline; shuts down 2027-01-14),
+  `gpt-6-luna` (OpenAI's named replacement) and Anthropic `claude-haiku-5-5`
+  (cross-vendor, same price). Answering from supplied context is a simple task,
+  so cost came first: the mid-tier `gpt-6.1-terra` and `claude-sonnet-5-5` are
+  configured in the script but commented out. All run without reasoning /
+  thinking. The judge, `claude-opus-5`, is deliberately not one of the models
+  under test.
 
 Open-weight and self-hosted models were not included.
 
@@ -175,13 +178,14 @@ the 0.55 warning line, all chunk ids resolve. The two weakest alignments
 (Q44 0.73, Q42 0.78) were inspected by hand and are correct — both score below
 1.0 only because the answer spans a chunk boundary.
 
-## Full-corpus verification (`10`, `11`)
+## Full-corpus comparison (`10`, `11`)
 
 Phases 0–3 run on the 170-paper subset, which is optimistic by construction.
 `10` rebuilds the **entire** production corpus (106,717 chunks) with the
-winning embedding model into a new collection, and `11` re-measures the old
-and new pipelines end to end against it — so the recommendation rests on
-production-scale numbers rather than extrapolation.
+winning embedding model into a new collection, and `11` compares the old and
+new retrieval stacks against it — so the recommendation rests on
+production-scale numbers rather than extrapolation. `11` measures retrieval
+only; generation was measured on the subset (`09`).
 
 `10` re-embeds the stored `textContent` rather than re-splitting the papers.
 That keeps chunk boundaries byte-identical to the live store, so the embedding
