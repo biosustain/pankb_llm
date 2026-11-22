@@ -8,6 +8,19 @@ Authors:
 - Data preprocessing, LLM, DEV vector DB creation (Chroma), retriever, Streamlit web app: Binhuan Sun, binsun@biosustain.dtu.dk 
 - Changing the DEV vector DB (Chroma) to the PROD vector DB instance (Azure Cosmos DB for MongoDB (vCore)) and adjusting the choice of embeddings to the Cosmos DB limitations, the PROD DB index creation, dockerization, integration of the streamlit app with the Django framework templates, the github repo maintenance: Pashkova Liubov, liupa@dtu.dk
 
+## Current configuration
+
+| Component | Model / setting |
+|---|---|
+| Vector store | `pankb_vector_store_v2` (Azure Cosmos DB for MongoDB vCore, 1024-dim, HNSW) |
+| Embedder | `voyage-4-large` (Voyage, 1024 dims) |
+| Retrieval | top 30 |
+| Reranker | `rerank-2.5` (Voyage), top 20, threshold 0.45 |
+| Generator | `gpt-6-luna` (OpenAI), `reasoning_effort="none"`, `temperature=0` |
+
+Chosen by the evaluation in [eval/](eval/); see [eval/FINDINGS.md](eval/FINDINGS.md).
+Updated 2026-11-22.
+
 ## Scripts execution
 
 Every time when one pushes to the `prod` repo (usually from the DEV server), the changes in the AI Assistant Web Application will be AUTOMATICALLY deployed to the PROD server. The automation (CI/CD) is achieved with the help of Github Actions enabled for the repository. The respective config file is `.github/workflows/deploy-prod-to-azurevm.yml`. In order for the automated deployment to work, you should set up the values of the following secret Github Actions secrets:

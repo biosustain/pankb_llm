@@ -11,6 +11,21 @@ Three layers, evaluated separately so failures can be attributed:
 
 Results for all four phases are in [FINDINGS.md](FINDINGS.md).
 
+## Current production stack
+
+As of 2026-11-22, production (`streamlit_app.py`) runs:
+
+| Component | Choice |
+|---|---|
+| Vector store | `pankb_vector_store_v2` |
+| Embedder | `voyage-4-large` (Voyage) |
+| Reranker | `rerank-2.5` (Voyage), threshold 0.45 |
+| Generator | `gpt-6-luna` (OpenAI) |
+
+How each was chosen — candidates, metrics and trade-offs — is in
+[FINDINGS.md](FINDINGS.md): embedder in phase 1, reranker and threshold in
+phase 2, generator in phase 3, full-corpus check in phase 4.
+
 ## Evaluation set
 
 `questions.json` / `questions.csv` — the 50-question set from Supplementary
