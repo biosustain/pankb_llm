@@ -73,23 +73,37 @@ REPO = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 dotenv.load_dotenv(os.path.join(REPO, ".env"))
 
 EVAL_DB = "eval"
-RETRIEVER = "voyage_4_large"          # phase-1 winner
-RERANK_MODEL = "rerank-english-v3.0"  # production reranker
-RERANK_THRESHOLD = 0.5                # production threshold
+# winner config from last phases
+RETRIEVER = "voyage_4_large"
+RERANK_MODEL = "rerank-2.5"           
+RERANK_THRESHOLD = 0.45
 RETRIEVE_K, TOP_N = 30, 20
 
-JUDGE_MODEL = "claude-opus-5"         # not in the tested set
+JUDGE_MODEL = "claude-opus-5" # the judge model uses thinking mode thus need higher token output limit      
+JUDGE_MAX_TOKENS = 4000
 
-# Models under test.
+# Models under test. `params` are passed straight to the provider's request.
+# Every model runs without reasoning/thinking, so the comparison is between
+# plain answering models. temperature=0 where the model accepts it (OpenAI
+# only); it reduces variance but does not make output deterministic.
 GENERATORS = [
     {"key": "gpt-4o-mini", "provider": "openai", "model": "gpt-4o-mini",
-     "note": "production generator today"},
-    {"key": "gpt-4o", "provider": "openai", "model": "gpt-4o",
-     "note": "same-vendor upgrade"},
-    {"key": "claude-sonnet-5", "provider": "anthropic", "model": "claude-sonnet-5",
-     "note": "cross-vendor"},
-    {"key": "claude-haiku-4-5", "provider": "anthropic",
-     "model": "claude-haiku-4-5-20251001", "note": "cross-vendor, small"},
+     "note": "production today; shuts down 2027-01-14",
+     "params": {"max_tokens": 500, "temperature": 0, "top_p": 0}},
+    {"key": "gpt-6-luna", "provider": "openai", "model": "gpt-6-luna",
+     "note": "OpenAI's named replacement; $0.10/$0.50",
+     "params": {"max_completion_tokens": 500, "reasoning_effort": "none",
+                "temperature": 0}},
+    # {"key": "gpt-6.1-terra", "provider": "openai", "model": "gpt-6.1-terra",
+    #  "note": "OpenAI mid tier; $1/$5",
+    #  "params": {"max_completion_tokens": 500, "reasoning_effort": "none",
+    #             "temperature": 0}},
+    {"key": "claude-haiku-5-5", "provider": "anthropic", "model": "claude-haiku-5-5",
+     "note": "Anthropic small; $0.10/$0.50",
+     "params": {"max_tokens": 500, "thinking": {"type": "disabled"}}},
+    # {"key": "claude-sonnet-5-5", "provider": "anthropic", "model": "claude-sonnet-5-5",
+    #  "note": "Anthropic mid tier; $2/$10",
+    #  "params": {"max_tokens": 500, "thinking": {"type": "between_tools"}}},
 ]
 
 # Verbatim from the paper (Materials and Methods), so the base/RAG arms are
@@ -151,26 +165,18 @@ Reply with ONLY a JSON object, no markdown fence:
 
 # --- provider calls --------------------------------------------------------
 
-def call_openai(model, prompt, max_tokens=500):
+def call_openai(model, prompt, **params):
     from openai import OpenAI
-    kwargs = {"model": model, "messages": [{"role": "user", "content": prompt}]}
-    # Reasoning models reject temperature/top_p and use a different token arg.
-    if re.match(r"^(gpt-5|o\d)", model):
-        kwargs["max_completion_tokens"] = max_tokens
-    else:
-        kwargs.update(max_tokens=max_tokens, temperature=0, top_p=0)
-    return OpenAI().chat.completions.create(**kwargs).choices[0].message.content or ""
+    r = OpenAI().chat.completions.create(
+        model=model, messages=[{"role": "user", "content": prompt}], **params)
+    return r.choices[0].message.content or ""
 
 
-def call_anthropic(model, prompt, max_tokens=500):
+def call_anthropic(model, prompt, **params):
     import anthropic
-    # temperature is not settable on this SDK/model generation -- it lives under
-    # output_config where supported, and reasoning models reject it outright.
-    # Determinism therefore cannot be forced here the way the paper did with
-    # temperature=0; see FINDINGS (phase 3) for what that costs.
+    # Claude models do not accept temperature, so determinism cannot be forced
     r = anthropic.Anthropic().messages.create(
-        model=model, max_tokens=max_tokens,
-        messages=[{"role": "user", "content": prompt}])
+        model=model, messages=[{"role": "user", "content": prompt}], **params)
     return "".join(b.text for b in r.content if b.type == "text")
 
 
@@ -178,7 +184,7 @@ def generate(cfg, prompt, attempts=4):
     fn = call_openai if cfg["provider"] == "openai" else call_anthropic
     for i in range(attempts):
         try:
-            return fn(cfg["model"], prompt)
+            return fn(cfg["model"], prompt, **cfg["params"])
         except Exception as e:
             if i == attempts - 1:
                 raise
@@ -191,7 +197,8 @@ def judge(question, reference, answer, context, attempts=4):
         context=context if context else "(no context was provided)")
     for i in range(attempts):
         try:
-            raw = call_anthropic(JUDGE_MODEL, prompt, max_tokens=300).strip()
+            raw = call_anthropic(JUDGE_MODEL, prompt,
+                                 max_tokens=JUDGE_MAX_TOKENS).strip()
             raw = re.sub(r"^```(?:json)?|```$", "", raw, flags=re.M).strip()
             m = re.search(r"\{.*\}", raw, re.S)
             v = json.loads(m.group() if m else raw)
@@ -221,10 +228,9 @@ def build_rag_contexts(questions, cache_path, workers=8):
             return cached
 
     import voyageai
-    import cohere
     conn = os.getenv("MONGODB_CONN_STRING")
     col = MongoClient(conn, serverSelectionTimeoutMS=30000)[EVAL_DB][RETRIEVER]
-    vo, co = voyageai.Client(), cohere.ClientV2()
+    vo = voyageai.Client()
 
     def one(q):
         vec = vo.embed(texts=[q["question"]], model="voyage-4-large",
@@ -236,9 +242,9 @@ def build_rag_contexts(questions, cache_path, workers=8):
             {"$project": {"chunk_id": 1, "textContent": 1, "title": 1}}]))
         if not docs:
             return q["id"], {"context": "", "n_docs": 0, "chunk_ids": []}
-        rr = co.rerank(model=RERANK_MODEL, query=q["question"],
+        rr = vo.rerank(query=q["question"],
                        documents=[d.get("textContent", "") for d in docs],
-                       top_n=TOP_N)
+                       model=RERANK_MODEL, top_k=TOP_N)
         kept = [(docs[x.index], x.relevance_score) for x in rr.results
                 if x.relevance_score >= RERANK_THRESHOLD]
         ctx = "\n\n".join(f"Title: {d.get('title', '')}. "
