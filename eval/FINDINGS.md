@@ -12,7 +12,7 @@ Method, scripts and known defects: [README.md](README.md).
 | 1 | Embedding model comparison | ✅ complete | 2026-09-20 |
 | 2 | Reranker comparison and threshold calibration | ✅ complete | 2026-09-20 |
 | 3 | Generation, end-to-end and faithfulness | ✅ complete | 2026-11-22 |
-| 4 | Production upgrade, verified at full scale | ✅ complete | 2026-09-21 |
+| 4 | Production upgrade, verified at full scale | ✅ complete | 2026-11-22 |
 
 ---
 
@@ -560,7 +560,7 @@ Production settings: `reasoning_effort="none"`, `temperature=0`, and no `top_p`
 
 ## Phase 4 — Production upgrade, verified at full corpus scale
 
-**Date**: 2026-09-21
+**Date**: 2026-11-22
 **Scripts**: `10_build_production_v2_store.py`, `11_compare_stacks_full_corpus.py`
 **Raw data**: `results/production_v2_build.json`, `results/full_corpus_comparison.json`
 
@@ -600,7 +600,7 @@ filtering — i.e. on what the LLM actually receives:
 | nDCG | 0.561 | 0.615 | +0.053 |
 | MRR | 0.655 | 0.671 | +0.016 |
 | hit rate | 0.766 | **0.872** | **+0.106** |
-| **docs reaching the LLM** | 11.3 | **19.6** | **+8.4** |
+| **docs reaching the LLM** | 11.3 | **19.7** | **+8.4** |
 
 Per question: **12 improved, 5 regressed, 30 unchanged.**
 
@@ -617,7 +617,7 @@ which corpus a number came from.
 
 **② The largest single change is how much reaches the LLM.**
 
-11.3 → 19.6 documents, a 74% increase. Two causes compound: the better
+11.3 → 19.7 documents, a 75% increase. Two causes compound: the better
 retriever surfaces more relevant chunks, and the recalibrated threshold stops
 discarding them. Phase 3 established that this is safe here — faithfulness
 measured 0% ungrounded, so the model demonstrably reasons over its context
@@ -640,12 +640,13 @@ only the first.
 
 ### Deployment status
 
-**Not deployed.** The code change is committed on the `eval` branch only; it is
-not merged to `prod` and CI/CD has not run. The live service is unchanged.
+**Retrieval stack deployed.** `streamlit_app.py` on `prod` uses
+`pankb_vector_store_v2`, `voyage-4-large`, voyage `rerank-2.5` and threshold
+0.45. The generator is still `gpt-4o-mini`; phase 3 recommends `gpt-6-luna`.
 
-Rollback is a one-line change of `collection_name`, since both collections are
-1024-dim with identical HNSW settings. `PANKB_USE_LEGACY_EMBEDDINGS` switches
-the embedding model back without editing code.
+Rollback: point `collection_name` back to `pankb_vector_store` and restore
+`EMBEDDING_MODEL`, `RERANK_MODEL` and the threshold together. Both collections
+are 1024-dim with identical HNSW settings.
 
 ### Limitations
 
