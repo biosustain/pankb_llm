@@ -85,7 +85,7 @@ Update `AZURE_BLOB_SAS` in `.env` when necessary.
 
    ```
    mongorestore --uri "$MONGODB_CONN_STRING" --archive=pankb_vector_store_v2.archive.gz --gzip \
-     --nsFrom "pankb_llm.pankb_vector_store_v2" --nsTo "pankb_llm.pankb_vector_store_v2_restored" \
+     --nsFrom "ankb_llm.*" --nsTo "pankb_llm.*_restored" \
      --noIndexRestore
    ```
 
