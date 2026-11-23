@@ -1,0 +1,6 @@
+# Dependencies for backup/backup_vectordb.py, installed into the pankb_llm conda env:
+#   conda activate pankb_llm
+#   conda install -c conda-forge mongo-tools     # mongodump / mongorestore (not a pip package)
+#   pip install -r backup/requirements.txt
+azure-storage-blob==12.31.1
+python-dotenv==1.0.1
