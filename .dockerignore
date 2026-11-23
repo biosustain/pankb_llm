@@ -1,0 +1,4 @@
+# Keeps secrets and eval data out of image layers.
+.env
+.git
+eval/
